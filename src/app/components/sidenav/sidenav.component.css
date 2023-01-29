@@ -1,0 +1,36 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-events {
+    width: 250px;
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #555;
+  }
+
+  .mat-drawer-container {
+    background-color: #fafafa00;
+}
+
+.sideNavwrp{
+  width:240px; 
+  height:97%;
+  position: fixed;
+  top:16px;
+  left:10px;
+  background: transparent linear-gradient(180deg, #0A5198 0%, #110670 100%) 0% 0% no-repeat padding-box;
+  border-radius: 20px;
+  transition: .4s cubic-bezier(.25,.8,.25,1),background 0s;
+  overflow: hidden;
+}
+
+  .toggled{
+    width:60px;
+    left:0px;
+    box-shadow: inset 8px 0px 20px 1px #2b054e94
+  }

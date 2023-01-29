@@ -1,0 +1,25 @@
+.permission-Filter-wrp{position: relative; padding: 10px 15px 10px 25px; margin-top:25px}
+.gridbox{display: flex; justify-content: space-between;}
+.mtr15{margin-right: 15px;}
+.mat-raised-button{
+    width: 120px;
+    height: 40px;
+    background: #1F73AE 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    border-radius: 24px;
+    color:#fff;
+}
+.inputBoxPadding{padding: 0px;max-width: 298px;}
+ .w600{width:100%}
+.w280{width: 100%;}
+h4{margin: 0px;}
+
+.input_titile{
+    position:absolute;
+    top:-20px;
+}
+.p-col{width: 100%;}
+
+.smallLables{position: relative; align-self: center;}
+.boxes{position:relative; width: 100%; margin: 5px;}
+.small20{width: 20%;}

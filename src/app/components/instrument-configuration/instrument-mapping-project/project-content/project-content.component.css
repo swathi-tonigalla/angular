@@ -1,0 +1,34 @@
+.contentWrp{
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    min-height: 465px;
+}
+.mappingPanel{
+    height: 450px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #E6E9F0;
+    width: 100%;
+    box-shadow: -1px -1px 5px 0px rgb(67 67 67 / 5%) inset;
+    -webkit-box-shadow: -1px -1px 5px 0px rgb(67 67 67 / 5%) inset;
+    -moz-box-shadow: -1px -1px 5px 0px rgb(67 67 67 / 5%) inset;
+    border: 0.5px solid #cccccc;
+    margin: 0px 5px;
+}
+
+.resultWrp{
+    margin-top: -55px;
+    margin-bottom: 10px !important;
+}
+
+
+.cardwidth_second{
+    width: 97%;
+    position:relative;
+    top:2px;
+    border-radius: 20px;
+    padding: 10px 5px 20px 10px;
+    height: 100%;
+    background-color: #ffffff !important;
+}

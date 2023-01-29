@@ -1,0 +1,330 @@
+<p-toast position="top-center"></p-toast>
+<div class="container component_title cmClass">
+    <h3>User Management</h3>
+    <!-- <p>Manage your user list here</p> -->
+    <p>Manage user list</p>
+    <hr>
+</div>
+<div class="container">
+    <mat-card class="cardwidth_second mat-card-pad">
+        <div class="cardheader">
+            <mat-card-title>
+                <h3>User list</h3>
+            </mat-card-title>
+            </div>
+            <div style="margin-top: 20px;"> 
+                <!-- <p-table #dt [value]="users" [rows]="10" [paginator]="true"
+                    [rowHover]="true" dataKey="id" [globalFilterFields]="['clientName']"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                </p-table> -->
+                <p-table #dt [value]="users"  [rows]="10" [paginator]="true"
+                    [rowHover]="true" dataKey="id" [globalFilterFields]="['userName']"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Results" [showCurrentPageReport]="true"[rowsPerPageOptions]="[10,25,50]">
+                 
+                    
+                    <ng-template pTemplate="caption">
+       
+                        <div class="boxes">
+                            <mat-form-field class="example-full-width mat-form-field-fullwidth inputSearch">
+                                <input 
+                                id="Searchbar"
+                                matInput 
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Search User Name">  
+                            </mat-form-field>
+                             
+                        </div>
+                        <div class="boxes smallBoxes">
+                            <button pButton pRipple label="New User" icon="pi pi-plus"
+                    class="p-button-rounded p-button-info cm_button"
+                    (click)="newUser()"
+                            ></button>
+                        </div>
+                        
+                        </ng-template>
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <mat-checkbox class="example-margin" (change)="changeAllSelectedUser($event)" color="primary"
+                                [(ngModel)]="selectAll"></mat-checkbox>
+                                <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+                            </th>
+                            <!-- <th>User Id</th> -->
+                            <!-- <th pSortableColumn="id"># <p-sortIcon field="id"></p-sortIcon></th>
+                            <th pSortableColumn="id"># <p-sortIcon field="id"></p-sortIcon></th> -->
+                            <th>User Name </th>
+                       
+                            <th>Email Address</th>
+                          
+                            <th>Role</th>
+                            <!-- <th></th> -->
+                            <th  style="padding-right: 33px;padding-left: 16px;">Created On</th>
+                            <!-- <th>Last Login</th> -->
+                            <th>
+                                &nbsp; &nbsp; <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"  (click)="deleteSelectedUsers()" 
+                                [disabled] ="!checkedIDs || !checkedIDs.length"></button>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-user> 
+                        <tr>
+                            <td>
+                                <!-- <p-tableCheckbox [value]="user"  (change)="changeSelection(user)"></p-tableCheckbox> -->
+                                <mat-checkbox class="example-margin" (change)="changeSelection(user)" color="primary"
+                                [(ngModel)]="user.checked"></mat-checkbox>
+                            </td>
+                            <!-- <td>{{user.id}}</td>  -->
+                            <td>{{user.userName}}</td>
+                            
+                            <td>{{user.email_id}}</td>
+                      
+                            <td>
+                               
+                                <span *ngIf="user.roles==='Administrator'"> {{user.roles}}</span>
+                            <span *ngIf="user.roles==='Normal User'">{{analyst}}</span>
+                            </td>
+                     
+                            <!-- <td></td> -->
+                            <td class="tdPad">{{user.createdAt  | customDateFormat:'longDate'}}</td>
+                            <!-- <td>-</td> -->
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-success p-mr-2" (click)="editUsers(user)" ></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"  (click)="deleteUsers(user)" ></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="cm_crudTable">
+                <p-dialog [(visible)]="userDilog" [style]="{width: '60vw',height: '65vh'}" [modal]="true" styleClass="p-fluid">
+                    <ng-template pTemplate="header">
+                        <mat-card-title>
+                            <h3>New User</h3>
+                            
+                        </mat-card-title>
+                        <p-divider></p-divider>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <form class="userForm" [formGroup]="userRegistration">
+                            <div class="p-grid inptbox">
+                                <div class="p-col"  style="margin-right: 10px;">
+                                  <div class="box padBox"> 
+                                    <strong><mat-label class="flable">User Name<span>*</span></mat-label> </strong>
+                                    <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                        <mat-label>User Name</mat-label>
+                                        <input 
+                                            id="userName"
+                                            [(ngModel)]="user.userName"                                   
+                                            [class.is-invalid]="userRegistration.controls.userName.invalid && userRegistration.controls.userName.touched" 
+                                            matInput 
+                                            formControlName="userName" 
+                                            placeholder="Enter Username">
+                                    </mat-form-field>
+                                    <small 
+                                    class="d-none"
+                                     [class.dnone]="userRegistration.controls.userName.valid || userRegistration.controls.userName.untouched">
+                                   <br>Please enter User name
+                                    </small>
+                                  </div>
+                                </div>
+                                <div class="p-col" style="margin-right: 10px;">
+                                    <div class="box padBox"> 
+                                        <strong><mat-label class="flable">Email Address<span>*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                            <mat-label>Enter Email Address</mat-label>
+                                            <input 
+                                                id="emailID" 
+                                                [(ngModel)]="user.email_id"                                   
+                                                [class.is-invalid]="userRegistration.controls.emailID.invalid && userRegistration.controls.emailID.touched" 
+                                                matInput 
+                                                formControlName="emailID" 
+                                                placeholder="Enter Email Address"
+                                                >
+                                        </mat-form-field>
+                                        <small 
+                                        class="d-none"
+                                         [class.dnone]="userRegistration.controls.emailID.valid || userRegistration.controls.emailID.untouched">
+                                       <br>
+                                       Enter email in lower case letters.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="p-col"  style="margin-right: 10px;">
+                                    <div class="box padBox"> 
+                                        <strong><mat-label class="flable">Confirm Email Address<span>*</span></mat-label> </strong>
+                                            <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                                <mat-label>Enter Email Address</mat-label>
+                                                <input 
+                                                    id="confirmEmail"
+                                                    [(ngModel)]="user.email_verified_at" 
+                                                    [class.is-invalid]="userRegistration.controls.confirmEmail.invalid && userRegistration.controls.confirmEmail.touched" 
+                                                    matInput 
+                                                    formControlName="confirmEmail" 
+                                                    placeholder="Enter Email Address">
+                                            </mat-form-field>
+                                            <!-- [(ngModel)]="user.email_verified_at"  -->
+                                            <!-- <small 
+                                            class="d-none"
+                                             [class.dnone]="userRegistration.controls.confirmEmail.valid || userRegistration.controls.confirmEmail.untouched">
+                                           <br> Please enter confirm email address
+                                            </small> -->
+                                            <small 
+                                            class="d-none"
+                                            *ngIf="userRegistration.errors?.notMatch && userRegistration.controls.confirmEmail.value"
+                                            >
+                                           <br> Email is not equal to Confirm Email
+                                            </small>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-grid inptbox" style="margin-top: 10px;">
+                                    <div class="p-col"  style="margin-right: 10px;">
+                                        <div  class="box padBox">
+                                            <strong><mat-label class="flable">Password<span>*</span></mat-label> </strong>
+                                            <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                                <mat-label>Enter Password here</mat-label>
+                                                <input 
+                                                    id="password"
+                                                    [(ngModel)]="user.password"
+                                                    type="password" 
+                                                    (change)="editPass()"                                   
+                                                    [class.is-invalid]="userRegistration.controls.password.invalid && userRegistration.controls.password.touched" 
+                                                    matInput 
+                                                    formControlName="password" 
+                                                    placeholder="Enter Password here"
+                                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$">
+                                            </mat-form-field>
+                                            <small 
+                                                class="d-none"
+                                                [class.dnone]="userRegistration.controls.password.valid || userRegistration.controls.password.untouched">
+                                                <!-- <br> Please enter Password -->
+                                                <!-- <br>Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&). -->
+                                            </small>
+                                            <small
+                                            class="d-none"
+                                            *ngIf="userRegistration.get('password').touched && userRegistration.get('password').hasError('pattern') ">
+                                            <!-- <br>Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&). -->
+                                            <br>
+                                            <div>
+                                                Password must contain: 
+                                                <br>a) More than 8 characters,
+                                                <br>b) 1 numeric,
+                                                <br>c) 1 upper case letter,
+                                                <br>d) 1 special character($@$!%*?&).
+                                            </div>
+
+                                        </small>
+                                        </div>
+                                    </div>
+                                
+                                <div *ngIf="(!editPasswordField && !editpass)" class="p-col"  style="margin-right: 10px;">
+                                    <div  class="box padBox">
+                                        <strong><mat-label class="flable">Confirm Password<span>*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                        <mat-label>Enter Password here</mat-label>
+                                        <input 
+                                            id="confirmPassword" 
+                                            type="password" 
+                                           
+                                            [class.is-invalid]="userRegistration.controls.confirmPassword.invalid && userRegistration.controls.confirmPassword.touched" 
+                                            matInput 
+                                            formControlName="confirmPassword" 
+                                            placeholder="Confirm User's Password">
+                                            </mat-form-field>
+                                    
+                                    </div>
+                                </div>
+                            
+                                <div *ngIf="(!editPasswordField && editpass)" class="p-col"  style="margin-right: 10px;">
+                                    <div  class="box padBox">
+                                        <strong><mat-label class="flable">Confirm Password<span>*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                        <mat-label>Enter Password here</mat-label>
+                                        <input 
+                                            id="confirmPassword" 
+                                            type="password" 
+                                            
+                                            [class.is-invalid]="userRegistration.controls.confirmPassword.invalid && userRegistration.controls.confirmPassword.touched" 
+                                            matInput 
+                                            formControlName="confirmPassword" 
+                                            placeholder="Confirm User's Password">
+                                            </mat-form-field>
+                                        <!-- <small 
+                                            class="d-none"
+                                             [class.dnone]="userRegistration.controls.confirmPassword.valid || userRegistration.controls.confirmPassword.untouched">
+                                           <br> Confirm User's Password
+                                        </small> -->
+                                        <small 
+                                        class="d-none"
+                                        *ngIf="userRegistration.errors?.passwordNotMatch && userRegistration.controls.confirmPassword.value"
+                                        >
+                                        <br> Password is not equal to Confirm Password
+                                        </small>
+                                    </div>
+                                </div>
+                            
+                                <div *ngIf="editPasswordField"  class="p-col"  style="margin-right: 10px;">
+                                    <div  class="box padBox">
+                                        <strong><mat-label class="flable">Confirm Password<span>*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                        <mat-label>Enter Password here</mat-label>
+                                        <input 
+                                            id="confirmPassword" 
+                                            type="password" 
+                                            [(ngModel)]="user.password" 
+                                            [class.is-invalid]="userRegistration.controls.confirmPassword.invalid && userRegistration.controls.confirmPassword.touched" 
+                                            matInput 
+                                            formControlName="confirmPassword" 
+                                            placeholder="Confirm User's Password">
+                                            </mat-form-field>
+                                        <!-- <small 
+                                            class="d-none"
+                                             [class.dnone]="userRegistration.controls.confirmPassword.valid || userRegistration.controls.confirmPassword.untouched">
+                                           <br> Confirm User's Password
+                                        </small> -->
+                                        <small 
+                                        class="d-none"
+                                        *ngIf="userRegistration.errors?.passwordNotMatch"
+                                        >
+                                       <br> Password is not equal to Confirm Password
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-col"  style="margin-right: 10px;">
+                                    <div class="box padBox">
+                                        <strong><mat-label class="flable">Role<span>*</span></mat-label> </strong>
+                                        <br>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                            <mat-label>Select Role</mat-label>
+                                            <mat-select 
+                                                id = "roles"
+                                                [(ngModel)]="user.roles"
+                                                formControlName="roles"
+                                                 >
+                                                <mat-option value="Administrator">Administrator</mat-option>
+                                                <mat-option value="Normal User" >Analyst</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <small 
+                                            class="d-none"
+                                            [class.dnone]="userRegistration.controls.roles.valid || userRegistration.controls.roles.untouched">
+                                            <br> Please select user Roles
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+                        <button [disabled]="!userRegistration.valid" pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="onSubmit()" ></button>
+                    </ng-template>
+                </p-dialog>
+                <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            </div>
+    </mat-card>
+</div>

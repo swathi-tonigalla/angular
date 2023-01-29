@@ -1,0 +1,143 @@
+<div *ngIf="!isload"> 
+<div  *ngIf="isLoading || isSucessmsg || concat_c1.length == 0" class="uidPanel">
+    <div *ngIf="isLoading" id="progressSpinDesti"
+    style="width: 100%; min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+      <p style="font-size: 14px;text-align: center;">Please wait...<br>Generating UID</p>
+    </div>
+    <div style="width: 100%; min-height: 150px;" *ngIf="isSucessmsg">
+    <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+    </div>
+    <div *ngIf="!isload && !isLoading && !isSucessmsg && concat_c1.length < 1" style=" width:100%;display: flex; align-items: center; flex-direction: column;">
+       
+       <div style="display: flex; width: 100%; align-items: center; justify-content: flex-end;">
+        <!-- <button pButton pRipple type="button" label="Close" class="p-button-danger p-button-text" (click)="closeBox()"></button> -->
+       </div>
+        <div *ngIf="!isload" style="display: flex; justify-content: center; width: 100%; min-height: 150px; align-items: center;">
+            <!-- <p style="text-align: center; font-size: 13px;">Please click on generate new to <br> Unique/Matching ID.</p> -->
+            <button pButton pRipple type="button" label="Generate New" class="p-button-info p-button-text" (click)="genrateNew()" style="border-radius: 50px !important;
+            border: 1px solid #58b1e1;"></button>
+        
+          </div> 
+        <div *ngIf="!isload && alreadygenrateduids || isEdit && alreadygenrateduids" style="display: flex; align-items:  center; width: 100%; padding: 5px; border-top:1px solid #ddd; flex-direction: column;">
+          <div style="width: 100%;margin-bottom: 3px;">
+            <small style="font-weight: bold; ">Generated Unique/Matching ID in current project</small>        
+          </div>
+          
+            <div  *ngIf="!isload" style="width: 100%; align-items: center; display: inline-block;">
+            <small *ngFor="let uid of alreadygenrateduids" 
+            class="genratedUID"
+            pTooltip="{{uid.LDcolname}}"           
+            tooltipPosition="top" 
+            tooltipStyleClass="cstmClass"
+           >
+              {{uid?.uidName}}
+           </small>
+           </div>
+      
+        </div>
+    </div>
+
+   
+
+</div>
+
+<div *ngIf="!isload && concat_c1.length >=1 || isEdit && concat_c1.length >=1" class="uidPanel"> 
+    <div class="concatRow concatEqation">
+        <div class="eqBox"
+        *ngIf="!isload && concat_c1.length >0 || isEdit && concat_c1.length>0">
+        <div *ngIf="!isload && concat_c1.length >0 || isEdit && concat_c1.length>0">
+            <span>  {{concat_c1[0].LDgroup}} &nbsp; = &nbsp; </span>
+        </div>
+        <div *ngIf="!isload && concat_c1.length >0 || isEdit && concat_c1.length>0">
+          <mat-chip *ngFor="let c1_cols of concat_c1;let i=index" [removable]="removable" (removed)="remove(i)">
+            {{c1_cols?.LDname}}
+            <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+        </mat-chip>
+        </div>
+        </div>
+      
+        <div  *ngIf="!isload && concat_c1.length >0 || isEdit && concat_c1.length>0" style="height: 40px; display: flex; align-items: center; justify-content: center; margin-top: 30px;">
+           
+                <button  pButton pRipple icon="pi pi-check" label="Generate UID" class="p-button-rounded p-button-success cm_button" (click)="OngenrateC1($event)"></button>
+                <button  pButton pRipple icon="pi pi-times" label="Close" class="p-button-rounded p-button-info cm_button" (click)="oncloseUidDIlog()"></button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="isload && alreadygenrateduids"  class="uidPanel" style="display: flex; flex-direction: column;">
+    <div
+    *ngIf="!finalaftergen"
+    style="width: 100%; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+    <p style="font-size: 14px; font-weight: bold; margin-left: 10px;">Click on below buttons to regenerate uid's with new source.</p>
+    </div>
+
+    <div
+    id="beforUID">
+    <p-scrollPanel [style]="{width: '100%', height: '380px'}" styleClass="custombar1">
+    <div 
+    *ngFor="let re_uid of alreadygenrateduids;let i=index"
+    style="width: 100%; margin-bottom: 5px; padding-left: 2px; display: flex; align-items: center; padding: 5px 0px; border-bottom: 1px dashed #ddd;">
+    <div id="skeleton_{{re_uid.id}}" style="width:100%;display: none;">
+      <p-skeleton></p-skeleton>
+    </div>
+    <div style="width: 100%;"  id="uidName_{{re_uid.id}}">
+       <span class="regenration_uid_name">{{re_uid?.uidName}}</span>
+      </div>
+    
+      <div  id="statusText_{{re_uid.id}}" style="width: 100%;">
+        <span  id="statusTextSpan_{{re_uid.id}}" class="status"
+        [class.success]="status==='Regenerated'"
+        >{{status}}</span>
+       </div>
+
+       <div  style="width: 22%;" id="reGenBtn_{{re_uid.id}}">
+        <button 
+        pButton pRipple type="button" 
+        pTooltip="Click to regenerate" 
+        icon="pi pi-check" 
+        class="p-button-rounded p-button-info"
+        [disabled]="is_regenration"
+        (click)="regenratUID(re_uid.id, re_uid.LDcolID, re_uid.sourceID,re_uid.prid, re_uid.udname)"
+        ></button>
+       </div>
+
+       <div  id="statusText_{{re_uid.id}}" style="width: 28%; display: none;">
+  
+        <span  id="statusTextSpan_{{re_uid.id}}" class="status success" style="display: flex;">
+         <mat-icon aria-hidden="false" style="margin-right: 3px;font-size: 20px;">check_circle</mat-icon>
+           Regenerated</span>
+       </div>
+     
+    </div>
+  </p-scrollPanel>
+    </div>
+ 
+    <!-- <div id="afterGenUid"
+    *ngIf="finalaftergen.length>3"
+    >
+    <div
+    *ngIf="finalaftergen"
+    style="width: 100%; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+    <p style="font-size: 14px; font-weight: bold; margin-left: 10px;">Regenerated Uid's</p>
+    </div>
+    <div 
+    *ngFor="let regen_uid of finalaftergen;let i=index"
+    style="width: 100%; margin-bottom: 5px; padding-left: 2px; display: flex; align-items: center; padding: 5px 0px; border-bottom: 1px dashed #ddd;">
+
+    <div style="width: 100%;"  id="uidName_{{regen_uid.id}}">
+      <span class="regenration_uid_name">{{regen_uid?.uidName}}</span>
+     </div>
+     <div  id="statusText_{{regen_uid.id}}" style="width: 28%;">
+  
+       <span  id="statusTextSpan_{{regen_uid.id}}" class="status success" style="display: flex;">
+        <mat-icon aria-hidden="false" style="margin-right: 3px;font-size: 20px;">check_circle</mat-icon>
+         {{regen_uid?.status}}</span>
+      </div>
+  </div> 
+
+    </div>--> 
+   
+</div>

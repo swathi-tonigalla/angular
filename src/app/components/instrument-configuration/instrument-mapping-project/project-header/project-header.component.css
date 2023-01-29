@@ -1,0 +1,27 @@
+.cardheader{
+    height: 57px;
+    padding: 15px 25px;
+    border-radius: 20px 20px 0px 0px;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    position: relative;
+    top: -16px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.component_title{padding: 0px 40px 0px 15px; min-height: 65px;}
+.component_title hr{clear: both; margin-bottom: 0px;}
+.upClass h3{font-weight:bold; color: #343434; margin-bottom:3px;}
+.upClass p{font-size: 13px; color: #343434; margin-bottom: 2px;}
+
+.prName{
+    float:left;
+    padding: 5px;
+    margin-top: -5px;
+}
+
+.clientName{
+    float:right;
+    padding: 5px;
+    margin-top: -5px;
+    text-align: right;
+}

@@ -1,0 +1,102 @@
+<div class="adminWrp">
+    <div class="container component_title cmClass">
+        <h3>Dashboard</h3>
+        <p style="margin-bottom: -4px;">Admin Dashboard</p>
+        <hr>
+    </div>
+<div class="contentWrp">
+    <mat-card class="cardwidth">
+        <div class="cardCont">
+                <div class="p-col">
+                    <div class="box padBox">
+                        <div class="dashboardTotalcountInfo">
+                           <h1 class="countTitle">{{reciveallConfigCount?.instrumentConfuguredByYou}}</h1> 
+                           <!-- <p class="countMiddleText">Instruments Configured by you</p> -->
+                           <p class="countMiddleText">Instruments Configured</p>
+                           <p class="countLastText">Click on new project to generate Instrument Configuration</p>
+                           <button pButton pRipple type="button" class="npBtn" label="New project" class="p-button-rounded" (click)="newProjectDashboard()"></button>
+                        </div>
+                    </div>
+                </div>
+     </div>
+    </mat-card>
+    <mat-card class="cardwidth fixWidth normalTop" >
+        <div class="cardCont">
+            <div class="p-col">
+                <div class="box padBox">
+                    <div class="cardheader">
+                        <mat-card-title>
+                            <h3>Statistics</h3>
+                        </mat-card-title>
+                        </div>
+                    <div class="dashboardstatisticks">
+                            <div class="dashboardIcon icon_one">
+                                <div class="userregistered">
+                                        <div class="imgBox usersCountImg"></div>
+                                </div>
+                                <div class="count"> 
+                                        <h1>{{userData?.length}}</h1>
+                                </div>
+                                <div class="icontitle">
+                                        <!-- <h5>Users Registered</h5> -->
+                                        <h5>Registered Users</h5>
+                                </div>
+                            </div>
+                            <div class="dashboardIcon icon_two">
+                                <div class="userregistered">
+                                    <div class="imgBox clientRegistration"></div>
+                                    
+                            </div>
+                            <div class="count"> 
+                                    <h1 style="color:#FFAD0A">{{clientData?.length}}</h1>
+                            </div>
+                            <div class="icontitle">
+                                    <!-- <h5>Clients Registered</h5> -->
+                                    <h5>Registered Clients</h5>
+                            </div>
+                            </div>
+                            <div class="dashboardIcon icon_three">
+                                <div class="userregistered">
+                                    <div class="imgBox instrumeConfig"></div>
+                                   
+                            </div>
+                            <div class="count"> 
+                                    <h1 style="color:#295597">{{reciveallConfigCount?.AllUserInstrumentConfigured}}</h1>
+                            </div>
+                            <div class="icontitle" style="width:auto;top: -59px;
+                            left: 76px;">
+                                    <!-- <h5>Instruments Configured</h5> -->
+                                    <h5>Configured Instruments</h5>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </mat-card>
+</div>
+ 
+
+<div class="tableWrp">
+    <mat-card class="cardwidth" style="top: 40px;
+    width: 96%;">
+        <div class="cardCont">
+                <div class="p-col">
+                    <div class="box padBox">
+                        <div class="cardheader">
+                            <mat-card-title>
+                                <h3>Recent Instruments Configuration Activity</h3>
+                            </mat-card-title>
+                            </div>
+                            <div class="actTable">
+                                    <app-recent-activity-table></app-recent-activity-table>
+                            </div> 
+
+                    </div>
+                </div>
+     </div>
+    </mat-card>
+    <div class="tableHolder"></div>
+</div>
+</div>

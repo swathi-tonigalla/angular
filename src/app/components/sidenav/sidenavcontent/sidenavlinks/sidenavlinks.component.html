@@ -1,0 +1,50 @@
+<div 
+class="admin_dasboard_menus"
+[class.sidespacecover]="classToggled"
+>
+<div *ngIf="isAdmin">
+    <a class="dashIcon" routerLink="homeIndex" [routerLinkActive]="['sideactive','dashctive']" (click)="dashboard()">
+        <span *ngIf="!classToggled">Dashboard</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+        
+        <a routerLink="clientmanagement" class="cm_icon" [routerLinkActive]="['sideactive','cm_iconAct']" (click)="clmanage()">
+            <span *ngIf="!classToggled">Client Management</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+     
+
+        <a routerLink="instrumentDestination" class="id_icon" [routerLinkActive]="['sideactive','id_iconAct']" (click)="instDestination()">
+            <span *ngIf="!classToggled">Instrument Destination</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+    <a class="ic_config" routerLink="instrumentConfiguration" [routerLinkActive]="['sideactive','ic_configAct']" (click)="icconfig()">
+        <span *ngIf="!classToggled">Instrument Configuration</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+    <a routerLink="usermanagement" class="um_icon" [routerLinkActive]="['sideactive','um_iconAct']" (click)="userMan()">
+        <span *ngIf="!classToggled"> User Management</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+    <a routerLink="userpermissions" class="up_icon" [routerLinkActive]="['sideactive','up_iconAct']" (click)="userPer()">
+        <span *ngIf="!classToggled">User Permission</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+
+  
+    <a routerLink="auditreport" class="id_icon" class="ad_icon" [routerLinkActive]="['sideactive','ad_iconAct']" (click)="auditReport()">
+        <span *ngIf="!classToggled">Audit Report</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+    </div>
+ 
+<div *ngIf="!isAdmin">
+    <a class="dashIcon" routerLink="homeIndex" [routerLinkActive]="['sideactive','dashctive']">
+        <span *ngIf="!classToggled">Dashboard</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+
+        <div *ngIf="isInstrumentDestination">   
+            <a routerLink="instrumentDestination" class="id_icon" [routerLinkActive]="['sideactive','id_iconAct']">
+                    <span *ngIf="!classToggled">Instrument Destination</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+            </div> 
+
+    <a class="ic_config" routerLink="instrumentConfiguration" [routerLinkActive]="['sideactive','ic_configAct']">
+        <span *ngIf="!classToggled">Instrument Configuration</span><span  class="iconsupport" *ngIf="classToggled"></span></a> 
+    
+    <div *ngIf="isAuditReport">
+    <a routerLink="auditreport" class="id_icon" class="ad_icon" [routerLinkActive]="['sideactive','ad_iconAct']">
+            <span *ngIf="!classToggled">Audit Report</span><span  class="iconsupport" *ngIf="classToggled"></span></a>
+    </div>
+    
+    </div>
+    </div>

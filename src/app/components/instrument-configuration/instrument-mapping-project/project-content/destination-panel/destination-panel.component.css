@@ -1,0 +1,36 @@
+.destinationWrp{height: 450px;
+    border: 1px solid #f0f0f1;
+    border-radius: 10px;}
+.cardheader{
+    height: 50px;
+    padding: 15px 25px;
+    border-radius: 10px 10px 0px 0px;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    position: relative;
+    top: 0px;
+    border-bottom: 1px solid #d5d5d5;
+}
+.cardheader h3{text-align: center;font-size: 14px;
+    font-weight: 400;
+    color: #343434;}
+.destinationWrp .padBox{padding: 0px 0px 20px 0px !important;}
+
+.destinationWrp{
+    min-height: 450px;
+}
+
+.destinationWrp .box{
+    max-width: 230px !important;
+    height: 450px;
+    box-shadow: 0px 1px 2px #33333336;
+}
+
+.Expandablepanels{padding: 6px 5px;}
+
+.box::before{background: none !important;}
+
+:host ::ng-deep .p-scrollpanel .p-scrollpanel-bar {
+    background: transparent linear-gradient(180deg, #0A5198 0%, #110670 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000045;
+    border-radius: 6px;
+}

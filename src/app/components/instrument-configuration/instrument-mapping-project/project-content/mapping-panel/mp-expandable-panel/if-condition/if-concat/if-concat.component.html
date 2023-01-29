@@ -1,0 +1,191 @@
+<div *ngIf="if_concat_wait" class="con" style="min-height: 200px;">
+    <div id="progressSpinIF"
+      style="width: 100%; min-height: 150px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+        fill="#EEEEEE"></p-progressSpinner>
+      <p style="font-size: 14px; text-align: center;">Please wait...<br> filtering selected column.</p>
+    </div>
+  </div>
+
+  <div *ngIf="isSelectedIfConcat" class="filterMappingSelected">
+    <p style="text-align: center; font-weight: bold;">All set...<br> you can go for mapping now!</p>
+  
+            <!-- <span class="editText">To change current mapping click on edit button</span>
+            <button pButton pRipple icon="pi pi-pencil"
+        class="p-button-rounded p-button-text p-button-success p-mr-2 selectInstTypeBtn"></button> -->
+  
+    </div>
+    <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+  <div *ngIf="!if_concat_wait && !isSelectedIfConcat" class="concCantPanel">
+    <p-messages [(value)]="msgs" [enableService]="false"></p-messages>
+    <div *ngIf="!if_concat_wait && if_concat_Arry.length < 1"
+      style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 14px;text-align: center;">Please select result column from <br> source data</p>
+    </div>
+  
+    <div *ngIf="if_concat_Arry.length >0" class="conCatsub">
+
+      <div *ngIf="if_concat_Arry.length >0" style="width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgb(221, 221, 221);
+            margin-bottom: 15px;
+            padding-top: 7px;">
+  
+        <div style="width: 100%; font-size: 14px; font-weight: bold;">
+          <p style="margin-bottom: 0px;">
+            <small style="color: #0a357d;"> {{if_concat_Arry[0].LDname}}</small>
+            is selected for concat filter
+          </p>
+        </div>
+        <div style="width: 41%;">
+          <mat-chip [removable]="removable" (removed)="remove(0)">
+            {{if_concat_Arry[0].LDname}}
+            <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+          </mat-chip>
+        </div>
+  
+      </div>
+  
+      <div *ngIf="if_concat_Arry.length >0" style="width: 100%; display: flex; align-items: center; padding-left: 10px;">
+        <div style="width: 100%;">
+          <!-- <p style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Select Uid</p> -->
+          <mat-form-field class="example-full-width mat-form-field-fullwidth">
+            <mat-label>Select First UID</mat-label>
+            <mat-select id="firstUidDrp_ifConcat" (selectionChange)="onSelectFirstUid_if()" [(ngModel)]="SelectedFirstUid">
+              <!--  [(ngModel)]="selectedInstType"
+                         (selectionChange)="onClientChange()"                  
+                        -->
+              <mat-option *ngFor="let uid of postionUID" [value]="uid.id">
+                {{uid?.uidName}}
+                <small class="uidSpecification"><span>({{uid?.LDcolname}})</span></small>
+              </mat-option> 
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%;">
+          <mat-form-field class="example-full-width mat-form-field-fullwidth">
+            <mat-label>Select Second UID</mat-label>
+            <mat-select id="SecondUidDrp_ifConcat" [disabled]="!isFirstUiSelected_if_con" (selectionChange)="onSelectSecondUid_if_concat()"
+              [(ngModel)]="SelectedSecondUid_if_con">
+              <!--  [(ngModel)]="selectedInstType"
+                       (selectionChange)="onClientChange()"
+                     
+                      -->
+              <mat-option *ngFor="let suid_if_concat of isnotPositionUid" [value]="suid_if_concat.id">
+  
+                {{suid_if_concat?.uidName}}
+  
+                <small class="uidSpecification"><span>({{suid_if_concat?.LDcolname}})</span></small>
+              </mat-option>
+  
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div
+        style="margin-top: 10px; display: flex;align-items: center; width: 100%; border-top:1px solid #ddd; flex-direction: column;"
+     >
+  
+        <div *ngIf="uidDone_if_con" style="width: 100%;">
+          <p *ngIf="SelectedSecondUid_if_con != null" style="font-size: 14px; font-weight: bold;">Now you can set if condition with another uid.</p>
+        </div>
+  
+        <div *ngIf="uidDone_if_con" style="width: 100%;margin-top: 10px;display: flex; flex-direction: column; align-items: center;">
+  
+          <div style="width: 100%;">
+            <mat-form-field *ngIf="SelectedSecondUid_if_con != null" class="example-full-width mat-form-field-fullwidth"
+        
+            >
+              <mat-label>Select Condition</mat-label>
+              <mat-select id="SelectCOnditionIF" [(ngModel)]="selectedCondition_if" (selectionChange)="onconditionSelect()" [disabled]="SelectedSecondUid_if_con == null">
+                <mat-option *ngFor="let condiValue of removedDuplicatedFromSelectedColn" [value]="condiValue" >
+                  {{condiValue}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+
+            <small *ngIf="SelectedSecondUid_if_con == null" style="color:tomato; font-weight: bold;    position: relative;
+            top: -5px;">
+              <span> * </span>Please select 2nd uid 
+            </small>
+            </div>
+            <div *ngIf="conditionSelected" style="width: 100%;margin-bottom: 2px;">
+                <p style="font-weight: bold;">Select column from source data for next comparison</p>
+                <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+            </div>
+            <div *ngIf="if_concat_Arry.length >1" style="width:100%; display: flex; align-items: center;">
+                <p style="margin-bottom: 0px; margin-right: 30px;">
+                    <small style="color: #0a357d;"> {{if_concat_Arry[1].LDname}}</small>
+                    is selected for concat filter
+                  </p>
+
+             <mat-chip [removable]="removable" (removed)="remove2(1)">
+                {{if_concat_Arry[1].LDname}}
+                <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+              </mat-chip>
+            </div>
+
+
+            <div *ngIf="if_concat_Arry.length >1" style="width: 100%;">
+                <mat-form-field class="example-full-width mat-form-field-fullwidth" style="margin-right: 10px;">
+                    <mat-label>Select First UID</mat-label>
+                    <mat-select id="firstUidDrp_ifConcat_2" (selectionChange)="onSelectFirstUid_if_concat_1()" [(ngModel)]="SelectedFirstUid_2">
+                      <!--  [(ngModel)]="selectedInstType"
+                                 (selectionChange)="onClientChange()" 
+                                -->
+                      <mat-option *ngFor="let uid_2 of postionUID" [value]="uid_2.id">
+                        {{uid_2?.uidName}}
+                <small class="uidSpecification"><span>({{uid_2?.LDcolname}})</span></small>
+
+          
+                      </mat-option>
+          
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                    <mat-label>Select Second UID</mat-label>
+                    <mat-select id="SecondUidDrp_ifConcat_2" [disabled]="!isFirstUiSelected_if_con" (selectionChange)="onSelectSecondUid_if_concat_2()"
+                      [(ngModel)]="SelectedSecondUid_if_con_2">
+                      <!--  [(ngModel)]="selectedInstType"
+                               (selectionChange)="onClientChange()"
+                             
+                              -->
+                      <mat-option *ngFor="let suid_if_concat_2 of isnotPositionUid" [value]="suid_if_concat_2.id">
+          
+                        {{suid_if_concat_2?.uidName}}
+                        <small class="uidSpecification"><span>({{suid_if_concat_2?.LDcolname}})</span></small>
+          
+          
+                      </mat-option>
+          
+                    </mat-select>
+                  </mat-form-field>
+                  
+           
+            </div>
+            
+            </div>
+  
+  
+        <div *ngIf="uidDone_if_con_2"
+          style="width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; margin-top: 5px;">
+
+    
+          <div *ngIf="uidDone_if_con && SelectedSecondUid_if_con_2 != null">
+            <button  id="if_concat" pButton pRipple icon="pi pi-check" label="Set Condition" [disabled]="!SelectedSecondUid_if_con_2"
+            class="p-button-rounded p-button-success cm_button" (click)="OnsetIf_concat_Condition()"></button>
+          <button pButton pRipple icon="pi pi-times" label="Clear"
+            class="p-button-rounded p-button-info cm_button"></button>
+          </div>
+          
+        </div>
+  
+ 
+      </div>
+    </div>
+  </div>

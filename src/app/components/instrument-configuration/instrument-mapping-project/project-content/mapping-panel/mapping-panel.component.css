@@ -1,0 +1,30 @@
+
+:host ::ng-deep .p-scrollpanel .p-scrollpanel-bar {
+    background: transparent linear-gradient(180deg, #0A5198 0%, #110670 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000045;
+    border-radius: 6px;
+}
+
+.ProjectButtons{
+    padding: 5px 0px;
+    display: flex;
+ align-items: center;
+justify-content: center;
+
+}
+
+
+.ProjectButtons button{
+    margin-right: 10px;
+    position: relative;
+    top:5px
+}
+.noINstrument{width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    min-height: 420px;
+    text-align: center;
+    color: #656464;
+    justify-content: center;}

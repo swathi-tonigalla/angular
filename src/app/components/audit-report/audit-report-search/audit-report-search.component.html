@@ -1,0 +1,59 @@
+<div class="report-Filter-wraper">
+    <form class="example-form pd-bt"> 
+        <div class="p-grid p-flex-column">
+          <div class="p-col">
+            <div class="box inputBoxPadding">
+            <span class="input_titile"><strong>Select Client Name <span class="star">*</span></strong></span>
+            <mat-form-field class="">
+                <mat-label>Select Client Name</mat-label>
+                <mat-select  name="clientname">
+                  <mat-option>clientname
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+         </div>
+
+         <div class="p-col">
+            <div class="box inputBoxPadding">
+            <span class="input_titile"><strong>Select Project <span class="star">*</span></strong></span>
+            <mat-form-field class="">
+                <mat-label>Select Project Name</mat-label>
+                <mat-select  name="clientname">
+                  <mat-option>project name
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+         </div>
+         
+          <div class="p-col">
+            <div class="box inputBoxPadding">
+              <span class="input_titile"><strong>Start Date <span class="star">*</span></strong></span>
+         <mat-form-field class="">
+       
+          <mat-label>Select Start Date</mat-label>
+             <input matInput [matDatepicker]="userListDatePickerstdate"/>
+             <mat-datepicker-toggle [for]="userListDatePickerstdate" matSuffix></mat-datepicker-toggle>
+             <mat-datepicker #userListDatePickerstdate></mat-datepicker>
+         </mat-form-field>
+              </div>
+            </div>
+           
+          <div class="p-col">
+              <div class="box inputBoxPadding">
+                <strong class="smallLables"><mat-label class="">To</mat-label> </strong>
+                <span class="input_titile"><strong>End Date <span class="star">*</span></strong></span>
+                <mat-form-field class="">
+                  
+                 <mat-label>Select End Date</mat-label>
+                    <input matInput [matDatepicker]="userListDatePickerenddt"/>
+                    <mat-datepicker-toggle [for]="userListDatePickerenddt" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #userListDatePickerenddt></mat-datepicker>
+                </mat-form-field>
+              </div>
+          </div>
+      </div>
+         <button class="mainbtn" mat-raised-button >Search</button>
+    </form>
+</div>

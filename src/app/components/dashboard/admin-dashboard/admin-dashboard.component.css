@@ -1,0 +1,389 @@
+.cardwidth {
+  width: 95%;
+  position: relative;
+  top: 15px;
+  border-radius: 20px;
+  padding: 0 !important;
+  margin-right: 5px;
+}
+
+.normalTop{
+  top: 25px;
+}
+.cardheader {
+  /* height: 57px; */
+  height: 38px;
+  padding: 9px 20px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: -11px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.cardwidth_second {
+  width: 97%;
+  position: relative;
+  top: 18px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+
+.component_title {
+  padding: 0px 40px 0px 15px;
+}
+.cmClass h3 {
+  font-weight: bold;
+  color: #343434;
+  margin-bottom: 6px;
+}
+.cmClass p {
+  font-size: 13px;
+  color: #343434;
+}
+
+.cm_header {
+  width: 100%;
+  height: 50px;
+}
+
+.cm_header .p_grid {
+  float: right;
+  padding-right: 40px;
+}
+.cm_header .p_grid .cm_button {
+  background: #1f73ae;
+  border: none;
+}
+.padBox {
+  padding: 0px !important;
+  max-width: 100%;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+.box::before {
+  background: none !important;
+}
+
+.contentWrp {
+  width: 97%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 5px;
+  margin-top: -20px;
+}
+.dashboardstatisticks,
+.dashboardTotalcountInfo
+ {
+  min-height: 170px;
+  padding: 20px 5px;
+  display: flex;
+}
+.dashboardTotalcountInfo {
+  /* width: 400px; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  }
+
+.dashboardstatisticks {
+  justify-content: space-between;
+  align-items: center;
+}
+.npBtn {
+  background-color: #1f73ae !important;
+}
+.countTitle {
+  font-size: 34px;
+  font-weight: bold;
+  color: #0f75bc;
+  margin-bottom: 5px;
+  margin-top: 12px;
+}
+.countMiddleText {
+  font-size: 20px;
+  width: 170px;
+  white-space: pre-wrap;
+  text-align: center;
+  line-height: 1.5em;
+}
+.countMiddleText,
+.countLastText {
+  color: #5f4c4c;
+  margin-top: 5px;
+}
+.countLastText {
+  font-size: 14px;
+}
+
+.dashboardIcon {
+  width: 200px;
+  height: 100px;
+  margin: 5px;
+  padding: 5px;
+}
+
+:host ::ng-deep .p-button {
+  padding: 0.5rem 2rem;
+  background-color: #1f73ae;
+  border-color: #1f73ae;
+}
+:host ::ng-deep .p-button:hover {
+  background-color: #1f73ae;
+}
+
+.userregistered {
+  padding: 5px;
+  float: left;
+  margin: 5px;
+  width: 60px;
+  height: 80px;
+  position: relative;
+    top: -10px;
+}
+
+.userregistered img {
+  width: 58px;
+  position: relative;
+  top: -23px;
+  left: -5px;
+}
+.count {
+  float: left;
+  margin: inherit;
+  width: 90px;
+  margin-top: -3px;
+}
+.icontitle {
+  float: left;
+  width: 100px;
+  margin-top: 5px;
+  position: relative;
+}
+.count h1 {
+  color: #2cb0e2;
+  font-size: 28px;
+  font-weight: bold;
+}
+.count h1,
+.icontitle h5 {
+  margin: 0px;
+  text-align: left;
+ }
+.icontitle h5 {
+  color: #343434;
+}
+.actTable {
+  padding: 5px 20px;
+}
+.actTable {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+}
+.tableHolder {
+  width: 100%;
+  height: 10px;
+}
+.imgBox{width: 60px; height: 60px; background-size: contain !important;}
+.usersCountImg{
+    background: url(../../../../assets/images/clientRegistred.png)  no-repeat;
+}
+
+.clientRegistration{
+  background: url(../../../../assets/images/userRegistred.png)  no-repeat; 
+}
+
+.instrumeConfig{
+  background: url(../../../../assets/images/MappedResult.png)  no-repeat;  
+}
+
+@media only screen  and (min-width: 1920px) {
+  .cardwidth {
+    width: 100%;
+    position: relative;
+    top: 15px;
+    border-radius: 20px;
+    padding: 0 !important;
+    margin-right: 5px;
+  }
+  .countTitle {
+    font-size: 40px;
+  }
+  .icontitle h5 {
+    margin: 0px;
+    text-align: left;
+    font-size: 15px;
+  }
+  .countMiddleText {
+    font-size: 13px;
+    width: 200px;
+    white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.5em;
+  }
+  .countLastText {
+    font-size: 13px;
+  }
+  :host ::ng-deep .p-button {
+    padding: 0.5rem 4rem;
+  }
+  .cmClass h3 {
+    font-weight: bold;
+    color: #343434;
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+  .cmClass p {
+    font-size: 18px;
+    color: #343434;
+  }
+  
+  .imgBox{width: 60px; height: 60px; background-size: contain !important;}
+  .usersCountImg{
+      background: url(../../../../assets/images/clientRegistred.png)  no-repeat;
+  }
+  
+  .clientRegistration{
+    background: url(../../../../assets/images/userRegistred.png)  no-repeat; 
+  }
+  
+  .instrumeConfig{
+    background: url(../../../../assets/images/MappedResult.png)  no-repeat;  
+  }
+  .dashboardTotalcountInfo {
+    /* width: 400px; */
+    min-height: 140px !important;
+  }
+  .normalTop{
+    top: 20px!important;
+  }
+ 
+}
+@media only screen  and (min-width: 1366px) {
+  .fixWidth{
+    width: 95% !important;
+    min-height: 240px;
+  }
+  .normalTop  {
+    top: 20px;
+}
+}
+
+@media only screen  and (max-width: 1300px){
+  .fixWidth{
+    width: 95% !important;
+    min-height: 258px;
+  }
+  .normalTop{
+    top: 20px!important;
+  }
+
+  .countLastText{text-align: center;}
+}
+
+@media only screen  and (min-width: 1920px) {
+  .fixWidth{
+    width: 95% !important;
+    min-height: 230px !important;
+  }
+  .normalTop{
+    top: 20px!important;
+  }
+  .icontitle h5{word-spacing: 100vh;}
+}
+
+@media only screen  and (min-width: 1440px) {
+  .fixWidth{
+    width: 95% !important;
+    min-height: 230px;
+  }
+  .normalTop{
+    top: 25px !important;
+  }
+ .cardwidth {
+    /* width: 95%;
+    position: relative;
+    top: 15px;
+    border-radius: 20px;
+    padding: 0 !important;
+    margin-right: 5px; */
+
+    width: 100%;
+    position: relative;
+    top: 15px;
+    border-radius: 20px;
+    padding: 0 !important;
+    margin-right: 5px;
+  }
+  .countTitle {
+    font-size: 40px;
+  }
+  .icontitle h5 {
+    margin: 0px;
+    text-align: left;
+    /* font-size: 13px; */
+  }
+  .countMiddleText {
+    font-size: 20px;
+    width: 170px;
+    white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.5em;
+    
+  }
+  .countMiddleText,
+.countLastText {
+  color: #5f4c4c;
+  margin-top: 5px;
+}
+.countLastText {
+  font-size: 14px;
+  text-align: center;
+}
+  :host ::ng-deep .p-button {
+    padding: 0.5rem 4rem;
+  }
+  .cmClass h3 {
+    font-weight: bold;
+    color: #343434;
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+  .cmClass p {
+    font-size: 13px;
+    color: #343434;
+  }
+  .imgBox{width: 60px; height: 60px; background-size: contain !important;}
+  .usersCountImg{
+      background: url(../../../../assets/images/clientRegistred.png)  no-repeat;
+  }
+  
+  .clientRegistration{
+    background: url(../../../../assets/images/userRegistred.png)  no-repeat; 
+  }
+  
+  .instrumeConfig{
+    background: url(../../../../assets/images/MappedResult.png)  no-repeat;  
+  }
+ .dashboardstatisticks,
+.dashboardTotalcountInfo
+ {
+  min-height: 140px !important;
+  padding: 20px 5px;
+  display: flex;
+  }
+ .cardheader {
+    /* height: 57px; */
+    height: 38px;
+    padding: 9px 20px;
+    border-radius: 20px 20px 0px 0px;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    position: relative;
+    top: -21px;
+    border-bottom: 1px solid #d5d5d5;
+  }
+ 
+}

@@ -1,0 +1,16 @@
+
+ .Main_container{
+    /* width:calc(100% - 260px); */
+   
+      padding: calc(2rem + 4.45rem + 1.3rem) 2rem 0;
+      padding: 0;
+      position: relative;
+      transition: all .3s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      min-height: calc(100% - 3.35rem);
+      margin-left: 260px;
+ }
+
+
+.toggledContainer{margin-left: 70px;}

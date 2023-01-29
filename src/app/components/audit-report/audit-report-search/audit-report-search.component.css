@@ -1,0 +1,63 @@
+.report-Filter-wraper {
+  position: relative;
+  padding: 10px 15px 10px 25px;
+  margin-top: 25px;
+}
+.mtr15 {
+  margin-right: 15px;
+}
+.mat-raised-button {
+  width: 120px;
+  height: 40px;
+  background: #1f73ae 0% 0% no-repeat padding-box;
+  border-radius: 23px;
+  border-radius: 24px;
+  color: #fff;
+}
+.inputBoxPadding {
+  padding: 0px;
+  max-width: 223px;
+}
+.w600 {
+  width: 95%;
+}
+.w280 {
+  width: 250px;
+}
+h4 {
+  margin: 0px;
+}
+
+.input_titile {
+  position: absolute;
+  top: -20px;
+}
+
+.smallLables {
+  position: relative;
+  margin-right: 10px;
+  margin-left: -12px;
+}
+
+.pd-bt {
+  padding-bottom: 30px;
+}
+
+.star {
+  color: red;
+}
+
+/* Extra large devices (large laptops and desktops, 992px and up) */
+@media only screen and (max-width: 1200px) {
+  .input_titile {
+    top: -8px;
+  }
+
+  .inputBoxPadding {
+    max-width: 291px;
+  }
+
+  :host ::ng-deep .p-datatable {
+    font-size: 13px;
+  }
+}

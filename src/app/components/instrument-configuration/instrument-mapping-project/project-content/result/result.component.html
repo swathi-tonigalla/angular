@@ -1,0 +1,342 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<div class="container">
+  <mat-card class="cardwidth_second mat-card-pad">
+    <div class="cardheader">
+      <mat-card-title>
+        <h3>Configured Instruments</h3>
+      </mat-card-title>
+    </div>
+
+    <div class="card" style="padding-top: 50px;">
+
+      <div *ngIf="isDownloadWait"
+        style="width: 100%;  min-height: 270px; display: flex; justify-content: center; align-items: center; background-color: #fff; border-radius: 10px; position: relative; top:0px">
+        <div id="progressSpin_mapping_Result"
+          style="width: 230px; height: 60vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+          <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+            fill="#EEEEEE"></p-progressSpinner>
+          <p style="font-size: 12px; text-align: center; color: rgb(95, 95, 95);">Please Wait! <br>Before download
+            Setting up records in file.</p>
+        </div>
+      </div>
+      <div style="margin-top: -45px; padding-left: 15px;">
+        <div id="beforeResult" class="bfrResult">
+          <span>
+            <mat-icon aria-hidden="false" aria-label="no data" style="font-size: 35px;
+                          width: 35px;
+                          height: 35px;">description</mat-icon>
+          </span>
+          <h5>Sample Results not available</h5>
+        </div>
+        <div id="ResultView" *ngIf="mappedFileResult && !isDownloadWait">
+          <p-tabView>
+            <!-- {{mappedFileResult | json}} -->
+            <p-tabPanel *ngFor="let mainInst of mappedFileResult; let i = index"
+              header="{{mainInst.mappedInstrumentName}}">
+              <div fxLayout="row" class="result-btn-content" fxLayoutAlign="start center">
+                <div fxFlex="85" id="editor_{{mainInst.mappedInstID}}">
+                  <!-- <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable" color="primary" pTooltip="Remove Space" tooltipPosition="top">
+                    <mat-icon (click)="trimString()"> format_strikethrough</mat-icon>
+                  </button> -->
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable"
+                    color="primary" pTooltip="Lower Case" tooltipPosition="top">
+                    <mat-icon (click)="lowerCaseString()"> text_fields</mat-icon>
+                  </button>
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable" color="primary" pTooltip="Upper Case" tooltipPosition="top">
+                    <mat-icon (click)="upperCaseString()"> format_size</mat-icon>
+                  </button>
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable" color="primary" pTooltip="String to Number" tooltipPosition="top">
+                    <mat-icon (click)="stringToNumber()"> translate</mat-icon>
+                  </button>
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable" color="primary" pTooltip="Truncate Decimal" tooltipPosition="top">
+                    <mat-icon (click)="truncateDecimal()"> filter_tilt_shift</mat-icon>
+                  </button>
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button [disabled]="operationButtonDisable" color="primary" pTooltip="Remove Leading Zero" tooltipPosition="top">
+                    <mat-icon (click)="removeLeadingZero()"> toll</mat-icon>
+                  </button>
+                  <span class="result-btn-divider"></span>
+                  <button class="result-btn-cst-icon" mat-icon-button color="primary" [matMenuTriggerFor]="replaceMenu"
+                    [disabled]="operationButtonDisable" pTooltip="Date Format" tooltipPosition="top" >
+                    <mat-icon> date_range</mat-icon>
+                  </button>
+                  <mat-menu #replaceMenu="matMenu">
+                    <button mat-menu-item [disabled]="!dateBtnDisabled" (click)="dateConversionUK()">{{ddmmyy}}</button>
+                    <button mat-menu-item [disabled]="dateBtnDisabled" (click)="dateConversionUS()">{{mmddyy}}</button>
+                  </mat-menu>
+
+
+                  <mat-accordion class="cst-a-acc">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                      [disabled]="operationButtonDisable">
+                      <mat-expansion-panel-header
+                        [ngClass]="{'cst-bg-accor1': operationButtonDisable, 'cst-bg-accor2': !operationButtonDisable}">                                      
+                        <mat-panel-title
+                          [ngClass]="{'cst-title-accor1': operationButtonDisable, 'cst-title-accor2': !operationButtonDisable}">
+                          <mat-icon class="cst-acc-icon"> find_replace</mat-icon>  
+                          <span>Replace</span>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-form-field class="cst-input" appearance="fill">
+                        <mat-label>Find</mat-label>
+                        <input matInput type="text" #findVal value="">
+                      </mat-form-field>
+                      <mat-form-field class="cst-input" appearance="fill">
+                        <mat-label>Replace</mat-label>
+                        <input matInput type="text" #replaceVal value="">
+                      </mat-form-field>
+                      <button class="cst-btn p-button p-button-success" mat-flat-button 
+                        (click)="replaceText(findVal.value, replaceVal.value)">Replace</button>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+
+                  <mat-accordion class="cst-a-acc">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                      [disabled]="operationButtonDisable">
+                      <mat-expansion-panel-header
+                        [ngClass]="{'cst-bg-accor1': operationButtonDisable, 'cst-bg-accor2': !operationButtonDisable}">
+                        <mat-panel-title
+                          [ngClass]="{'cst-title-accor1': operationButtonDisable, 'cst-title-accor2': !operationButtonDisable}">
+                          <mat-icon class="cst-acc-icon"> format_clear</mat-icon>  
+                         <span>Slice</span> 
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-form-field class="cst-input" appearance="fill">
+                        <mat-label class="flable">Prefix Value<span>*</span></mat-label>
+                        <input matInput type="text"
+                        placeholder="e.g. 1"
+                        pTooltip="Prefix value should be 'Positive' value or '0'" #sliceStartVal>
+                      </mat-form-field>
+                      <mat-form-field class="cst-input" appearance="fill">
+                        <mat-label class="flable">Suffix Value<span>*</span></mat-label>
+                        <input matInput type="text"
+                        placeholder="e.g. -1"
+                        pTooltip="Suffix value should be 'Negative' value or '0'"
+                        #sliceEndVal >
+                      </mat-form-field>
+                      <button class="cst-btn-sc p-button p-button-success" mat-flat-button 
+                        (click)="sliceCharacters(sliceStartVal.value,sliceEndVal.value)"
+                        [disabled]="!sliceEndVal.value" 
+                        [class.diabledBtn]="!sliceEndVal.value"
+                     >Slice Value</button>
+                        
+                    </mat-expansion-panel>
+                  </mat-accordion>
+
+                  <mat-accordion class="cst-a-acc">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                      [disabled]="operationButtonDisable">
+                      <mat-expansion-panel-header
+                        [ngClass]="{'cst-bg-accor1': operationButtonDisable, 'cst-bg-accor2': !operationButtonDisable}">
+                        <mat-panel-title
+                          [ngClass]="{'cst-title-accor1': operationButtonDisable, 'cst-title-accor2': !operationButtonDisable}">
+                          <mat-icon class="cst-acc-icon"> format_shapes</mat-icon>  
+                          <span>Arithmetic</span>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Column</mat-label>
+                        <mat-select [(ngModel)]="selectedResultCol1">
+                          <mat-option *ngFor="let list1 of listResultData" [value]="list1.mpColName">
+                            {{list1.mpColName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Column</mat-label>
+                        <mat-select [(ngModel)]="selectedResultCol2">
+                          <mat-option *ngFor="let list2 of listResultData" [value]="list2.mpColName">
+                            {{list2.mpColName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Operation</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let mode of operationMode" [value]="mode.name"
+                            (click)="airthmeticOnNumber(selectedResultCol1,selectedResultCol2,mode)">{{mode.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+
+                  <mat-accordion class="cst-a-acc">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                      [disabled]="operationButtonDisable">
+                      <mat-expansion-panel-header
+                        [ngClass]="{'cst-bg-accor1': operationButtonDisable, 'cst-bg-accor2': !operationButtonDisable}">
+                        <mat-panel-title
+                          [ngClass]="{'cst-title-accor1': operationButtonDisable, 'cst-title-accor2': !operationButtonDisable}">
+                          <mat-icon class="cst-acc-icon"> iso</mat-icon>  
+                         <span>Calculator</span> 
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-form-field class="cst-input" appearance="fill">
+                        <mat-label>Enter Number</mat-label>
+                        <input matInput type="number" #numVal value="">
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Operation</mat-label>
+                        <mat-select>
+                          <mat-option (click)="addNumber(numVal.value)">Add</mat-option>
+                          <mat-option (click)="subtractNumber(numVal.value)">Substract</mat-option>
+                          <mat-option (click)="multiplyNumber(numVal.value)">Multiply</mat-option>
+                          <mat-option (click)="divideNumber(numVal.value)">Divide</mat-option>
+                          <mat-option (click)="modulusNumber(numVal.value)">Modulus</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+
+                <div fxFlex="15" class="result-btn-download"
+                  style="margin-bottom: 5px; width: 100%; display: flex; align-items: center;justify-content: flex-end;">
+
+
+                  <button [disabled]="!ddDisabled" mat-button [matMenuTriggerFor]="menu"
+    class="settingMenuButton dnlodbtn"
+    [class.diabledBtn]="!ddDisabled"
+    >
+                    <div class="usernameRole">
+                      <mat-icon style="margin-right: 3px;position: relative;
+            left: -8px;
+            top: 8px;"> file_download</mat-icon>
+                      <span>Download</span>
+                      <mat-icon class="downicon" aria-hidden="false" aria-label="Example home icon" style="
+           position: relative;
+    top: 7px;
+    left: 12px;
+        ">arrow_drop_down</mat-icon>
+                    </div>
+                  </button>
+                  <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item class="menuBtn" id="CSV_{{mainInst.mappedInstID}}" type="button"
+                      (click)="exportCSV(mainInst.mappedInstID,mainInst.mappedInstrumentName)" style="min-width: 155px;">
+
+                      <a style="display: block;
+    padding: 5px 7px;
+    padding: 5px 8px;
+    text-decoration: none;
+    color: #333333;
+    position: relative;
+   ">
+                        <mat-icon style="margin-right: 3px; "> insert_drive_file</mat-icon>
+
+                        CSV
+                      </a>
+
+                    </button>
+
+                    <button mat-menu-item class="menuBtn" id="EXLS_{{mainInst.mappedInstID}}" type="button"
+                      (click)="exportExls(mainInst.mappedInstID,mainInst.mappedInstrumentName)" style="min-width: 155px;border-top: 1px solid #ddd;">
+
+                      <a style="display: block;
+    padding: 5px 7px;
+    padding: 5px 8px;
+    text-decoration: none;
+    color: #333333;
+    position: relative;
+    ">
+                        <mat-icon style="margin-right: 3px; ">description</mat-icon>
+                        XLS
+                      </a>
+
+                    </button>
+
+                  </mat-menu>
+
+                </div>
+              </div>
+
+
+
+              <p-scrollPanel [style]="{width: '100%', height: '380px'}" styleClass="custombar1">
+                <div id="excel_table_{{mainInst.mappedInstID}}"
+                  style="width: 100%;height: 100%;display: flex;flex-direction: column;">
+
+                  <!-- [ngStyle]="{'display':col.instID == mainInst.mappedInstID ? 'block' : 'none' }" -->
+                  <ul  
+                    style="width:100%;padding: 5px;display: flex; list-style: none; padding: 0px; margin-top: 5px;position: relative; left: 0px; border: 1px solid #ddd;    overflow-x: scroll;">
+                    <li *ngFor="let col of mainInst.instumentDataMapped; let i = index" style="padding: 5px;
+                                        margin: 0px -12px 0px 12px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        text-align: center;
+                                        border-right: 1px solid #ddd;"
+                      class="example-box"
+                      [ngStyle]="{'display':col.instID == mainInst.mappedInstID ? 'flex' : 'none' }"
+                      >
+                      
+                      <!-- [ngStyle]="{'display':col.instID == mainInst.mappedInstID ? 'flex' : 'none' }" -->
+
+                      <!-- [ngStyle]="{'display':col.instID == mainInst.mappedInstID ? 'flex' : 'none' }" -->
+                      <!-- [checked]="mainInst.mappedColDataCheckbox" -->
+                      <!-- [(ngModel)]="mainInst.mappedColDataCheckbox" -->
+                   
+                        <span style="display: flex; align-items: center; padding: 8px 4px; justify-content: center;">
+                          <mat-checkbox name="{{mainInst.mappedInstID}}_{{col.mpColName}}" class="example-margin"
+                          [(ngModel)]="col.mappedColDataCheckbox"
+                            (change)="isResultColSelected(col,$event.checked,mainInst.mappedInstID,col.mpColName)"
+                            color="primary" style="margin-right: 5px;"></mat-checkbox>
+                          <button id="rsultDeletBtn_{{col.mpColID}}_{{mainInst.mappedInstID}}" pButton
+                            pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"
+                            (click)="removeColumn(i,mainInst.mappedInstID,mainInst.mappedInstrumentName,col.mpColName)"
+                            >
+                            <!-- (click)="deleteColn(mainInst.instumentDataMapped,'mpColID',col.mpColID, col.mpColName)" -->
+                            <!-- <div id="disablebtn_{{col.mpColID}}_{{mainInst.mappedInstID}}" style="    width: 30px;
+                          height: 30px;
+                          background-color: rgb(255 255 255 / 55%);
+                          position: absolute;
+                          z-index: 1;
+                          top: 0px;
+                          left: 0px;"></div> -->
+                          </button>
+                        
+                        </span>
+  
+                        <span style="margin-bottom: 10px;
+                                              border-bottom: 1px solid #ddd;
+                                              padding: 8px 4px 65px 4px; height: 30px;
+                                              display: block;
+                                              word-break: break-all;
+                                               width: 130px;"
+                                            
+                           >
+                          <strong>{{col.mpColName}}  </strong> 
+                        </span>
+  
+                      
+                        <span style=" border-bottom: 1px solid #ddd;
+                                            padding:10px 4px; display: block;
+                                              word-break: break-all;min-height: 48px;
+      width: 140px;" *ngFor="let cold of col.mpcolData | keyvalue:originalOrder">
+                          {{cold.value}}
+                        </span>
+                  
+  
+                   
+                 
+
+             
+                    </li>
+                  </ul>
+
+                  <!-- [ngStyle]="{'display':coldata.instID == mainInst.mappedInstID ? 'flex' : 'none' }" -->
+                  <p-toast position="bottom-center" key="bc"></p-toast>
+                </div>
+              </p-scrollPanel>
+            </p-tabPanel>
+          </p-tabView>
+
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
+</div>

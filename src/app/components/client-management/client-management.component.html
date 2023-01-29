@@ -1,0 +1,152 @@
+<p-toast position="top-center"></p-toast>
+<div class="container component_title cmClass">
+    <h3>Client Management</h3>
+    <!-- <p>Manage your client list here</p> -->
+    <p>Manage client list </p>
+    <hr>
+</div>
+<div class="container">
+    <mat-card class="cardwidth_second mat-card-pad">
+        <div class="cardheader">
+        <mat-card-title>
+            <h3>Client list</h3>
+        </mat-card-title>
+        </div>
+    
+        <div class="card" style="padding-top: 50px;">
+          
+           <div style="margin-top: -45px;"> 
+                 
+            <p-table #dt [value]="clients" [rows]="10" [paginator]="true"
+           [rowHover]="true" dataKey="id" [globalFilterFields]="['clientName']" [(selection)]="selectedClient"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Results" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]">
+           
+            <ng-template pTemplate="caption">
+       
+            <div class="boxes">
+                <mat-form-field class="example-full-width mat-form-field-fullwidth inputSearch">
+                    <input 
+                    id="Searchbar"
+                    matInput 
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                    placeholder="Search Client Name">  
+                </mat-form-field>
+                 
+            </div>
+            <div class="boxes smallBoxes">
+                <button pButton pRipple label="New Client" icon="pi pi-plus"
+                class="newclient p-button-rounded p-button-info cm_button"
+                (click)="newClient()"
+                ></button>
+            </div>
+            
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th id="chkbox" style="width: 3rem;">
+                        <mat-checkbox class="example-margin" (change)="changeAllSelectedClients($event)" color="primary"
+                        [(ngModel)]="selectAll"></mat-checkbox>
+                        <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+                    </th>
+                    <!-- <th id="id" pSortableColumn="id">Client Id<p-sortIcon field="id"></p-sortIcon></th> -->
+                    <th id="clName" pSortableColumn="clientName">Client Name <p-sortIcon field="clientName"></p-sortIcon></th>
+                    <!-- <th id="remarks">Remark</th> -->
+                    <th id="remarks">Additional Info</th>
+                    
+                    <th id="">Created On</th>
+                    <th id=""> 
+                        &nbsp; &nbsp; <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"  (click)="deleteSelectedClients()" 
+                        [disabled] ="!checkedIDs || !checkedIDs.length"></button>
+                        <!-- &nbsp; &nbsp; <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"  (click)="deleteSelectedClients()" [disabled]="!selectedClient || !selectedClient.length"></button> -->
+                    </th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-client>
+                <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+                <tr>
+                    <td>
+                        <!-- <p-tableCheckbox [value]="client"></p-tableCheckbox> -->
+                        <mat-checkbox class="example-margin" (change)="changeSelection(client)" color="primary"
+                        [(ngModel)]="client.checked"></mat-checkbox>
+                    </td>
+                    <!-- <td>{{client.id}}</td>   -->
+                    <td>{{client.clientName}}</td>  
+                    <td>{{client.remarks}}</td>  
+                    <td class="tdPad">{{client.createdAt | customDateFormat:'longDate'}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-success p-mr-2" (click)="editClients(client)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning" (click)="deleteClient(client)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        </div>
+           <div class="cm_crudTable">
+            <p-dialog [(visible)]="clientDilog" [style]="{width: '650px'}" [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="header">
+                <mat-card-title>
+                    <h3>New Client </h3>
+                </mat-card-title>
+            </ng-template>
+                <ng-template pTemplate="content">
+                 
+                <form class="clientForm" [formGroup]="clientRegistration">
+                    <div class="p-grid">
+                        <div class="p-col">
+                            <div class="box padBox">
+                                <strong><mat-label class="flable">Client Name<span>*</span></mat-label> </strong>
+                                <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                    <mat-label>Client Name</mat-label>
+                                    <input 
+                                    id="clientName"
+                                    [(ngModel)]="client.clientName"
+                                    [class.is-invalid]="clientRegistration.controls.clientName.invalid && clientRegistration.controls.clientName.touched" 
+                                    matInput 
+                                    formControlName="clientName" 
+                                    placeholder="Enter new client name">
+                                </mat-form-field>
+                                <small 
+                               class="d-none"
+                                [class.dinone]="clientRegistration.controls.clientName.valid || clientRegistration.controls.clientName.untouched">Please enter client name</small>
+                            </div>
+                        </div>
+                        <div class="p-col">
+                            <div class="box padBox">
+                                <!-- <strong><mat-label class="flable">Remark/Note <span>*</span></mat-label> </strong> -->
+                                <strong><mat-label class="flable">Additional Info<span>*</span></mat-label> </strong>
+                                <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                    <!-- <mat-label>Remark</mat-label> -->
+                                    <mat-label>Additional Info</mat-label>
+                                    <textarea 
+                                    id="remarks"
+                                    [(ngModel)]="client.remarks"
+                                    [class.is-invalid]="clientRegistration.controls.remarks.invalid && clientRegistration.controls.remarks.touched" 
+                                    matInput 
+                                    formControlName="remarks" 
+                                    placeholder="Some note about client if any"
+                                    (keydown)="space($event)"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                      </form>
+                </ng-template>
+                
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+                    <button [disabled]="!clientRegistration.valid" pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="onSubmit()" ></button>
+                </ng-template>
+            </p-dialog>
+            
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+          
+           </div>
+           
+        </div>
+    </mat-card>
+</div>

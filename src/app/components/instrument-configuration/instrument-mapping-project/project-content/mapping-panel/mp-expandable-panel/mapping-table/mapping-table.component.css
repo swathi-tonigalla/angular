@@ -1,0 +1,163 @@
+:host ::ng-deep .p-panel.p-panel-toggleable .p-panel-header {
+  padding: 0.3rem 1rem;
+  background: transparent linear-gradient(97deg, #0A5198 0%, #380670 100%) 0% 0% no-repeat padding-box;
+box-shadow: 0px 1px 1px #0C0C0C66;
+border-radius: 4px;
+color: #ffffff;
+font-size:13px
+}
+
+.mappingTableWrp{padding-top: 15px;}
+
+.mappingTableWrp .colnListUl {
+  list-style-type: none;
+  margin-top: -10px;
+  padding: 0px;
+}
+.mappingTableWrp .colnListUl li {padding: 4px 13px 5px 13px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #F6F6F6;
+  box-shadow: 0px 1px 2px #33333336;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction:column;
+  transition: 300ms ease all; 
+}
+
+.mappingTableWrp .colnListUl li div{
+    display: inline-block;
+  }
+.mappingTableWrp .colnListUl li:nth-child(odd) {background: #F5F5F5;}
+
+.mappingTableWrp .listColn{
+font-size: 12px;
+white-space: break-spaces !important;
+padding: 0px 2px;
+width: 43%;
+position: relative;
+ 
+/* font-weight: bold; */
+}
+.listContent{width:100%;display: flex !important;justify-content: flex-start;
+  align-items: center;}
+
+.brk{
+  width: 2px;
+    height: 30px;
+    border-right: 1px solid #c9c9c9;
+    position: relative;
+    left: -3px;
+    top:3px
+}
+
+.mappedResult{
+font-size: 11px; 
+padding: 0px 2px;
+position: relative;
+width: 100%;
+}
+
+:host ::ng-deep .p-panel .p-panel-content {
+  padding: 0.8rem 0.2rem;
+}
+:host ::ng-deep .mat-checkbox-inner-container{ left: -7px;}
+
+
+.colnListUl li div.isMandetory{
+  position: relative;
+  right: -20px;
+}
+
+.mappingTableWrp .dataType {
+  font-size: 10px;
+  font-weight: normal;
+  font-style: italic;
+}
+:host ::ng-deep .isMandetory .p-badge {
+  background: #295597;
+  color: #ffffff;
+  font-size: 0.60rem;
+  font-weight: 700;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  line-height: 1.3rem;
+}
+
+
+:host ::ng-deep .p-button {
+  border-radius: 4px !important;
+}
+
+:host ::ng-deep .p-button.p-button-text:enabled:hover{
+  color:#9c9c9c
+}
+:host ::ng-deep .deletebtn .p-button.p-button-text:enabled:hover{
+  color: #e84118;
+}
+
+:host ::ng-deep .maapingBtn .p-button{
+border: 1px solid #9c9c9c !important;
+border-radius: 4px !important;
+}
+
+:host ::ng-deep .maapingBtn .p-button.p-button-text{
+  color:#9c9c9c
+}
+:host ::ng-deep .maapingBtn .p-button.p-button-text:enabled:hover{
+  color: #00286A;
+  border: 1px solid #00286A !important;
+}
+:host ::ng-deep .settings .p-button.p-button-text:enabled:hover{
+  color: #00286A;
+}
+
+:host ::ng-deep .mat-checkbox{position: relative;}
+:host ::ng-deep .mat-checkbox-label{ position:relative;left:-5px; font-weight: 400;}
+
+.mappingbuttons{
+  position: relative;
+  display: flex !important;
+   justify-content: flex-end;  
+  /* right: -75px; */
+  float: right;
+  width: 100%;
+}
+
+.relativeRight{
+  right:-246px
+}
+.mappingbuttons div{
+  margin-right: 5px;
+}
+
+:host ::ng-deep .p-button{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.toggleNotActive{
+  color:#9c9c9c
+}
+
+.toggleActive{
+  color:#100574 !important
+}
+
+.material-icons{font-size: 22px !important; text-align: end !important;}
+.toggleicon{font-size: 28px !important;}
+.togglePanel{transition: 300ms ease all; display:block !important;height: 0px; position: relative;}
+.panelactive{
+  min-height: 100px;
+  background-color: #fff;
+  width: 104%;
+  box-shadow: 0px 1px 2px 0px #33333387;
+  border-radius: 4px;
+  position: relative;
+  padding: 5px;
+  top: 0px;
+  left: -10px;
+}
+
+
+.togglebg{background: #dadada !important;}

@@ -1,0 +1,448 @@
+
+:host ::ng-deep .p-panel.p-panel-toggleable .p-panel-header {
+    height: 50px;
+    padding: 15px 25px;
+    border-radius: 10px 10px 0px 0px;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    position: relative;
+    top: 0px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+:host ::ng-deep .p-panel .p-panel-content {
+         padding: 2px 5px; 
+}
+
+:host ::ng-deep .p-panel.p-panel-toggleable .p-panel-header h3{
+    margin-bottom: 0px;
+}
+
+:host ::ng-deep  .p-panel.p-component {
+    margin-bottom: 6px;
+}
+
+.displaynoPanel{display: none;}
+
+.displayPanel{display: block;}
+
+:host ::ng-deep .p-dialog-header {
+  height: 57px;
+  padding: 30px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: 0px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+:host ::ng-deep .p-dialog-header h3 {
+  margin: 0 0 -6px;
+}
+:host ::ng-deep .p-dialog-header-icons{
+  display: none;
+}
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background: #ffffff;
+  color: #495057;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+}
+
+.mappingReady{
+  color: #ffffff !important;
+  background: #280e6b;
+  border-color:  #280e6b !important;
+}
+
+.mappingReady:hover{
+  color: #ffffff !important;
+  background: #5d4a64  !important;
+  border-color:  #5d4a64  !important;
+ 
+}
+.classRed{
+  color:tomato;
+  font-weight: bold;
+}
+.btnDisabled{width:46px; height: 46px; background-color: #f1f1f16e; border-radius: 4px;  position:absolute; top:-1px; z-index: 1;}
+
+/* 
+:host ::ng-deep .p-panel.p-panel-toggleable .p-panel-header {
+    padding: 0.3rem 1rem;
+    background: transparent linear-gradient(97deg, #0A5198 0%, #380670 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 1px 1px #0C0C0C66;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size:13px
+  }
+   */
+  .mappingTableWrp{padding-top: 15px;}
+  
+  .mappingTableWrp .colnListUl {
+    list-style-type: none;
+    margin-top: -10px;
+    padding: 0px;
+  }
+
+  .hideAutomap{display: none !important;}
+
+ .nothide{display: flex;}
+  .mappingTableWrp .colnListUl div li {
+    padding: 2px 13px 2px 13px;
+    background: #FFFFFF;
+    border: 1px solid #F6F6F6;
+    box-shadow: 0px 1px 2px #33333336;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: 300ms ease all;
+}
+  
+  .mappingTableWrp .colnListUl li div{
+      display: inline-block;
+    }
+  .mappingTableWrp .colnListUl div li:nth-child(odd) {background: #F5F5F5;}
+  
+  .mappingTableWrp .listColn{
+  font-size: 12px;
+  white-space: break-spaces !important;
+  padding: 0px 2px;
+  width: 43%;
+  position: relative;
+   
+  /* font-weight: bold; */
+  }
+  .listContent{width:100%;display: flex !important;justify-content: flex-start;
+    align-items: center;}
+  
+  .brk{
+    width: 2px;
+      height: 30px;
+      border-right: 1px solid #c9c9c9;
+      position: relative;
+      left: -3px;
+      top:3px
+  }
+  
+  .mappedResult{
+
+  font-size: 11px; 
+  padding: 0px 2px;
+  position: relative;
+  width: 100%;
+  font-style: italic;
+  }
+
+  #mappedFile{color:blue}
+  
+  :host ::ng-deep .p-panel .p-panel-content {
+    padding: 0.8rem 0.2rem;
+  }
+  :host ::ng-deep .mat-checkbox-inner-container{ left: -7px;}
+  
+  
+  .colnListUl li div.isMandetory{
+    position: relative;
+    right: -20px;
+  }
+  
+  .mappingTableWrp .dataType {
+    font-size: 10px;
+    font-weight: normal;
+    font-style: italic;
+  }
+  :host ::ng-deep .isMandetory .p-badge {
+    background: #295597;
+    color: #ffffff;
+    font-size: 0.60rem;
+    font-weight: 700;
+    min-width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+  }
+  
+  
+  :host ::ng-deep .p-button {
+    border-radius: 4px !important;
+  }
+  
+  :host ::ng-deep .p-button.p-button-text:enabled:hover{
+    color:#9c9c9c
+  }
+  :host ::ng-deep .deletebtn .p-button.p-button-text:enabled:hover{
+    color: #0a4e96;;
+  }
+  
+  :host ::ng-deep .maapingBtn .p-button{
+  border: 1px solid #9c9c9c !important;
+  border-radius: 4px !important;
+  }
+  
+  :host ::ng-deep .maapingBtn .p-button.p-button-text{
+    color:#9c9c9c
+  }
+  :host ::ng-deep .maapingBtn .p-button.p-button-text:enabled:hover{
+    color: #00286A;
+    border: 1px solid #00286A !important;
+  }
+  :host ::ng-deep .settings .p-button.p-button-text:enabled:hover{
+    color: #00286A;
+  }
+  
+  :host ::ng-deep .mat-checkbox{position: relative;}
+  :host ::ng-deep .mat-checkbox-label{ position:relative;left:-5px; font-weight: 400;}
+  
+  .mappingbuttons{
+    position: relative;
+    display: flex !important;
+     justify-content: flex-end;  
+    /* right: -75px; */
+    float: right;
+    width: 100%;
+  }
+  
+  .relativeRight{
+    right:-246px
+  }
+  .mappingbuttons div{
+    margin-right: 5px;
+  }
+  
+  :host ::ng-deep .p-button{
+    padding: 0.5rem 0.5rem !important;
+  }
+  
+  .toggleNotActive{
+    color:#9c9c9c
+  }
+  
+  .toggleActive{
+    color:#100574 !important
+  }
+  
+  .material-icons{font-size: 22px !important; text-align: end !important;}
+  .toggleicon{font-size: 28px !important;}
+  .togglePanel{transition: 300ms ease all; display:block !important;height: 0px; position: relative;}
+  .panelactive{
+    height: 100%;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0px 1px 2px 0px #33333387;
+    border-radius: 4px;
+    position: relative;
+    padding: 5px;
+    top: 0px;
+    margin-top: 5px;
+    /* left: -10px; */
+  }
+  
+  
+  .togglebg{background: #dadada !important;}
+
+ 
+.pan{height: 100%; width: 100%;}
+
+.mappedResult p{
+
+  margin-bottom: 0px;
+  margin-top: 3px; 
+}
+
+.mappedP{  
+  width: 172px;
+  margin-right: 0px;
+  word-break: break-all;
+  display: block;
+  /* background: #009432; */
+  border-radius: 3px;
+  padding: 3px;
+  color: #009432;
+  font-weight: 500;
+  }
+
+
+  .blankedP{
+    /* background: #F79F1F; */
+    display: block;
+  border-radius: 3px;
+  padding: 3px;
+  color: #F79F1F;
+  font-weight: 500;
+  width: fit-content;
+
+  }
+
+  .uid_pan{
+    display: none;
+    position: sticky;
+    z-index: 9998;
+    top: 55px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .selectInst{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 4px 10px;
+    height: 50px;
+    margin-bottom: 5px;
+    position: sticky;
+    top: 0px;
+    z-index: 9999;
+    background: #f5f5f5;
+    border-radius: 5px;
+    margin-top: -15px;
+    border: 1px solid #F6F6F6;
+    box-shadow: 0px 1px 2px #33333336;
+    margin-left: 1px;
+  }
+
+  .beforeBox::before{
+    content: '';
+    display: block;
+    width: 96%;
+    border-radius: 10px;
+    height: 100vh;
+    background-color: #ffffffd4;
+    z-index: 1;
+    position: absolute;
+    padding: 5px;
+    top: 54px;
+    left: 0px;
+  }
+  .selectInstTypeBtn{
+    background-color: #689f38 !important;
+    color: #ffffff !important;
+  }
+
+  .uidBtn{
+    margin-left: 10px;
+    background-color: #0d89ec !important; color: #ffffff !important;
+  }
+
+  .Midpanel{display: none;}
+
+  .whereMapingDone{
+width: 100%;
+min-height: 200px;
+height: 100%;
+padding: 5px;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+    background: #fff;
+    position:relative; 
+    z-index:15
+  }
+
+  .whereMapingDone h4{
+    color: #009432;
+    margin-bottom: 3px;
+ 
+  }
+
+  .whereMapingDone p{
+    color: rgba(100, 100, 100, 0.932);
+    margin-top: 2px;;
+    font-size: 14px;
+ 
+
+  }
+
+  .resetButton{
+    background-color: #0A4C95 !important;
+    color: #ffffff !important;
+  }
+
+
+  
+.mat-standard-chip.mat-chip-with-trailing-icon {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 8px;
+  padding-left: 12px;
+}
+
+.mat-standard-chip {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 16px;
+  align-items: center;
+  cursor: default;
+  min-height: 32px;
+  height: 1px;
+}
+
+.mat-chip {
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.mat-chip {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mat-chip.mat-standard-chip {
+  background-color: #e0e0e0;
+  color: rgba(0,0,0,.87);
+  margin-right: 3px;
+}
+
+.chipsConcat {
+  text-align: center !important;
+  padding-top: 1px  !important;
+}
+
+.hardcoreBtn{
+  font-weight: bold;
+  border: 1px solid #2569b1;
+  border-radius: 100% !important;
+  padding: 5px 10px !important;
+  margin-top: 5px;
+  background: #2569b1;
+  color: #fff;
+  
+}
+
+.DesabledhardcoreBtn{
+  border: 1px solid #d0d0d0;
+  border-radius: 100% !important;
+  padding: 5px 10px !important;
+  margin-top: 5px;
+  background: #d0d0d0;
+  color: #a9a9a9;
+}
+
+.matWidth{
+  width: 132px !important;
+}
+
+ .isGoingForUIDclass{
+   background-color: #D32F2F !important;
+   color: #fff !important;
+ }
+
+
+ .instrumentTypCol{
+  
+    margin-right: 10px;
+                    color: #ffffff;
+                    padding: 5px 7px;
+                    background: #40378e;
+                    border-radius: 18px;
+ 
+ }
+
+ .instrumentTyp{ font-weight: bold; color: #40378e;font-style: italic;}

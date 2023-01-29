@@ -1,0 +1,392 @@
+::ng-deep .mat-checkbox {
+  margin-left: 15px;
+}
+.tdPad{
+  word-spacing:100vw; 
+ }
+
+.component_title {
+  padding: 0px 40px 0px 15px;
+}
+
+.cmClass h3 {
+  font-weight: bold;
+  color: #343434;
+  margin-bottom: 6px;
+}
+
+.cmClass p {
+  font-size: 13px;
+  color: #343434;
+}
+
+.cardwidth_second {
+  width: 97%;
+  position: relative;
+  top: 18px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+
+.cardheader {
+  height: 57px;
+  padding: 15px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: -16px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.cm_header {
+  width: 100%;
+  height: 50px;
+}
+
+.cm_header .p_grid {
+  float: right;
+  padding-right: 40px;
+}
+.cm_header .p_grid .cm_button {
+  background: #1f73ae;
+  border: none;
+}
+.cardwidth {
+  width: 97%;
+  position: relative;
+  top: 15px;
+  left: 15px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+.example-form-field {
+  width: 200px;
+  left: 30px;
+}
+.mtr15 {
+  margin-right: 15px;
+}
+
+.box1 {
+  position: relative;
+  top: 0;
+  opacity: 1;
+  float: left;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  /*background: #fff;*/
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+}
+
+:host ::ng-deep .p-button.instbtn {
+  position: relative;
+  padding: 0.2rem 1.2rem !important;
+  /* left: 10px; */
+  border-radius: 9px;
+}
+:host ::ng-deep .p-button mat-icon {
+  position: absolute;
+  font-size: 26px;
+}
+
+:host ::ng-deep .p-button .iconUp {
+  right: 0px;
+  top: 2px;
+}
+:host ::ng-deep .p-button .iconDown {
+  right: 0px;
+  top: 2px;
+}
+
+.instrumentList {
+  margin: 0px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 3px 3px #0000006b;
+  position: absolute;
+  left: 0px;
+  z-index: 999;
+  padding: 10px;
+  min-width: 150px;
+  /* width: 200px; */
+  top: 50px;
+  border: 1px solid #ddd;
+}
+
+.instrumentList li {
+  display: block;
+  border-bottom: 1px solid rgb(211 211 212);
+  list-style: none;
+  padding: 10px 8px;
+  text-align: left;
+}
+:host ::ng-deep .p-dialog{
+max-height: 98% !important;
+}
+:host ::ng-deep .p-dialog-header {
+  height: 57px;
+  padding: 30px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: 0px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+:host ::ng-deep .p-dialog-header h3 {
+  margin: 0 0 -6px;
+}
+
+.destinationForm {
+  position: relative;
+  top: 30px;
+}
+.padBox {
+  padding: 0px !important;
+  max-width: 650px;
+  margin-bottom: 6px;
+}
+
+:host ::ng-deep .p-dialog-content {
+  height: 100%;
+}
+:host ::ng-deep .p-fileupload-buttonbar {
+  height: 60px;
+  position: relative;
+}
+
+:host ::ng-deep .p-fluid .p-fileupload .p-button {
+  position: relative;
+  top: -3px;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-content {
+  min-height: 190px;
+}
+
+:host ::ng-deep .p-fileupload-row {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  top: -13px;
+  left: 10px;
+  /* padding: 5px; */
+  margin-bottom: 5px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px #333;
+  height: 44px;
+}
+
+:host ::ng-deep .p-fileupload-row:nth-child(odd) {
+  background: #f5f5f5;
+}
+/* :host ::ng-deep div.p-fileupload-row:first-child{display: none !important;} */
+
+:host ::ng-deep .p-button.p-component.p-button-icon-only {
+  top: 0px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+}
+
+:host ::ng-deep .p-fileupload-files {
+  position: relative;
+}
+
+:host ::ng-deep .p-fileupload-row > div {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.inputbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.inputbox .p-col-6 {
+  margin-right: 20px;
+}
+
+.titles {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  background: none !important;
+  position: relative;
+  border: none !important;
+  top: -44px;
+  left: 190px;
+  padding: 1rem 1rem;
+  width: 85%;
+  float: left;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+:host .boxes {
+  width: 100%;
+
+  margin: 10px;
+}
+
+:host .smallBoxes {
+  width: 30%;
+}
+:host ::ng-deep .inputSearch::after {
+  position: absolute;
+  font-family: "Material Icons";
+  content: "\e8b6";
+  color: #9d9d9d;
+  top: 9px;
+  left: 96%;
+  font-size: 26px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header .mat-form-field-fullwidth {
+  width: 100%;
+}
+
+:host ::ng-deep p-dropdown {
+  position: absolute !important;
+  top: 3px;
+  left: 65px;
+}
+
+:host ::ng-deep p-dropdown:before {
+  content: "Show";
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: -37px;
+  color: #343434;
+}
+
+:host ::ng-deep p-dropdown:after {
+  /* content: "Entries"; */
+  content: "Results";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 78px;
+  color: #343434;
+}
+
+:host ::ng-deep .p-button-rounded.newclient {
+  position: absolute;
+}
+
+:host ::ng-deep .p-datatable-wrapper {
+  position: relative;
+  top: -55px;
+}
+
+:host ::ng-deep .mat-form-field-label {
+  font-size: 0.8em;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  top: 1.8125em;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  text-align: left !important;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: left !important;
+  /* padding: 1rem 0px; */
+
+}
+
+@media only screen and (max-width: 1200px) {
+  .smallBoxes {
+    width: 36% !important;
+  }
+
+  .boxes {
+    width: 50% !important;
+  }
+}
+:host ::ng-deep .p-dialog-content{
+  overflow-x: hidden !important;
+}
+
+
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td{
+  max-width: 150px;
+  word-break: break-all;
+}
+
+.instrumentTypesBox{
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.instrumentTypesBox li{
+  padding: 5px 7px;
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+}
+
+.instrumentTypesBox li .conrtolsBox{
+  width: 100%;
+ margin-right: 5px;
+}
+
+.instrumentTypesBox li .controlButton {
+  width: 7%;
+ 
+}
+
+:host ::ng-deep .p-button.p-component.p-button-icon-only.instypeDelet{ color:#FBC02D !important}
+:host ::ng-deep  .Addtypbtn {
+  background-color: #0288D1 !important;
+  color: #fff !important;}
+
+ .instrumentTypes{
+   width: 100%;
+   padding: 2px;
+   list-style: none;
+   margin: 0px;
+  min-height: 50px;
+ }
+
+ .instrumentTypes li{
+  display: flex;
+  width: 100%;
+  padding: 2px 10px;
+  align-items: center;
+  background: #f9f7f7;
+  border: 1px solid #efefef;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px 0px #dddddd26;
+  font-size: 14px;
+ }
+
+ .instrumentTypes li:nth-child(odd){
+  background: #ffffff;
+ }
+ /* .deleteButton{
+  background-color: orange;
+ } */
+
+
+ 

@@ -1,0 +1,13 @@
+
+<div class="sideNavContentwrp">
+  <div class="logo">
+      <h3 *ngIf="!classToggled">{{logName.fullName}}</h3>
+      <h3 *ngIf="classToggled">{{logName.shortname}}</h3>
+  </div>
+
+  <div class="sideNavLinksWrp">
+      <app-sidenavlinks></app-sidenavlinks>
+  </div>
+  
+</div>
+ 

@@ -1,0 +1,111 @@
+.app-userPermission-table{
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.app-userPermission-table p-table ng-template tr{
+
+    border:1px solid black;border-radius: 4px;
+}
+:host ::ng-deep .p-dialog-header-icons{
+    display: none;
+  }
+
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+    background: #2CB0E2 !important;
+}
+.app-userPermission-table {
+    padding-top: 40px ;
+}
+ 
+:host ::ng-deep p-dropdown{
+    position:absolute !important;
+    top:-45px;
+    left: 47px;  
+}
+
+ 
+:host ::ng-deep p-dropdown:before{
+    content: 'Show'; 
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -37px;
+    color: #343434;
+ }
+ :host ::ng-deep .p-dialog-header{
+    height: 57px;
+    padding: 15px 25px;
+    border-radius: 20px 20px 0px 0px;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    position: relative;
+    top: 0px;
+    border-bottom: 1px solid #d5d5d5;
+ }
+
+ :host ::ng-deep .p-dialog-content{
+     padding-bottom: 25px;
+ }
+
+ :host ::ng-deep .p-datatable .p-datatable-thead > tr > th, :host ::ng-deep .p-datatable .p-datatable-thead > tr > td {
+      /* text-align: center; */
+      text-align: left;
+ }
+
+ :host ::ng-deep .mat-checkbox {
+    position: relative;
+    left: 45px;
+ }
+
+ .addclient{
+ position: relative;
+ left: 45px;
+} 
+
+:host ::ng-deep p-dropdown:after{
+    /* content: 'Entries';  */
+    content: 'Results'; 
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 78px;
+    color: #343434;
+ }
+
+ :host ::ng-deep .p-datatable .p-datatable-tbody>tr>td{
+    max-width: 150px;
+    word-break: break-all;
+    /* padding-left: 36px; */
+    /* text-align: center !important; */
+    text-align: left !important;
+  }
+
+  
+:host ::ng-deep .p-datatable .p-datatable-header {
+    background: none !important;
+    position: relative;
+    border: none !important;
+    top: -85px;
+    left: 190px;
+    padding: 1rem 1rem;
+    width: 85%;
+    float: left;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  :host .boxes {
+    width: 100%;
+  
+    margin: 10px;
+  }
+  :host ::ng-deep .p-datatable-wrapper {
+    position: relative;
+    top: -80px;
+  }
+  /* .checkboxStyle{
+      margin-left: 72px;
+  } */
+ 

@@ -1,0 +1,33 @@
+ 
+ <div class="container component_title upClass">
+<h3>User Permission</h3>
+<!-- <p>You can set user permission here</p> -->
+<p> Set User Permission </p>
+<hr>
+ </div>
+<mat-card class="cardwidth">
+    <div class="cardCont" style="padding-bottom: 5px;">
+        <div class="cardheader">
+            <mat-card-title>
+                <h3> Select Following</h3>
+             </mat-card-title>   
+        </div>
+        <app-permision-search-filter></app-permision-search-filter>
+    </div>
+
+</mat-card>
+
+
+<mat-card class="cardwidth_second mat-card-pad">
+    <div class="cardheader">
+    <mat-card-title>
+        <h3>User list</h3>
+    </mat-card-title>
+    </div>
+    <app-userpermisiontable *ngIf="!isSearch"></app-userpermisiontable>
+    <app-searchuserpermissiontable *ngIf="isSearch"></app-searchuserpermissiontable>
+
+   
+</mat-card>
+
+ 

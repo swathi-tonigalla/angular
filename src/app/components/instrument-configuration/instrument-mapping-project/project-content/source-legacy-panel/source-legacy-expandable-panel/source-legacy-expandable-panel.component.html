@@ -1,0 +1,74 @@
+<!-- [class.beforeBox]="!this.destiStatus" -->
+<!-- [ngClass]="{'beforeBox':'!destiStatus'}" -->
+<!--  *ngIf="project.sourceLegacy" -->
+
+<div id="sourcePanMain" style="width: 100%">
+  <div id="progressSpin"
+  style="width: 230px; height: 60vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+    fill="#EEEEEE"></p-progressSpinner>
+    <p style="font-size: 12px; text-align: center; color: rgb(95, 95, 95);">Please Wait! <br>We are intigrating Source data<br>It may take a time</p>
+</div>
+  <div  id="noSourceData" class="noData" style="width: 230px; height: 60vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <span><mat-icon aria-hidden="false" aria-label="no data" 
+    style="font-size: 35px;
+      width: 35px;
+      height: 35px;">error</mat-icon>
+    </span><h5>Source data is not available as this is auto mapped project.<br></h5>
+  </div>
+
+
+ <div *ngIf="project">
+  <p-panel [toggleable]="true" [collapsed]="true" *ngFor="let source of project.sourceLegacy;let i=index"
+    id="Source_panel_{{source.sourceID}}">
+    <!-- <div *ngIf="filterSelected" class="beforeBox"></div> -->
+  
+    <div *ngIf="filterSelected && !destiStatus && !isUIdSelection || isload" class="beforeBox"></div>
+    <ng-template pTemplate="header">
+      <label class="example-list-section" for="Sourcetag_{{source.sourceID}}">
+        <mat-checkbox id="Sourcetag_{{source?.sourceID}}" class="example-margin" color="primary"
+         >
+         <!-- [(ngModel)]="source.isMasterSel" (change)="checkUncheckAllSource(source.sourceName,source,$event.checked)" -->
+          <div *ngIf="project.sourceLegacy">
+            <label class="listHeading">{{source.sourceName}}</label>
+          </div>
+        </mat-checkbox>
+      </label>
+    </ng-template>
+    <section class="example-section">
+      <span class="example-list-section">
+        <ul class="colnListUl">
+          <div class="rowDiv" *ngFor="let sourceList of source?.sourceLegacyData;let SiD = index">
+            <li id="Source_row_{{sourceList.LDname}}">
+
+              <mat-checkbox color="primary" name="source_name" [(ngModel)]="sourceList.isSourceDataRow"
+                (change)="isSourceSelected(sourceList,$event.checked)">
+                <!-- [(ngModel)]="sourceList.isSourceDataRow" -->
+              </mat-checkbox>
+
+              <label class="listColn">{{sourceList?.LDname}}</label>
+              <!-- <div class="dataType">abc</div> -->
+              <!-- <div class="isMandetory"> <p-badge value="M" styleClass="p-mr-2"></p-badge></div> -->
+
+            </li>
+          </div>
+
+
+        </ul>
+
+
+      </span>
+
+    </section>
+
+  </p-panel>
+ </div>
+
+
+</div>
+
+
+<!-- (change)="changeCheckbox(instlist)" -->
+<!-- [checked]="allComplete"
+  [indeterminate]="someComplete()"
+  (change)="setAll($event.checked)" -->

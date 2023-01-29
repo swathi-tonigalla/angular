@@ -1,0 +1,48 @@
+<div class="userWrp">
+    <div class="container component_title cmClass">
+        <h3>Dashboard</h3>
+        <p style="margin-bottom: -4px;">User Dashboard</p>
+        <hr>
+    </div>
+<div class="contentWrp">
+    <mat-card class="cardwidth">
+        <div class="cardCont">
+                <div class="p-col">
+                    <div class="box padBox">
+                        <div class="dashboardTotalcountInfo">
+                           <h1 class="countTitle">{{reciveallConfigCount?.instrumentConfuguredByYou}}</h1> 
+                           <!-- <p class="countMiddleText">Instruments Configured by you</p> -->
+                           <p class="countMiddleText">Instruments Configured</p>
+                           <p class="countLastText">Click on new project to generate Instrument Configuration</p>
+                           <button pButton pRipple type="button" class="npBtn" label="New project" class="p-button-rounded" (click)="newProjectDashboard()"></button>
+                        </div>
+                    </div>
+                </div>
+     </div>
+    </mat-card>
+   
+</div>
+ 
+
+<div class="tableWrp">
+    <mat-card class="cardwidth" style="top: 40px;
+    width: 96%;">
+        <div class="cardCont">
+                <div class="p-col">
+                    <div class="box padBox">
+                        <div class="cardheader">
+                            <mat-card-title>
+                                <h3>Recent Instruments Configuration Activity</h3>
+                            </mat-card-title>
+                            </div>
+                            <div class="actTable">
+                                    <app-recent-activity-table></app-recent-activity-table>
+                            </div> 
+
+                    </div>
+                </div>
+     </div>
+    </mat-card>
+    <div class="tableHolder"></div>
+</div>
+</div>

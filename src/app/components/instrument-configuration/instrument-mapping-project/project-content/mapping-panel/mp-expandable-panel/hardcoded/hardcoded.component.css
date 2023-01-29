@@ -1,0 +1,44 @@
+.hcdPanel{
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    min-height: 150px;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+    display: flex;
+    background-color: #fff;
+    /* justify-content: center;
+    align-items: center; */
+
+}
+
+.hardwrp{
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.padBox {
+    padding: 0px !important;
+    max-width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .box {
+    position: relative;
+    top: 0;
+    opacity: 1;
+    float: left;
+    /* padding: 60px 50px 40px 50px; */
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+    /* max-width: 330px; */
+}

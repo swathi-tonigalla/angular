@@ -1,0 +1,154 @@
+<div *ngIf="ifWait" class="con" style="min-height: 200px;">
+  <div id="progressSpinIF"
+    style="width: 100%; min-height: 150px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+    <p style="font-size: 14px; text-align: center;">Please wait...<br> filtering selected column.</p>
+  </div>
+</div>
+
+<div *ngIf="isSelectedIfOnly" class="filterMappingSelected">
+  <p style="text-align: center; font-weight: bold;">All set...<br> you can go for mapping now!</p>
+
+          <!-- <span class="editText">To change current mapping click on edit button</span>
+          <button pButton pRipple icon="pi pi-pencil"
+      class="p-button-rounded p-button-text p-button-success p-mr-2 selectInstTypeBtn"></button> -->
+
+  </div>
+
+<div *ngIf="!ifWait && !isSelectedIfOnly" class="concCantPanel">
+  <p-messages [(value)]="msgs" [enableService]="false"></p-messages>
+  <div *ngIf="!ifWait && ifonlyArry.length < 1"
+    style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+    <p style="font-size: 14px;text-align: center;">Please select result column from <br> source data</p>
+  </div>
+
+  <div *ngIf="ifonlyArry.length >0" class="conCatsub">
+
+    <div *ngIf="ifonlyArry.length >0" style="width: 100%;
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgb(221, 221, 221);
+          margin-bottom: 15px;
+          padding-top: 7px;">
+
+      <div style="width: 100%; font-size: 14px; font-weight: bold;">
+        <p style="margin-bottom: 0px;">
+          <small style="color: #0a357d;"> {{ifonlyArry[0].LDname}}</small>
+          is selected for concat filter
+        </p>
+      </div>
+      <div style="width: 41%;">
+        <mat-chip [removable]="removable" (removed)="remove(0)">
+          {{ifonlyArry[0].LDname}}
+          <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+        </mat-chip>
+      </div>
+
+    </div>
+
+    <div *ngIf="ifonlyArry.length >0" style="width: 100%; display: flex; align-items: center; padding-left: 10px;">
+      <div style="width: 100%;">
+        <!-- <p style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Select Uid</p> -->
+        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+          <mat-label>Select First UID</mat-label>
+          <mat-select id="firstUidDrp" (selectionChange)="onSelectFirstUid_if()" [(ngModel)]="SelectedFirstUid">
+            <!--  [(ngModel)]="selectedInstType"
+                       (selectionChange)="onClientChange()"
+                     
+                      -->
+            <mat-option *ngFor="let uid of postionUID" [value]="uid.id">
+
+              {{uid?.uidName}}
+              <small class="uidSpecification"><span>({{uid?.LDcolname}})</span></small>
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="width: 100%;">
+        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+          <mat-label>Select Second UID</mat-label>
+          <mat-select id="SecondUidDrp" [disabled]="!isFirstUiSelected" (selectionChange)="onSelectSecondUid_if()"
+            [(ngModel)]="SelectedSecondUid">
+            <!--  [(ngModel)]="selectedInstType"
+                     (selectionChange)="onClientChange()"
+                   
+                    -->
+            <mat-option *ngFor="let suid of isnotPositionUid" [value]="suid.id">
+
+              {{suid?.uidName}}
+
+              <small class="uidSpecification"><span>({{suid?.LDcolname}})</span></small>
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+      style="margin-top: 10px; display: flex;align-items: center; width: 100%; border-top:1px solid #ddd; flex-direction: column;"
+   >
+<form [formGroup]="ifonlyfrom" style="width: 100%;">
+      <div *ngIf="uidDone" style="width: 100%;">
+        <p style="font-size: 14px; font-weight: bold; color: #689F38;">Now you can set if condition.</p>
+      </div>
+
+      <div *ngIf="uidDone" style="width: 100%;margin-top: 10px;display: flex;">
+
+        <div style="width: 100%; margin-right: 10px;">
+          <mat-form-field class="example-full-width mat-form-field-fullwidth"
+      
+          >
+            <mat-label>Select Condition</mat-label>
+            <mat-select id="SelectCOnditionIF" [(ngModel)]="selectedCondition_if" formControlName="selectCondtion">
+              <mat-option *ngFor="let condiValue of removedDuplicatedFromSelectedColn" [value]="condiValue">
+                {{condiValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div style="width: 100%">
+
+
+          <mat-form-field 
+          class="example-full-width mat-form-field-fullwidth" 
+          style="margin-right: 5px; width: 120px;"
+       
+          >
+            <mat-label>Enter first value</mat-label>
+            <input id="firstCondition" [(ngModel)]="firstValue_if" matInput placeholder="eg.INTREST"    formControlName="firstValue">
+          </mat-form-field>
+
+          <!-- formControlName="clientName"  -->
+
+        </div>
+        <div style="width: 100%">
+          <mat-form-field 
+          class="example-full-width mat-form-field-fullwidth" 
+          style="width: 120px;"
+          >
+            <mat-label>Enter otherwise value</mat-label>
+            <input id="secondCondition" [(ngModel)]="secondValue_if" matInput placeholder="eg.INDEX"  formControlName="otherwiseValue">
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div *ngIf="uidDone"
+        style="width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 5px; margin-top: 5px;">
+        <button [disabled]="!ifonlyfrom.valid" pButton pRipple icon="pi pi-check" label="Set Condition"
+          class="p-button-rounded p-button-success cm_button" (click)="OnsetIfOnlyCondition()"></button>
+        <button pButton pRipple icon="pi pi-times" label="Clear"
+          class="p-button-rounded p-button-info cm_button"></button>
+      </div>
+
+    </form>
+    </div>
+  </div>
+</div>

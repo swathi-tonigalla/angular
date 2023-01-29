@@ -1,0 +1,307 @@
+<p-toast position="top-center"></p-toast>
+<div id="toogleWraper">
+
+<div class="container component_title cmClass">
+    <h3>Instrument Destination Management</h3>
+    <!-- <p>Here you can manage Instrument Destination</p> -->
+    <p>Manage Instrument Destination</p>
+    <hr>
+    <!-- <p *ngIf="isUpdate">UPDATE</p> -->
+</div>
+<div class="container">
+    <mat-card class="cardwidth_second mat-card-pad">
+        <div class="cardheader">
+            <mat-card-title>
+                <h3>Destination List</h3>
+            </mat-card-title>
+            </div>
+ 
+            <div style="margin-top: 20px;"> 
+                <!-- <p-table #dt [value]="users" [rows]="10" [paginator]="true"
+                    [rowHover]="true" dataKey="id" [globalFilterFields]="['clientName']"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                </p-table> -->
+                <p-table #dt [value]="destinations" [rows]="10" [paginator]="true"
+                    [rowHover]="true" dataKey="id" [globalFilterFields]="['destinationName']"
+                    currentPageReportTemplate="Show Results {first} to {last} of {totalRecords}" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]">
+                     
+            <ng-template pTemplate="caption">
+       
+                <div class="boxes">
+                    <mat-form-field class="example-full-width mat-form-field-fullwidth inputSearch">
+                        <input 
+                        id="Searchbar"
+                        matInput 
+                        (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Search Destination by Name">  
+                    </mat-form-field>
+                     
+                </div>
+                <div class="boxes smallBoxes">
+                    <button pButton pRipple label="New Destination" icon="pi pi-plus"
+                    class="p-button-rounded p-button-info cm_button"
+                    (click)="newDestination()"
+                    ></button>
+                </div>
+                
+                </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <mat-checkbox class="example-margin"  color="primary"
+                                [(ngModel)]="selectAll"  (change)="changeAllSelectedDestination($event)"></mat-checkbox>
+                            </th>
+                            <!-- <th pSortableColumn="id"># <p-sortIcon field="id"></p-sortIcon></th>
+                            <th pSortableColumn="id"># <p-sortIcon field="id"></p-sortIcon></th> -->
+                            <!-- <th>Destination Id</th> -->
+                            <th>Destination Name </th>
+                            <th>Client Name</th>
+                            <th>Instrument</th>
+                            <th>Instrument Type</th>
+                            <th>Created On</th>
+                            <th > 
+                                &nbsp; &nbsp; <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning"  (click)="deleteSelectedDestinations()" 
+                                [disabled] ="!checkedIDs || !checkedIDs.length" style="color: #FBC02D;"></button>
+                            </th> 
+                            </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-destination>
+                        <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+                        <tr>
+                            <td>
+                               <mat-checkbox class="example-margin" (change)="changeSelection(destination)" color="primary"
+                                [(ngModel)]="destination.checkedDestination"></mat-checkbox>
+                            </td>
+                        <!-- <td>{{destination?.id}}</td> -->
+                       <td>{{destination?.destinationName}}</td>
+                       <td>{{destination?.selectedClientName}}</td>
+                       <td style="position: relative;">
+                           <button pButton pRipple type="button" class="p-button-rounded instbtn" (click)="destination.instruments.toggleCheck = !destination.instruments.toggleCheck">    {{destination.instruments?.length}}
+                            <mat-icon *ngIf="destination.instruments?.toggleCheck" aria-hidden="false" class="iconUp">arrow_drop_up</mat-icon>
+                            <mat-icon *ngIf="!destination.instruments?.toggleCheck" aria-hidden="false" class="iconDown">
+                                arrow_drop_down
+                                </mat-icon>
+                            </button> 
+                        <ul *ngIf="destination.instruments?.toggleCheck" class="instrumentList">
+                               <li *ngFor="let instruments of destination.instruments"> 
+                               
+                                {{instruments?.instrumentName}}</li>
+                           </ul>
+                     </td>
+                     <td style="position: relative;">
+                        <button pButton pRipple type="button" class="p-button-rounded instbtn" (click)="destination.insrtumentTypes.typtoggleCheck = !destination.insrtumentTypes.typtoggleCheck">    {{destination.insrtumentTypes?.length}}
+                            <mat-icon *ngIf="destination.insrtumentTypes?.typtoggleCheck" aria-hidden="false" class="iconUp">arrow_drop_up</mat-icon>
+                            <mat-icon *ngIf="!destination.insrtumentTypes?.typtoggleCheck" aria-hidden="false" class="iconDown">
+                                arrow_drop_down
+                                </mat-icon>
+                        </button> 
+                        <ul *ngIf="destination.insrtumentTypes?.typtoggleCheck" class="instrumentList">
+                               <li *ngFor="let instTypes of destination.insrtumentTypes"> 
+                               {{instTypes?.instrumentTypename}}</li>
+                           </ul>
+                        </td>
+
+                       <td  class="tdPad"
+                       >{{destination?.createdAt | customDateFormat:'longDate'}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-success p-mr-2" (click)="editDestination(destination)" style="color: #689F38;"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning" (click)="deleteDestination(destination)" style="color: #FBC02D;"></button>
+                            </td>  
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <!-- [style]="{width: '650px',height:'650vh'}" -->
+            <div class="cm_crudTable">
+                <p-dialog [(visible)]="destinationDilog"  [modal]="true" styleClass="p-fluid">
+                    <ng-template pTemplate="header">
+                        <mat-card-title>
+                            <h3>Create New Instrument Destination</h3>
+                        </mat-card-title>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <form class="destinationForm" [formGroup]="destinationForm">
+                            <div class="p-grid inputbox">
+                               
+                                <div class="p-col-6">
+                                    <div class="box1 padBox">
+                                        <strong><mat-label class="flable">Destination Name<span style="color: tomato;">*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                            <mat-label>Enter Destination Name</mat-label>
+                                            <input 
+                                                id="selectedClient"   
+                                                [(ngModel)]="destination.destinationName"                              
+                                                [class.is-invalid]="destinationForm.controls.destinationName.invalid && destinationForm.controls.destinationName.touched" 
+                                                matInput 
+                                                formControlName="destinationName" 
+                                                placeholder="Enter Destination Name"
+                                                (keydown)="space($event)"
+                                                autocomplete="off" 
+                                                (input)="OnchangeDestinationName($event,destination.destinationName)"
+                                                >
+                                                <!-- (input)="OnchangeDestinationName($event,destination.destinationName)" -->
+                                        </mat-form-field>
+                                        <small
+                        
+                                        id="destNameExists" 
+                                        style="display: none;"
+                                         > </small>
+                                        <!-- <small 
+                                        class="d-none"
+                                         [class.dinone]="destinationForm.controls.userName.valid || destinationForm.controls.userName.untouched">
+                                       <br>Please enter User name
+                                        </small> -->
+                                    </div>
+                                </div>
+                                <div class="p-col-6">
+                                    <div *ngIf="!isnormalUSer" class="box1 padBox" >
+                                            <strong><mat-label class="flable">Select Client Name<span style="color: tomato;">*</span></mat-label> </strong>
+                                            <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                                <mat-label>Select client name for destination legacy</mat-label>
+                                                <mat-select 
+                                                    id = "clientdrop"
+                                                    [(ngModel)]="destination.selectedClientName"
+                                                    formControlName="selectedClientName"
+                                                    [disabled]="isProjectNameExists || isUpdateNewInstrument"
+                                                   [class.is-invalid]="destinationForm.controls.selectedClientName.invalid && destinationForm.controls.selectedClientName.touched" >
+                                                    <mat-option  *ngFor="let client of clients" [value]="client.clientName">
+                                                        {{client?.clientName}}
+                                                    </mat-option>
+                                                    <!--  -->
+                                                </mat-select>
+                                                 <!-- {{selectedClientdrp | json}}  -->
+                                            </mat-form-field>
+                                      
+                                            <!-- <small 
+                                            class="d-none"
+                                            [class.dinone]="destinationForm.controls.userName.valid || destinationForm.controls.userName.untouched">
+                                            <br>Please enter User name
+                                            </small> -->
+                                    </div>
+
+                                    <div *ngIf="isnormalUSer" class="box1 padBox" >
+                                        <strong><mat-label class="flable">Select Client Name<span style="color: tomato;">*</span></mat-label> </strong>
+                                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                            <mat-label>Select client name for destination legacy</mat-label>
+                                            <mat-select 
+                                                id = "clientdropFOrnormaluser"
+                                                [(ngModel)]="destination.selectedClientName"
+                                                formControlName="selectedClientName"
+                                                [disabled]="isProjectNameExists || isUpdateNewInstrument"
+                                                [class.is-invalid]="destinationForm.controls.selectedClientName.invalid && destinationForm.controls.selectedClientName.touched" >
+                                                <mat-option  *ngFor="let client of selectedClientForUser" [value]="client.clientName">
+                                                    {{client?.clientName}}
+                                                </mat-option>
+                                              
+                                            </mat-select>
+                                             <!-- {{selectedClientdrp | json}}  -->
+                                        </mat-form-field>
+                                  
+                                        <!-- <small 
+                                        class="d-none"
+                                        [class.dinone]="destinationForm.controls.userName.valid || destinationForm.controls.userName.untouched">
+                                        <br>Please enter User name
+                                        </small> -->
+                                </div>
+                                </div>
+                           </div>
+                             <div class="p-col" style="
+                            position: relative;
+                            top: 5px;    min-height: 285px; " *ngIf="!isUpdate">
+                               <!-- <h5>Column Direction</h5> -->
+                               <h4 class="titles">Select Instrument Types <span style="color: tomato;">*</span></h4>
+                               <app-destination-fileup style="
+                               position: relative;
+                               top: 25px;
+                              "></app-destination-fileup>
+                           </div> 
+                           
+                           <div class="p-col"  *ngIf="isUpdate">
+                                <div class="box1 padBox">
+                                    <h4 class="titles">Available Instrument Types <span style="color: tomato;"></span></h4>
+                                    <ul class="instrumentTypes">
+                                        <li *ngFor="let types of destination.insrtumentTypes; let i = index"> 
+                                        
+                                        <div style="width:100%; margin-right: 15px;"> 
+                                            {{types?.instrumentTypename}} 
+                                        </div> 
+                                        <div>
+                                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-warning" (click)="deleteType(i)" style="color: #FBC02D;"></button>
+                                        </div> 
+                                    </li>
+                                    </ul> 
+                                </div>
+                           </div>
+                           <div class="p-col-6">
+                            <div class="box1 padBox" style="max-width: 685px;">
+                               <div style="display: flex; align-items: center; border-bottom:1px solid #ddd ; padding-bottom: 5px;">
+                                <div style="width: 100%;">
+                                    <strong><mat-label class="flable">Add New Instrument Type<span style="color: tomato;"></span></mat-label> </strong>
+                                </div>
+                                
+                                <div *ngIf="!isEditMode" style="width: 25%;">
+                                    <button  pButton pRipple type="button" 
+                                    [disabled]="!destinationStatus || !destinationForm.valid"
+                                    class="p-button-rounded p-button-text myUploadBtn chooseToBrowse" (click)="addInstrumentType()">
+                                        <mat-icon aria-hidden="false" aria-label="add_circle_outline">add_circle_outline</mat-icon>
+                                        <span style="position: relative;
+                                        left: 30px;">Add Type</span> 
+                                      </button>
+                                    <!-- <button pButton pRipple type="button"  icon="pi pi-plus" class="p-button-rounded p-button-info Addtypbtn" ></button> -->
+                                </div>
+                                <div *ngIf="isEditMode" style="width: 25%;">
+                                    <button  pButton pRipple type="button" 
+                                    [disabled]="!destinationForm.valid"
+                                    class="p-button-rounded p-button-text myUploadBtn chooseToBrowse" (click)="addInstrumentType()">
+                                        <mat-icon aria-hidden="false" aria-label="add_circle_outline">add_circle_outline</mat-icon>
+                                        <span style="position: relative;
+                                        left: 30px;">Add Type</span> 
+                                      </button>
+                                    <!-- <button pButton pRipple type="button"  icon="pi pi-plus" class="p-button-rounded p-button-info Addtypbtn" ></button> -->
+                                </div>
+                                <!-- <button type="button"  class="btn btn-primary">Add More</button> -->
+                               </div>
+                               <ul class="instrumentTypesBox" formArrayName="insrtumentTypes" >
+                                    <li *ngFor="let type of instrumentTypes().controls; let i=index" [formGroupName]="i">
+                                        <div class="conrtolsBox controlInput">
+                                          <!-- {{destination.insrtumentTypes}}   -->
+                                            <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                                <mat-label>Instrument Type Name</mat-label>
+                                                <!--[(ngModel)]="destination.insrtumentTypes.instrumentTypename-->
+                                                <input 
+                                                
+                                                    id="instrumentType"  
+                                                    [(ngModel)]="type[i]"
+                                                    matInput 
+                                                    formControlName="instrumentTypename" 
+                                                    placeholder="Enter Instrument Type Name"
+                                                    (keydown)="space($event)">
+                                            </mat-form-field>
+                                            <!-- <input type="text" formControlName="instrumentType" class="form-control"> -->
+                                        </div>
+                                        <div class="conrtolsBox controlButton">
+                                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger instypeDelet" (click)="removeInstrumentType(i)"></button>
+                                        </div>
+                                    </li>
+                               </ul>
+                            </div>
+                        </div>      
+                    </form>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+                        <button *ngIf="isEditMode" [disabled]="!destinationForm.valid || updateMode" pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="onSubmit()" ></button>
+                        <button *ngIf="!isEditMode" [disabled]="!destinationForm.valid || !destinationStatus || updateMode" pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="onSubmit()" ></button>
+                    </ng-template>
+                </p-dialog>
+   
+                <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            </div>
+    </mat-card>
+
+
+</div>
+
+
+</div>

@@ -1,0 +1,90 @@
+ 
+
+ <div>
+
+  <div class="cardheader">
+
+    <div class="btnBox">
+        <div class="btnboxes btnBigbox">
+          <label class="btn btn-default p-0">
+            <button  pButton pRipple type="button"  class="p-button-rounded p-button-text myUploadBtn chooseToBrowse" (click)="fileInput.click()">
+              <mat-icon aria-hidden="false" aria-label="add_circle_outline">add_circle_outline</mat-icon>
+              <span>Choose to browse</span>
+              <input #fileInput type="file" multiple (change)="selectFiles($event)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  style="display:none;"/>
+            </button>
+            <h5 class="slectedFIles" *ngIf="selectedFiles">{{fileCount}}<span style="margin-left: 2px;">{{slectedMsg}}</span></h5>
+          </label>
+        </div>
+        <div class="btnboxes btnSmallBox border_right">
+          <button
+          pButton pRipple type="button"  
+          class="p-button-rounded p-button-text p-button-danger myUploadBtn"
+          [disabled]="!selectedFiles"
+          (click)="cancel()"
+          >
+           <mat-icon aria-hidden="false" aria-label="close">close</mat-icon>
+           <span>Cancel</span>
+         </button>
+    
+        </div>
+        <div class="btnboxes btnSmallBox">
+          <button
+          pButton pRipple type="button"  
+          class="p-button-rounded p-button-text p-button-success myUploadBtn"
+          [class.bgBtn]="selectedFiles"
+           [disabled]="!selectedFiles || isuploadStart"
+           (click)="uploadFiles($event)">
+           <mat-icon aria-hidden="false" aria-label="upload">file_upload</mat-icon>
+           <span>Upload</span>
+         </button>
+
+        
+        </div>
+       
+    </div>
+
+    </div>
+
+ </div>
+     
+ <div class="uploadQunue">
+   <div *ngIf="loadingAsyncTask" id="asynLoading" class="asyncLoding">
+
+    <div id="progressSpin"
+    style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+      
+  </div>
+  <!-- <h5>Please Wait! <br>  You can start project after upload is done.</h5> -->
+  <h5>Please Wait! <br>Project will start after upload is done</h5>
+      
+   </div>
+   <div class="filInfos">
+    <div *ngFor="let progressInfo of progressInfos" class="progressBarBox">
+      <div class="fileName"><span>{{ progressInfo.fileName }}</span></div> 
+       <div class="mainProgressBar">
+         <mat-progress-bar mode="determinate" 
+         
+         value="{{ progressInfo.value }}"
+        
+         [ngStyle]="{ width: progressInfo.value + '%' }"
+         >
+         {{ progressInfo.value }}%
+       </mat-progress-bar>
+
+       </div>
+     </div>
+   </div>
+
+
+  <div *ngIf="message.length" class="ErrorMsg">
+    <ul *ngFor="let msg of message; let i = index">
+      <li> <mat-icon aria-hidden="false" aria-label="upload">{{ msg }}</mat-icon> </li>
+    </ul>
+  </div>
+ 
+  </div>
+  
+
+  

@@ -1,0 +1,162 @@
+<!-- new sign in form -->
+<div class="signin-container" fxLayout fxLayoutAlign="center" >
+  <div class="signin-form-section1 section1-bg">
+    <h2 >ProdktrSegue</h2>
+    <div *ngIf="!isForgetPassword">
+      <form class="example-form" [formGroup]="signForm">
+      <h1><strong>Sign in</strong></h1>
+      <mat-card-content>
+        <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email Address" formControlName="email">
+        </mat-form-field>
+
+        
+
+        <mat-form-field class="example-full-width" style="margin-top:20px;">
+          <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </mat-card-content>
+      <p class="forgetpassword" style="margin-bottom: 10px;"><a routerLink ="" (click)="passwordForget()">Forgot password?</a></p>
+
+      <div class="logged-in">
+        <!-- <label>
+          <input type="checkbox" name="loggedin"> Keep me logged in
+        </label> -->
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="!signForm.valid" type="submit" label="Sign in" style="width: 100%; text-align: center;" pButton pRipple class="p-button-rounded signin-btn" (click)="submit()" > </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="isForgetPassword">
+  <form class="example-form" [formGroup]="forgotPassword">
+    <h1><strong>Forgot Password</strong></h1>
+    <div id="progressForgetPassowrd_sepec"
+    style="width: 260px; height: 20vh; display: none; align-items: center; justify-content: center; flex-direction: column;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+      <p style="font-size: 12px; text-align: center; color: rgb(95, 95, 95);">Please Wait!</p>
+  
+    </div>
+    <div id="forgetPanel">
+
+  
+    <mat-card-content>
+      <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email Address" formControlName="email" required>
+      </mat-form-field>
+      
+    </mat-card-content>
+    
+     <div style="width:100%;display: flex; justify-content: center;" class="button">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button cancelButton" (click)="hideDilog()"></button>
+      <button [disabled]="!forgotPassword.valid" pButton pRipple label="Submit" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="forgotPasswordFunction()" ></button>
+    </div>
+
+  </div>
+  </form>  
+</div>
+<br>
+<div>
+      <p class="copyright-text">@2021 Prodktr All rights reserved</p>
+    </div>
+  </div>
+
+  <div class="signin-form-section2 section2-bg">
+    <div class="prodktr-logo"> 
+      <div class="LoginImgBox"></div>
+          <!-- <h2 class="text-center" >Manage Your Schema Migrations</h2>
+          <p class="logo-subtext" class="align-left">One place where you can manage your schema migrations</p> -->
+          <h2 class="text-center" >ProdktrSegue</h2>
+          <p class="logo-subtext" class="align-left">Schema Migration Management Solution</p>
+    </div>
+
+  <!-- <div class="progrssBarPanel">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+  </div> -->
+</div>
+
+
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <p-dialog [(visible)]="forgotPasswordDialog" [style]="{width: '650px'}" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="header">
+      <mat-card-title>
+          <h3>Forgot Password </h3>
+      </mat-card-title>
+  </ng-template>
+      <ng-template pTemplate="content">
+       
+      <form class="forgotPasswordForm" [formGroup]="forgotPassword">
+          <div class="p-grid">
+              <div class="p-col">
+                  <div class="box padBox">
+                      <strong><mat-label class="flable">Email<span>*</span></mat-label> </strong>
+                      <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                          <mat-label>Email</mat-label>
+                          <input 
+                          id="email"
+                          
+                          [class.is-invalid]="forgotPassword.controls.email.invalid && forgotPassword.controls.email.touched" 
+                          matInput 
+                          formControlName="email"  [ngClass]="{'error': forgotPassword.errors}"
+                          >
+                      </mat-form-field>
+                      <small 
+                     class="d-none"
+                      [class.dinone]="forgotPassword.controls.email.valid || forgotPassword.controls.email.untouched">Please enter Email Id
+                    </small>
+                    <small 
+                    class="d-None" 
+                    *ngIf="forgotPassword.errors?.pattern">Please enter valid Email Id
+                   </small>
+                  </div>
+              </div>
+            </div>
+        </form>
+      </ng-template>
+      <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+          <button [disabled]="!forgotPassword.valid" pButton pRipple label="Submit" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="forgotPasswordFunction()" ></button>
+      </ng-template>
+  </p-dialog> -->
+
+
+
+
+
+
+
+

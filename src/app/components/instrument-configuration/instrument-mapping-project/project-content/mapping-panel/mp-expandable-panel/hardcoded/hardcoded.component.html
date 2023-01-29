@@ -1,0 +1,44 @@
+<div *ngIf="hardcodeseted && !isClose" class="hcdPanel" style="width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative; z-index: 20;">
+<div style="width: 100%; display: flex; align-items: center;     justify-content: flex-end;
+position: relative;
+top: -35px;">
+    <button pButton pRipple icon="pi pi-times"
+    class="p-button-rounded p-button-text p-button-danger p-mr-2 resetButton" style="display: none;" (click)="close()"></button>
+</div>
+<div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+    <p style="text-align: center;"><strong *ngIf="inputValue" style="color: #0A4C95 ;">{{inputValue}}&nbsp;</strong> <br>Hardcoded value assigned to this column</p>
+
+</div>
+</div>
+<div *ngIf="!hardcodeseted"  class="hcdPanel">
+    <form [formGroup]="hdcodeForm" style="width: 100%;">
+    <div class="hardwrp">
+  
+        <div class="p-col" style="width: 100%;">
+            <div class="box padBox">
+                <strong><mat-label class="flable">Set Hardcoded value <span style="color: tomato;">*</span></mat-label> </strong>
+                <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                    <!--  -->
+                    <input 
+                    [(ngModel)]="inputValue"
+                    id="hdcTxt"
+                    matInput 
+                    formControlName="hardcodedInput"
+                    placeholder="e.g.apple">
+                </mat-form-field>
+                <!-- (keydown)="space($event)" -->
+                <!-- <small 
+               class="d-none"
+                [class.dinone]="clientRegistration.controls.clientName.valid || clientRegistration.controls.clientName.untouched">Please enter client name</small> -->
+            </div>
+        </div>
+
+    <div   style="height: 40px; display: flex; align-items: center; justify-content: center; ">   
+            <button [disabled]="!hdcodeForm.valid" pButton pRipple icon="pi pi-check" label="Set Value" class="p-button-rounded p-button-success cm_button" (click)="onSetValues()" ></button>
+            <button  pButton pRipple icon="pi pi-times" label="Reset" class="p-button-rounded p-button-info cm_button" (click)="reset()"></button>
+    </div>
+
+    </div>
+
+</form>
+</div> 

@@ -1,0 +1,131 @@
+.cardwidth{
+    width:97.2%;
+    position: relative;
+    
+    /* margin: auto; */
+    top: 15px;
+    /* height: 35px; */
+    background: transparent linear-gradient(
+88deg
+, #0A4C95 0%, #0A054B 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    opacity: 1;
+    margin-bottom: 26px;
+
+}
+
+.cardwidth .whitetxt{
+    color:#ffffff
+}
+:host ::ng-deep .p-dialog-header {
+    height: 57px;
+    padding: 30px 25px;
+    border-radius: 20px 20px 0px 0px;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    position: relative;
+    top: 0px;
+    border-bottom: 1px solid #d5d5d5;
+  }
+  
+  :host ::ng-deep .p-dialog-header h3 {
+    margin: 0 0 -6px;
+  }
+ 
+
+.settingMenuButton{
+    border-radius: 30px;
+    padding: 0px 15px;
+    float: right;
+    position: relative;
+    top: -9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+.profpic{border-radius: 100%;
+    width: 40px;
+    height: 40px;
+background-color: #ddd;
+position: relative;
+top: 2px;
+left: -12px;
+}
+
+.usernameRole span,.usernameRole small, .usernameRole .downicon{
+    color:#ddd;
+    flex-direction: column;
+    position: relative;
+
+}
+.usernameRole {min-width: 100px; 
+    position: relative;
+    top: 10px;
+    /* left: 20px; */
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;}
+.usernameRole span{    /* top: -10px; */
+    text-align: left;
+    left: 0px;
+    text-transform: capitalize;
+}
+.usernameRole small{ top: -17px;
+    text-align: left;}
+
+    .usernameRole .downicon{
+        position:absolute;
+        top: 16px;
+        left: 85px;
+    }
+
+:host ::ng-deep .settingMenuButton .mat-button-wrapper{
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+:host ::ng-deep .mat-menu-panel {
+    min-width: 163px !important;
+}  
+.menuBtn{
+    min-width: 160px;
+   display: flex;
+   /* justify-content: right; */
+}
+.menuIcon{position: relative; top:10px}
+
+.d-none {
+    color: #ff5050;
+    margin-top: -16px;
+    display: block;
+    position: relative;
+  }
+  .d-None {
+    color: #ff5050;
+    margin-top: -19px;
+    display: block;
+    position: relative;
+  }
+ .dinone {
+    display: none;
+  }
+  .padBox {
+    padding: 0px !important;
+    max-width: 650px;
+    margin-bottom: 6px;
+    
+  }
+  .editProfileForm {
+    position: relative;
+    top: 30px;
+  }
+  .flable {
+    color: #343434;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .flable span {
+    color: #ff5050;
+  }

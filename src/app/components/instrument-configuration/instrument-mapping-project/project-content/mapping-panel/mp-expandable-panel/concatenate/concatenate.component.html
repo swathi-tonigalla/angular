@@ -1,0 +1,99 @@
+<div *ngIf="concatWait" class="con" style="min-height: 200px;">
+  <div id="progressSpinDesti"
+  style="width: 100%; min-height: 150px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+    fill="#EEEEEE"></p-progressSpinner>
+    <p style="font-size: 14px; text-align: center;">Please wait... <br>filtering selected column.</p>
+  </div>
+</div>
+
+<div *ngIf="isSelectedconcat" class="filterMappingSelected">
+  <!-- <p style="text-align: center; font-weight: bold;">All set...<br> you can go for mapping now!</p> -->
+  <span class="editText" style="margin-bottom: 5px;">You can map now this popup will close automatically. </span>
+          <span class="editText"><small>To change current mapping click on below edit button.</small></span>
+          <button pButton pRipple icon="pi pi-pencil"
+      class="p-button-rounded p-button-text p-button-success p-mr-2 selectInstTypeBtn" (click)="onEdit()"></button>
+
+  </div>
+
+
+<div *ngIf="!concatWait && !isSelectedconcat" class="concCantPanel">
+  <p-messages [(value)]="msgs" [enableService]="false"></p-messages>
+  <div *ngIf="!concatWait && concatArr.length < 1" style="width: 100%; height: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+    <p style="font-size: 14px;text-align: center;">Please select result column from <br> source data</p>
+    </div>
+    
+<div *ngIf="concatArr.length >0" class="conCatsub">
+
+    <div *ngIf="concatArr.length >0" style="width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgb(221, 221, 221);
+        margin-bottom: 15px;
+        padding-top: 7px;">  
+       
+       <div style="width: 100%; font-size: 14px; font-weight: bold;">
+      <p    style="margin-bottom: 0px;">
+          <small style="color: #0a357d;"> {{concatArr[0].LDname}}</small>
+          is selected for concat filter
+      </p>
+       </div>
+       <div style="width: 41%;">
+        <mat-chip [removable]="removable" (removed)="remove(0)">
+            {{concatArr[0].LDname}}
+            <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+        </mat-chip>
+       </div>
+      
+    </div>
+    
+    <div *ngIf="concatArr.length >0" style="width: 100%; display: flex; align-items: center; padding-left: 10px;">  
+     <div style="width: 100%;">
+      <!-- <p style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Select Uid</p> -->
+        <mat-form-field class="example-full-width mat-form-field-fullwidth"
+        >
+        <mat-label>Select First UID</mat-label>
+          <mat-select id="firstUidDrp"
+            (selectionChange)="onSelectFirstUid()" 
+            [(ngModel)]="SelectedFirstUid">
+            <!--  [(ngModel)]="selectedInstType"
+                     (selectionChange)="onClientChange()"
+                   
+                    -->
+            <mat-option *ngFor="let uid of postionUID" [value]="uid.id">
+                
+                    {{uid?.uidName}}
+                    <small class="uidSpecification"><span>({{uid?.LDcolname}})</span></small>
+
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+     </div>
+     <div style="width: 100%;">
+      <mat-form-field class="example-full-width mat-form-field-fullwidth"
+      >
+      <mat-label>Select Second UID</mat-label>
+        <mat-select id="SecondUidDrp"
+        [disabled]="!isFirstUiSelected"
+          (selectionChange)="onSelectSecondUid()" 
+          [(ngModel)]="SelectedSecondUid">
+          <!--  [(ngModel)]="selectedInstType"
+                   (selectionChange)="onClientChange()"
+                 
+                  -->
+          <mat-option *ngFor="let suid of isnotPositionUid" [value]="suid.id" style="display: flex;">
+              
+                  {{suid?.uidName}}
+                  <small class="uidSpecification"><span>({{suid?.LDcolname}})</span></small>
+                 
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+   </div>
+    </div>
+</div>
+</div>

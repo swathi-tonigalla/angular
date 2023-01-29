@@ -1,0 +1,185 @@
+<p-toast position="top-center"></p-toast>
+<mat-grid-list cols="4" > 
+<mat-card class="cardwidth"> 
+    <button 
+    pButton pRipple type="button" 
+    icon="pi pi-bars" 
+    (click)="toggleSideNav()" 
+    class="whitetxt p-button-rounded p-button-text"
+    ></button>
+    <button mat-button [matMenuTriggerFor]="menu" class="settingMenuButton">
+        <div class="profpic" style="display: flex; justify-content: center;align-items: center;"><i class="pi pi-user" style="font-size: 1.5rem; color:#0A054B"></i></div>
+        <div class="usernameRole">
+            <span>{{username}}</span> 
+            <small>
+            <!-- <div  *ngIf="role === 'Normal User'; else ref">
+              Analyst
+            </div> -->
+            <div>
+              {{role}}
+            </div>
+            </small>
+            <mat-icon  class="downicon"aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+        </div>
+    </button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item class="menuBtn" (click)="updatePassword()"><mat-icon aria-hidden="false" aria-label="" class="menuIcon">person_outline</mat-icon>Edit Profile</button>
+  <a mat-menu-item href="#" class="menuBtn" (click)="logout($event)"><mat-icon aria-hidden="false" aria-label="" class="menuIcon" >logout</mat-icon>Logout</a>
+</mat-menu>
+</mat-card>
+</mat-grid-list>
+
+<p-dialog [(visible)]="editProfileDialog" [style]="{width: '650px'}" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="header">
+      <mat-card-title>
+          <h3>Edit Profile </h3>
+      </mat-card-title>
+  </ng-template>
+      <ng-template pTemplate="content">
+       
+      <form class="editProfileForm" [formGroup]="editProfile">
+          <div class="p-grid">
+              <div class="p-col">
+                  <div class="box padBox">
+                      <strong><mat-label class="flable">User Name<span>*</span></mat-label> </strong>
+                      <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                          <mat-label>User Name</mat-label>
+                          <input 
+                          id="username"
+                          [(ngModel)]="username"
+                          [class.is-invalid]="editProfile.controls.username.invalid && editProfile.controls.username.touched" 
+                          matInput 
+                          formControlName="username" 
+                          >
+                      </mat-form-field>
+                      <!-- <small 
+                     class="d-none"
+                      [class.dinone]="editProfile.controls.username.valid || editProfile.controls.username.untouched">Please enter User Name
+                    </small> -->
+                  </div>
+              </div>
+
+              <div class="p-col">
+                <div class="box padBox">
+                    <strong><mat-label class="flable">Password<span>*</span></mat-label> </strong>
+                    <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                        <mat-label>Password</mat-label>
+                        <input 
+                        id="password" type="password"
+                        [class.is-invalid]="editProfile.controls.password.invalid && editProfile.controls.password.touched" 
+                        matInput 
+                        formControlName="password" 
+                        placeholder="Enter Password"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$">
+                    </mat-form-field>
+                    <small 
+                   class="d-none"
+                    [class.dinone]="editProfile.controls.password.valid || editProfile.controls.password.untouched">
+                    <!-- Please enter Password -->
+                  </small>
+                  <small
+                  class="d-none"
+                  *ngIf="editProfile.get('password').touched && editProfile.get('password').hasError('pattern') ">
+                  <br>Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&).
+              </small>
+                </div>
+            </div>
+
+            <div class="p-col">
+              <div class="box padBox">
+                  <strong><mat-label class="flable"> Confirm Password<span>*</span></mat-label> </strong>
+                  <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                      <mat-label>Confirm Password</mat-label>
+                      <input 
+                      id="confirm_password" type="password"
+                      [class.is-invalid]="editProfile.controls.confirm_password.invalid && editProfile.controls.confirm_password.touched" 
+                      matInput 
+                      formControlName="confirm_password" 
+                      placeholder="Enter Confirm Password">
+                  </mat-form-field>
+                  <small 
+                 class="d-none"
+                  [class.dinone]="editProfile.controls.confirm_password.valid || editProfile.controls.confirm_password.untouched">Please enter confirm Password
+                </small>
+                <small 
+                class="d-None"
+                *ngIf="editProfile.errors?.notMatch"
+                >
+               <br> Password is not equal to Confirm Password
+                </small> 
+              </div>
+          </div>
+        </div>
+        </form>
+      </ng-template>
+      <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+          <button [disabled]="!editProfile.valid" pButton pRipple label="Update" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="editUserProfile()" ></button>
+      </ng-template>
+  </p-dialog>
+
+
+
+
+
+
+
+
+<!-- <p-dialog [(visible)]="editProfileDialog"[style]="{width: '650px'}" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="header">
+    <mat-card-title>
+      <h3>Edit Profile </h3> -->
+        <!-- <h3>New Client </h3>
+    </mat-card-title>
+  </ng-template>
+  <div fxLayout fxLayoutAlign="center">
+        <form class="example-form" [formGroup]="editProfile">
+             <h2><strong>Edit Profile</strong></h2> -->
+            <!-- <mat-card-content>
+              <mat-form-field class="example-full-width">
+                <input id="username" 
+                [class.is-invalid]="editProfile.controls.username.invalid && editProfile.controls.username.touched" 
+                matInput placeholder="Username" formControlName="username" required [(ngModel)]="username">
+              </mat-form-field> -->
+              <!-- <small 
+              class="d-none"
+               [class.dinone]="forgetPassword.controls.username.valid || forgetPassword.controls.username.untouched">
+             <br>Please enter username
+              </small> -->
+       
+              <!-- <mat-form-field class="example-full-width">
+                <input id="password" type="password" 
+                [class.is-invalid]="editProfile.controls.password.invalid && editProfile.controls.password.touched" 
+                matInput placeholder="Password" formControlName="password" required>
+              </mat-form-field> -->
+              <!-- <small class="d-none"
+              [class.dinone]="forgetPassword.controls.password.valid || forgetPassword.controls.password.untouched">
+              <br> Please enter Password
+              </small> -->
+    
+              <!-- <mat-form-field class="example-full-width">
+                <input 
+                id="confirm_password" type="password" 
+                [class.is-invalid]="editProfile.controls.confirm_password.invalid && editProfile.controls.confirm_password.touched"
+                matInput placeholder="Confirm Password" formControlName="confirm_password" required>
+              </mat-form-field>
+              <small 
+              class="d-none"
+              *ngIf="editProfile.errors?.notMatch"
+              >
+             <br> Password is not equal to Confirm Password
+              </small> -->
+              <!-- <small class="d-none"
+              [class.dinone]="forgetPassword.controls.confirmPassword.valid || forgetPassword.controls.confirmPassword.untouched">
+               <br> Please enter Password
+              </small> -->
+    
+            <!-- </mat-card-content>
+        
+            <div class="form-group"> -->
+              <!-- <button [disabled]="!forgetPassword.valid" type="submit" class="btn btn-primary btn-block signin-btn" (click)="onSubmit()"> Update Password</button> -->
+              <!-- <button  [disabled]="!editProfile.valid" (click)="editUserProfile()" pButton pRipple type="button" label="Update Password" class="p-button-rounded"></button>
+            </div>
+          </form>
+    </div>
+</p-dialog>  -->

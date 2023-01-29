@@ -1,0 +1,147 @@
+.cardheader {
+    height: 57px;
+    padding: 5px;
+    border-radius: 10px 10px 0px 0px;
+    background: #f8f9fa;
+    position: relative;
+    top: -16px;
+    border: 1px solid #d5d5d5;
+  }
+
+  .btnBox{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+  }
+
+  .btnboxes{
+width: 100%;
+height: 40px;
+ 
+
+  }
+
+  .btnBigbox{width: 80% !important;}
+  .btnSmallBox{width: 18% !important;}
+  .border_right{
+      border-right: 1px solid #d0d0d0;
+  }
+
+  :host ::ng-deep .chooseToBrowse{
+    width: 200px;
+  }
+
+  
+:host ::ng-deep .myUploadBtn{ padding: 6px;    
+    background-color: #1f73ae00 !important;
+    border-color: #ffffff00 !important;}
+
+
+    .bgBtn{
+        background: #537f2d !important;
+        color: #ffffff !important;
+        border-color: #537f2d !important;
+        padding-right: 3px;
+        margin-left: 3px;
+    }
+
+    .bgBtn span{
+      
+        color: #ffffff !important;
+     
+    }
+
+    :host ::ng-deep .myUploadBtn span{
+        color: #707070;
+    }
+
+    .uploadQunue{
+        width: 100%;
+        min-height: 180px;
+        display: flex;
+        justify-content: flex-start;
+        border: 1px solid #d5d5d5;
+        overflow-x: hidden;
+        position: relative;
+        top: -17px;
+    }
+
+    .progressBarBox{
+    width: 100%;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 1px #00000017;
+    border: 1px solid #F1F1F1;
+    padding: 5px 6px;
+    }
+
+    .progressBarBox:nth-child(even){
+        background-color: #F1F1F1;
+    }
+
+    .fileName,.mainProgressBar{
+        width: 100%;
+    }
+
+    .ErrorMsg{ width: 7%;
+        height: 40px;
+        border-radius: 4px;
+        margin-left: 8px;
+        position: relative;
+        top: 9px;
+      
+    }
+
+ 
+        .ErrorMsg ul{
+            padding: 0px;
+    height: 39px;
+    margin-bottom: 11px;
+    margin-top: 8px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 1px 1px #00000017;
+    position: relative;
+    top: -6px;
+          
+        }
+
+        .ErrorMsg ul:nth-child(even){
+            background-color: #F1F1F1;
+        }
+
+
+
+        .asyncLoding{
+            height: 100%;
+            width: 100%;
+            background-color: #fffffff3;
+            z-index: 1;
+            position: absolute;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+        
+          .asyncLoding h5{color: #333;text-align: center;}
+    
+        .ErrorMsg ul li {color: #537f2d; list-style: none; padding: 5px; height: 40px;}
+        .ErrorMsg ul li .material-icons {font-size: 25px !important;}
+
+    .filInfos{width: 99%;}
+
+    .slectedFIles{
+        margin: 0px;
+        position: relative;
+        left: 225px;
+        top: -24px;
+        color: #548cf1;
+      }
+    

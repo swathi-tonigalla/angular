@@ -1,0 +1,75 @@
+<!-- <p-toast position="top-center"></p-toast> -->
+
+<div style="width: 100%">
+
+  <div id="progressSpinDesti_sepec"
+  style="width: 230px; height: 60vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+    fill="#EEEEEE"></p-progressSpinner>
+    <p style="font-size: 12px; text-align: center; color: rgb(95, 95, 95);">Please Wait! <br>We are intigrating instruments<br>It may take a time</p>
+
+  </div>
+
+  
+  <p-scrollPanel *ngIf="!isLoading" id="instrumentsList" [style]="{width: '100%', height: '380px'}" styleClass="custombar1">
+    <p-panel [toggleable]="true" [collapsed]="true" id="Destination_panel_{{instrument.instrumentID}}"
+      *ngFor="let instrument of project.instruments;let i=index">
+      <ng-template pTemplate="header">
+      
+        <label class="example-list-section" for="tag_{{instrument?.instrumentID}}">
+         
+          <mat-checkbox [disabled]="disabled" id="tag__{{instrument?.instrumentID}}" class="example-margin" color="primary"
+            [(ngModel)]="instrument.isMasterSel"
+            (change)="checkUncheckAll(instrument.instrumentName,instrument,$event.checked)">
+            <!-- [(ngModel)]="instrument.isChecked" -->
+            <div id="disabled__{{instrument?.instrumentID}}" 
+            *ngIf="disabled" 
+            class="dsbld"
+            (click)="warnMsgCloseInstrument()"
+            ></div>
+            <div *ngIf="project.instruments">
+              <label class="listHeading" [class.isDisabledLable]="disabled">{{instrument.instrumentName}}</label>
+            </div>
+          </mat-checkbox>
+      
+        </label>
+
+      </ng-template>
+      <p-scrollPanel [style]="{width: '100%', height: '380px'}" styleClass="custombar1">
+        <section class="example-section" style="margin-top:14px;">
+          <span class="example-list-section">
+            <ul class="colnListUl">
+              <div class="rowDiv" *ngFor="let instlist of instrument?.instrumentsData;let iD = index">
+                <li id="destination_row_{{instlist.name}}">
+
+                  <mat-checkbox color="primary" name="list_name" [(ngModel)]="instlist.isDestination"
+                    (change)="isAllSelected(instlist,$event.checked)">
+                  </mat-checkbox>
+
+                  <label class="listColn" for="tag{{instlist?.colId}}">{{instlist?.name}}</label>
+                  <!-- <div class="dataType">abc</div> -->
+                  <div class="isMandetory" *ngIf="!instlist.mandatory">
+                    <p-badge value="M" styleClass="p-mr-2"></p-badge>
+                  </div>
+
+                </li>
+              </div>
+
+
+            </ul>
+
+
+          </span>
+
+        </section>
+      </p-scrollPanel>
+
+    </p-panel>
+  </p-scrollPanel>
+</div>
+
+
+<!-- (change)="changeCheckbox(instlist)" -->
+<!-- [checked]="allComplete"
+  [indeterminate]="someComplete()"
+  (change)="setAll($event.checked)" -->

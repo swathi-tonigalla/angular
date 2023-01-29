@@ -1,0 +1,244 @@
+.cardwidth {
+  width: 10%;
+  position: relative;
+  top: 15px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+
+.cardheader {
+  height: 57px;
+  padding: 15px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: -16px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.cardwidth_second {
+  width: 97%;
+  position: relative;
+  top: 18px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+
+.component_title {
+  padding: 0px 40px 0px 15px;
+}
+.cmClass h3 {
+  font-weight: bold;
+  color: #343434;
+  margin-bottom: 6px;
+}
+.cmClass p {
+  font-size: 13px;
+  color: #343434;
+}
+
+.cm_header {
+  width: 100%;
+  height: 50px;
+}
+
+.cm_header .p_grid {
+  float: right;
+  padding-right: 40px;
+}
+.cm_header .p_grid .cm_button {
+  background: #1f73ae;
+  border: none;
+}
+.padBox {
+  padding: 0px !important;
+  max-width: 650px;
+  margin-bottom: 6px;
+}
+
+.mat-form-field-fullwidth {
+  display: block;
+  width: 100%;
+}
+.p-dialog-header-override {
+  padding: 0px;
+}
+
+.p-dialog .p-dialog-header {
+  padding: 0px !important;
+}
+.dilogHeader {
+  width: 100%;
+}
+.flable {
+  color: #343434;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.flable span {
+  color: #ff5050;
+}
+.d-none {
+  color: #ff5050;
+  margin-top: -16px;
+  display: block;
+  position: relative;
+}
+
+.dinone {
+  display: none;
+}
+/* .is-invalid {
+    border-bottom: 1px solid #FF5050;
+} */
+
+:host ::ng-deep .p-dialog-header {
+  height: 57px;
+  padding: 30px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: 0px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+:host ::ng-deep .p-dialog-header h3 {
+  margin: 0 0 -6px;
+}
+
+.clientForm {
+  position: relative;
+  top: 30px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  background: none !important;
+  position: relative;
+  border: none !important;
+  top: -25px;
+  left: 190px;
+  padding: 1rem 1rem;
+  width: 85%;
+  float: left;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+:host .boxes {
+  width: 100%;
+
+  margin: 10px;
+}
+
+:host .smallBoxes {
+  width: 25%;
+}
+:host ::ng-deep .inputSearch::after {
+  position: absolute;
+  font-family: "Material Icons";
+  content: "\e8b6";
+  color: #9d9d9d;
+  top: 9px;
+  left: 96%;
+  font-size: 26px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header .mat-form-field-fullwidth {
+  width: 100%;
+}
+
+:host ::ng-deep p-dropdown {
+  position: absolute !important;
+  top: 18px;
+  left: 65px;
+}
+
+:host ::ng-deep p-dropdown:before {
+  content: "Show";
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: -37px;
+  color: #343434;
+}
+
+:host ::ng-deep p-dropdown:after {
+  /* content: "Entries"; */
+  content: "Results";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 78px;
+  color: #343434;
+}
+
+:host ::ng-deep .p-button-rounded.newclient {
+  position: absolute;
+}
+
+:host ::ng-deep .p-datatable-wrapper {
+  position: relative;
+  top: -55px;
+}
+
+:host ::ng-deep .mat-form-field-label {
+  font-size: 0.8em;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  top: 1.8125em;
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  text-align: left !important;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+  text-align: left !important;
+  /* padding: 1rem 0px; */
+}
+.tdPad{
+  word-spacing:100vw; 
+ }
+/* .tdPad{
+  padding-right:75px;
+ } */
+ ::ng-deep .mat-checkbox {
+  margin-left: 15px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .smallBoxes {
+    width: 36% !important;
+  }
+
+  .boxes {
+    width: 50% !important;
+  }
+  /* .tdPad{
+    padding-right:75px !important;
+   } */
+}
+
+
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td{
+  max-width: 150px;
+  word-break: break-all;
+}
+@media only screen  and (max-width: 1440px) {
+  /* .tdPad{
+    padding-right:75px;
+   } */
+} 
+
+@media only screen  and (max-width: 1366px) {
+  /* .tdPad{
+    padding-right:85px;
+    word-spacing:100vw; 
+   } */
+} 
+
+ @media only screen  and (min-width: 1920px) {
+  /* .tdPad{
+    padding-right:75px;
+   } */
+}

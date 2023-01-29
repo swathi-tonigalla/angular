@@ -1,0 +1,50 @@
+ 
+    <div *ngIf="isLoading" id="progressSpinDestiDashboard"
+    style="width: 100%; min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+      <p style="font-size: 14px;text-align: center;">Please wait...<br>Collecting recent projects</p>
+    </div>
+
+    <div *ngIf="!isLoading && noRecords" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; min-height: 380px;">
+        <p style="color: #333333;">No Projects Available.</p>
+       </div> 
+<p-table *ngIf="!isLoading && !noRecords" [columns]="cols" [rows]="05" [paginator]="true" [value]="projects">
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th id="id"  pSortableColumn="id">Project Id <p-sortIcon field="id"></p-sortIcon></th> -->
+            <th id="prname" pSortableColumn="projectName">Project Name <p-sortIcon field="projectName"></p-sortIcon></th>
+            <th style="text-align: center;" id="c=instrument">Instrument </th>
+            <th *ngIf="role === 'Administrator'" id="username" pSortableColumn="userName">User Name <p-sortIcon field="userName"></p-sortIcon></th>
+            <th id="clname" pSortableColumn="clientName">Client Name <p-sortIcon field="clientName"></p-sortIcon></th>
+            <!-- <th id="three">Updated At</th> -->
+            <th   id="createdAt" pSortableColumn="createdAt">Created On <p-sortIcon field="createdAt"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-projects>
+        <tr>
+            <!-- <td>{{projects.id}}</td> -->
+            <td>{{projects.projectName}}</td>
+            <td style="position: relative; text-align: center;"> 
+               <button pButton pRipple type="button" class="p-button-rounded" (click)="projects.mappedInstruments.toggleCheck = !projects.mappedInstruments.toggleCheck"> {{projects.mappedInstruments.length}}
+                <mat-icon *ngIf="projects.mappedInstruments.toggleCheck" aria-hidden="false" class="iconUp">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="!projects.mappedInstruments.toggleCheck" aria-hidden="false" class="iconDown">
+                    arrow_drop_down
+                    </mat-icon>
+
+               </button> 
+            <ul *ngIf="projects.mappedInstruments.toggleCheck" class="instrumentList">
+                   <li *ngFor="let instruments of projects.mappedInstruments"> 
+                   
+                    {{instruments.mappedInstrumentName}}</li>
+               </ul>
+             
+            </td>
+            <td *ngIf="role === 'Administrator'">{{projects.userName}}</td>
+            <td>{{projects.clientName}}</td>
+            <!-- <td>-</td> -->
+            <td class="tdPad">{{projects.createdAt | customDateFormat:'longDate'}}</td>
+            
+        </tr>
+    </ng-template>
+</p-table>

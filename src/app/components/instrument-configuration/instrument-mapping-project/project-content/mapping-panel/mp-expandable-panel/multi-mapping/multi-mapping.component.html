@@ -1,0 +1,88 @@
+<div *ngIf="isSelectedWhere" class="filterMappingSelected">
+    <p>Mapping is selected for  <span class="colName">{{resultcolumFile}}.{{resultColnName}}</span><br>WHERE<span
+            class="whereselected">{{whereKeyFile}}.{{whereKeyColn}}</span>=<span class="colName"> {{selectedKeyForFilter}}</span></p>
+
+            <span class="editText">To change current mapping click on edit button</span>
+            <button pButton pRipple icon="pi pi-pencil"
+        class="p-button-rounded p-button-text p-button-success p-mr-2 selectInstTypeBtn"></button>
+
+    </div>
+<div *ngIf="!isSelectedWhere" class="filterBox">
+    <div class="multiMapRow">
+        <div class="multiMapinputBox" style="height: 70px;">
+            <strong>
+                <mat-label class="flable" style="font-size: 12px;">Select result column from source legacy
+                    data<span></span>
+                </mat-label>
+            </strong>
+            <!-- <mat-form-field class="example-full-width mat-form-field-fullwidth">
+        
+                    <input id="resultColInput1" [disabled]="true" [(ngModel)]="resultColName" matInput>
+                </mat-form-field> -->
+            <br>
+            <span class="selectedColnName"
+                *ngIf="compareKeyData.length>0">{{compareKeyData[0].LDgroup}}.{{compareKeyData[0].LDname}}</span>
+            <!-- [(ngModel)]="srcData.LDname" -->
+            <!-- formControlName="clientName"  -->
+        </div>
+        <div class="multiMapinputBox" style="height: 70px;">
+            <strong *ngIf="compareKeyData.length>0">
+                <mat-label class="flable" style="font-size: 12px;">Select column name for compare as key with result
+                    column<span></span></mat-label>
+            </strong>
+            <br>
+            <!-- <mat-form-field class="example-full-width mat-form-field-fullwidth">
+            
+                    <input id="resultColInput2" [disabled]="true" [(ngModel)]="compareKeyData[1].LDname" matInput>
+                </mat-form-field> -->
+            <mat-form-field class="example-full-width mat-form-field-fullwidth" *ngIf="compareKeyData.length>1">
+                <!-- <mat-label>Select specific key </mat-label> -->
+                <mat-select (selectionChange)="onFilterKeySelect()" [(ngModel)]="selectedKeyForFilter">
+
+                    <mat-option *ngFor="let key of instrumentTypesDrpValue" [value]="key">
+
+
+                        {{key}}
+
+
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+
+            <!-- <span class="selectedColnName">{{compareKeyData[1].LDgroup}}.{{compareKeyData[1].LDname}}</span> -->
+        </div>
+
+    </div>
+
+
+</div>
+
+
+    <!-- <hr  class="nhr"> -->
+    <!-- <div class="multiMapRow">
+            <div class="multiMapinputBox" style="height: 20px;">
+                <mat-checkbox 
+                color="primary"
+                [disabled]="compareKeyData.length <= 1"
+                [(ngModel)]="isAddMoreChecked">
+    
+               <span class="chbxTxt"> Please select checkbox to add more columns to compare with result column</span>
+            
+            </mat-checkbox>
+            </div>
+        </div> -->
+
+    <!-- <div class="multiMapRow">
+            <div class="multiMapinputBox" *ngIf="isAddMoreChecked && compareKeyData.length>2" style="height: 70px;">
+                <strong><mat-label class="flable" style="font-size: 12px;">Select compare column from source legacy data<span></span></mat-label> </strong>
+        
+                <br>
+                <span class="selectedColnName">{{compareKeyData[2].LDgroup}}.{{compareKeyData[2].LDname}}</span>
+            </div> -->
+    <!-- <div class="multiMapinputBox" *ngIf="isAddMoreChecked && compareKeyData.length>3" style="height: 70px;">
+                <strong><mat-label class="flable" style="font-size: 12px;">Select compare column from source legacy data<span></span></mat-label> </strong>
+                <br>
+                <span class="selectedColnName">{{compareKeyData[3].LDgroup}}.{{compareKeyData[3].LDname}}</span>
+            </div> -->
+    <!-- </div> -->

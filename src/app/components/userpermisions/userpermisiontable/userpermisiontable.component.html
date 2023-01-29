@@ -1,0 +1,97 @@
+<div *ngIf="isLoading" id="progressSpinSearch"
+style="width: 100%; min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+  fill="#EEEEEE"></p-progressSpinner>
+  <p style="font-size: 14px;text-align: center;">Please wait...<br>Getting users for setting permission</p>
+</div>
+ 
+ <div *ngIf="!isLoading" class="app-userPermission-table">
+    <p-table #dt [value]="userPermissions" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    [globalFilterFields]="['name']" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Results" [rowsPerPageOptions]="[10,20,30]">
+     <ng-template pTemplate="caption">
+       <div class="boxes">
+            <mat-form-field class="example-full-width mat-form-field-fullwidth inputSearch">
+                <input 
+                id="Searchbar"
+                matInput 
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Enter User Name to search">  
+            </mat-form-field>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th id="id">User ID</th> -->
+            <th id="Name">User Name</th>
+            <!-- <th id="Country">Email id</th> -->
+            <th id="Company">Instrument Destination</th>
+            <th id="two">Audit Report</th>
+            <th id="three">Load Project</th>
+            <!-- <th id="four">Add Client</th> -->
+            <th id="five">Edit User Permission</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-userPermission>
+        <tr>
+            <!-- <td>{{userPermission?.unique_id}}</td> -->
+            <td>{{userPermission?.name}}</td>
+            <td>
+                <span  id="modletxt_{{userPermission.unique_id}}">{{userPermission?.instrument_destination}}</span>
+                <span id="txt_{{userPermission.unique_id}}" style="display: none;">{{instrumentDestinationtxt}}</span>
+            </td>
+            <td>
+                <span  id="modletxtar_{{userPermission.unique_id}}">{{userPermission?.audit_report}}</span>
+                <span id="txtar_{{userPermission.unique_id}}" style="display: none;">{{auditReporttxt}}</span>
+            </td>
+            <td>
+                <span  id="modletxtlp_{{userPermission.unique_id}}">{{userPermission?.load_project}}</span>
+                <span id="txtlp_{{userPermission.unique_id}}" style="display: none;">{{loadProjecttxt}}</span>
+            </td>
+            <td>
+                <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editUserPermission(userPermission)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+ <p-dialog [(visible)]="userPermissionDialog" [style]="{width: '1024px'}" header="Set User Permission" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field" >
+           <form [formGroup]="permissions">
+              <div style="padding-top: 30px; justify-content: center;">
+            <strong><mat-label style="margin-left: 20px;">Set Other Permission</mat-label></strong><br><br>
+           <mat-label style="margin-left: 20px;">Instrument Destination</mat-label>
+           <mat-checkbox  formControlName="instrument_destination"  color="primary" [(ngModel)]="userPermission.instrument_destination" 
+           (change)="changeInstrumentDestination($event.checked,userPermission.unique_id)"></mat-checkbox>
+            <mat-label style="margin-left: 150px;">Audit Report</mat-label>
+           <mat-checkbox formControlName="audit_report" color="primary" [(ngModel)]="userPermission.audit_report"
+           (change)="changeAuditReport($event.checked,userPermission.unique_id)"></mat-checkbox>
+           <mat-label style="margin-left: 170px;">Load Project</mat-label>
+           <mat-checkbox  formControlName="load_project"  color="primary" [(ngModel)]="userPermission.load_project"
+           (change)="change($event.checked,userPermission.unique_id)"></mat-checkbox>
+           <br><br><br>
+           <strong><mat-label style="margin-left: 20px;">Set Client Permission</mat-label></strong><br><br>
+           <p-pickList [source]="sourceClient" [target]="targetClient" sourceHeader="Available" targetHeader="Selected"
+    [responsive]="true" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" filterBy="clientName"
+    sourceFilterPlaceholder="Search by client name" targetFilterPlaceholder="Search by client name" ngDefaultControl>
+    <ng-template let-client pTemplate="item">
+        <div class="product-item">
+            <div class="product-list-detail">
+                <h5 class="p-mb-2">{{client.clientName}}</h5>
+            </div>
+        </div>
+    </ng-template>
+</p-pickList>
+</div>
+</form>    
+</div>
+</ng-template>
+<ng-template pTemplate="footer">
+       <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-info" (click)="closeDialog()"></button>  
+        <button [disabled]="targetClient.length<1" pButton pRipple type="button" label="Submit" class="p-button-rounded p-button-success" (click)="submitPermission()"></button>
+    </ng-template>
+</p-dialog>
+ 
+ </div>
+   

@@ -1,0 +1,42 @@
+ 
+<p-toast position="top-center"></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<div class="mappingWrp">
+    <div *ngIf="!isInstrumentSelected" class="noINstrument">
+        <span><mat-icon aria-hidden="false" aria-label="no data" 
+            style="font-size: 35px;
+              width: 35px;
+              height: 35px;">description</mat-icon>
+            </span> 
+            <h5>No Instrument is selected! <br> Please select instrument to start mapping</h5>
+
+    </div>
+    <p-scrollPanel [style]="{width: '100%', height: '385px'}" styleClass="custombar1">
+        <app-mp-expandable-panel></app-mp-expandable-panel>
+    </p-scrollPanel>
+ 
+    <div *ngIf="isInstrumentSelected" >
+    <div *ngIf="spinner" style="width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+        <p-progressSpinner [style]="{width: '35px', height: '35px'}" styleClass="custom-spinner" strokeWidth="6"
+        fill="#EEEEEE"></p-progressSpinner>
+    </div>
+    <div  *ngIf="!spinner"  class="ProjectButtons">
+        <button [disabled]="isMappingReady && !isload" pButton pRipple label="Close" icon="pi pi-times" class="p-button-rounded p-button-info cm_button p-button-danger" (click)="onCloseProject()" 
+        pTooltip="Close project and exit"
+        tooltipPosition="top" 
+        ></button>
+        <button [disabled]="isMappingReady && !isload" pButton pRipple label="Cancel" icon="pi pi-trash" class="p-button-rounded p-button-info cm_button" (click)="cancel()"
+        pTooltip="Close current instrument"
+        tooltipPosition="top" 
+        ></button>
+        <button [disabled]="!isMappingReady" pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success cm_button" (click)="onSave()"
+        pTooltip="Save current instrument data"
+        tooltipPosition="top" 
+        ></button>
+  
+    
+    </div>
+</div>
+ 
+</div>
+ 

@@ -1,0 +1,390 @@
+/* @import url(""); */
+
+.signin-container {
+  background-image: url(../../../assets/images/loginbg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+  padding: 5%;
+}
+
+.signin-container .signin-form-section1 .example-form {
+  width: 100%;
+  min-width: 400px;
+  padding: 10%;
+  /* @media only screen and (max-width: 1920px){
+
+  } */
+}
+
+.signin-container .signin-form-section2 {
+  padding: 10%;
+}
+
+.signin-form-section1,
+.signin-form-section2 {
+  padding: 3em 3em 3em 3em;
+}
+
+.signin-form-section1 {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.signin-form-section2 {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+}
+
+.section1-bg {
+  background-color: #fff;
+}
+
+.section2-bg {
+  color: #fff;
+  background: #0062cc url("../../../assets/images/Group1096.png");
+}
+
+.prodktr-logo  {
+  width: 315px;
+  margin-bottom: 30px;
+
+}
+
+.prodktr-logo h2{
+  margin-top: 20px;
+    margin-bottom: 6px;
+    color: #b9c1d3;
+}
+
+.prodktr-logo p{
+  color: #b9c1d3;
+}
+
+.logo-subtext {
+  font-size: 12px;
+}
+
+.signin-btn {
+  border-radius: 18px;
+}
+
+.copyright-text {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.signin-form-section1 h2 {
+  color: #0f75bc;
+}
+
+.example-form h1 {
+  color: #333;
+}
+
+.btnSubmit {
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .p-message .p-message-wrapper {
+  padding: 0.4rem 0.5rem;
+}
+
+:host ::ng-deep .p-message.p-message-error {
+  margin: 5px;
+}
+:host ::ng-deep .p-message .p-message-detail {
+  margin-left: 0.5rem;
+  font-size: 12px;
+}
+
+:host ::ng-deep .p-message .p-message-summary {
+  font-weight: 700;
+  font-size: 15px;
+}
+:host ::ng-deep .p-message .p-message-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.element.style {
+  position: relative;
+  top: 145px;
+}
+
+/* .progrssBarPanel {
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  position: absolute;
+  z-index: 1;
+} */
+
+/* for large screen px*/
+ @media only screen and (min-width: 1920px) {
+  .signin-container {
+    min-width: 100%;
+    min-height: 100%;
+    /* padding: 5%; */
+    /* top: -6px !important; */
+   } 
+  
+  .signin-container .signin-form-section1 .example-form {
+    width: 100%;
+    /* min-width: 750px; */
+    min-width: 780px;
+    padding: 14%;
+  }
+  .signin-container .signin-form-section2 {
+    padding: 14%;
+  }
+  .signin-form-section1,
+.signin-form-section2 {
+  padding: 6em 7em 13em 5em;
+}
+.signin-form-section1 {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  
+}
+.signin-form-section2 {
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  text-align: center;
+  font-size: 22px;
+}
+.prodktr-logo  {
+  width: 385px;
+  margin-bottom: 40px;
+}
+.prodktr-logo h2{
+  margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.prodktr-logo p{
+  font-size: 18px;
+}
+.signin-btn {
+  border-radius: 36px;
+}
+.copyright-text {
+  margin: 0%;
+  font-size: 19px;
+  font-weight: 500;
+}
+.example-form h1 {
+  font-size: 20px;
+}
+:host ::ng-deep .p-message .p-message-wrapper {
+  padding: 0.4rem 0.5rem;
+  width: 549px;
+}
+
+:host ::ng-deep .p-message.p-message-error {
+  margin: 5px;
+}
+:host ::ng-deep .p-message .p-message-detail {
+  margin-left: 0.5rem;
+  margin-right: -20.3rem;
+  font-size: 20px;
+}
+
+:host ::ng-deep .p-message .p-message-summary {
+  font-weight: 700;
+  font-size: 20px;
+}
+:host ::ng-deep .p-message .p-message-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.signin-form-section1 h2 {
+  color: #0f75bc;
+  font-size: 25px;
+}
+.logged-in{
+  font-size: 20px;
+  margin: 0 20px 20px 0;
+  padding: 7px;
+}
+.p-button-label{
+  font-size: 22px;
+}
+} 
+
+/*for 1440 px */
+@media only screen and (max-width: 1440px) {
+  .signin-container {
+    background-image: url(../../../assets/images/loginbg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    /* Preserve aspect ratio */
+    min-width: 100%;
+    min-height: 100%;
+    padding: 5%;
+    top: -25px !important;
+  }
+  .signin-container .signin-form-section1 .example-form {
+    width: 100%;
+    min-width: 400px;
+    padding: 10%;
+  }
+  .signin-container .signin-form-section2 {
+    padding: 10%;
+  }
+  .signin-form-section1,
+.signin-form-section2 {
+  padding: 3em 3em 3em 3em;
+}
+.signin-form-section1 {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.signin-form-section2 {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+}
+.prodktr-logo  {
+  width: 315px;
+  margin-bottom: 30px;
+}
+.prodktr-logo h2{
+  margin-top: 20px;
+    margin-bottom: 6px;
+    color: #b9c1d3;
+    font-size: 20px;
+}
+.prodktr-logo p{
+  font-size: 10px;
+}
+.signin-btn {
+  border-radius: 18px;
+}
+.copyright-text {
+  margin: 0%;
+  font-size: 11px;
+  font-weight: 500;
+}
+.example-form h1 {
+  color: #333;
+  font-size: 18px;
+}
+:host ::ng-deep .p-message .p-message-wrapper {
+  padding: 0.4rem 0.5rem;
+}
+
+:host ::ng-deep .p-message.p-message-error {
+  margin: 5px;
+}
+:host ::ng-deep .p-message .p-message-detail {
+  margin-left: 0.5rem;
+  font-size: 12px;
+}
+
+:host ::ng-deep .p-message .p-message-summary {
+  font-weight: 700;
+  font-size: 15px;
+}
+:host ::ng-deep .p-message .p-message-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.signin-form-section1 h2 {
+  color: #0f75bc;
+  font-size: 20px;
+}
+.logged-in{
+  padding-top: 20px;
+  margin: 0 20px 20px 0;
+  font-weight: 500;
+  font-size: 14px;
+}
+.p-button-label{
+  font-size: 15px;
+}
+
+
+}
+
+
+.LoginImgBox{margin: auto;
+  width: 175px; height: 130px; background: url(../../../assets/images/NoPath.png) no-repeat; background-size: contain;}
+
+  .padBox {
+    padding: 0px !important;
+    max-width: 650px;
+    margin-bottom: 6px;
+    
+  }
+  .forgotPasswordForm {
+    position: relative;
+    top: 30px;
+  }
+  .flable {
+    color: #343434;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .flable span {
+    color: #ff5050;
+  }
+  .d-none {
+    color: #ff5050;
+    margin-top: -16px;
+    display: block;
+    position: relative;
+  }
+ .dinone {
+    display: none;
+  }
+  .d-None {
+    color: #ff5050;
+    margin-top: -11px;
+    display: block;
+    position: relative;
+  }
+  .button{
+    min-height: 40px;
+   }
+   .cancelButton{
+     margin-right: 20px;
+   }
+
+
+  :host ::ng-deep .p-dialog-header {
+    height: 57px;
+    padding: 30px 25px;
+    border-radius: 20px 20px 0px 0px;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    position: relative;
+    top: 0px;
+    border-bottom: 1px solid #d5d5d5;
+    
+  }
+  
+  :host ::ng-deep .p-dialog-header h3 {
+    margin: 0 0 -6px;
+  }
+  .button{
+    min-height: 40px;
+   }
+   .cancelButton{
+     margin-right: 20px;
+   }
+
+
+

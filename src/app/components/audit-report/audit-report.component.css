@@ -1,0 +1,46 @@
+.cardwidth {
+  width: 97%;
+  position: relative;
+  top: 15px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+
+.cardheader {
+  height: 57px;
+  padding: 15px 25px;
+  border-radius: 20px 20px 0px 0px;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  position: relative;
+  top: -16px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.cardwidth_second {
+  width: 97%;
+  position: relative;
+  top: 40px;
+  border-radius: 20px;
+  padding: 0 !important;
+}
+.cardCont {
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+.component_title {
+  padding: 0px 40px 0px 15px;
+}
+.upClass h3 {
+  font-weight: bold;
+  color: #343434;
+  margin-bottom: 6px;
+}
+.upClass p {
+  font-size: 13px;
+  color: #343434;
+}
+
+.mr-t {
+  margin-top: 30px;
+}

@@ -1,0 +1,8 @@
+.sideNavContentwrp >.logo{height: 190px;margin-bottom: 5px; display: flex; justify-content:center; align-items: center;}
+
+.sideNavContentwrp >.logo > h3{ color:#E4E7EE; font-size:27px; font-weight:bold}
+
+
+.button--grey{
+    background-color:blueviolet
+}

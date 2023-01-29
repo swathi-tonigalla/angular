@@ -1,0 +1,60 @@
+
+ <mat-card class="cardwidth">
+    <div class="cardCont">
+        <div class="cardheader">
+            <mat-card-title>
+                <h3> Select Following</h3>
+             </mat-card-title>
+    
+           
+        </div>
+         <form #myForm="ngForm">
+            <br>
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Display Name</strong></span>
+                <mat-label>User's display Name</mat-label>
+                <input matInput type="text" [(ngModel)]="users.Name">
+            </mat-form-field>
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Email Address</strong></span>
+                <mat-label class="mtr15">this Email ID will be used for login</mat-label>
+                <input matInput type="text" [(ngModel)]="users.Email">
+            </mat-form-field>
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Confirm Email Address</strong></span>
+                <mat-label class="mtr15">Confirm user's email address </mat-label>
+                <input matInput type="text" >
+            </mat-form-field>
+
+            <br><br>
+
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Password</strong></span>
+                <mat-label class="mtr15">Enter User Password</mat-label>
+                <input matInput type="text" [(ngModel)]="users.Password">
+            </mat-form-field>
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Confirm Password</strong></span>
+                <mat-label class="mtr15">Enter User Password</mat-label>
+                <input matInput type="text" >
+            </mat-form-field>            
+            <mat-form-field class="example-form-field mtr15">
+                <span class="input_titile"><strong>Select User Role</strong></span>
+                <mat-label class="mtr15">User Role?</mat-label>
+                <mat-select [(ngModel)]="users.Roles">
+                    <mat-option  >
+                     Admin                     
+                    </mat-option>
+                    <mat-option>Normal User</mat-option>
+                  </mat-select>
+            </mat-form-field>
+
+            <br><br><br>
+            
+                <button  class="mat-raised-button" >cancel</button>
+            
+            <button  class="mat-raised-button-green" (click)="addUser(myForm)">save</button>
+        </form>
+    </div>
+
+</mat-card> 

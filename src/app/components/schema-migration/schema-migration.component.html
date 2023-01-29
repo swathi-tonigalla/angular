@@ -1,0 +1,312 @@
+<div class="schema_wrap">
+    <div class="container component_title cmClass">
+        <h3>Instrument Configuration</h3>
+        <!-- <p style="margin-bottom: -4px;">Create new or load existing schema from here</p> -->
+        <p style="margin-bottom: -4px;">Create new or Load existing schema</p>
+        <hr>
+    </div>
+</div>
+
+<!-- <mat-card class="cardwidth" style="top: 15px;">
+    <div class="cardCont">
+        <div class="p-col">
+            <div class="box padBox">
+                <div class="schema-username">
+                    <h4>Hello!</h4>
+                    <h1>{{username}}</h1>
+                </div>
+            </div>
+        </div>
+   
+    </div>
+</mat-card> -->
+
+<div id="wrper" class="contentWrp">
+    <mat-card class="cardwidth" style="top: 35px;">
+        <div class="cardCont">
+                <div class="p-col">
+                    <div class="box padBox">
+                        <div class="dashboardTotalcountInfo">
+                           <!-- <p class="countLastText">Click on new project to generate schema migration</p> -->
+                           <p class="countLastText">Click on new project button to generate schema</p>
+                           <button pButton pRipple type="button" label="New project" class="p-button-rounded npBtn" (click)="newProject()"></button>
+                        </div>
+                    </div>
+                </div>
+     </div>
+    </mat-card>
+    <mat-card *ngIf="admin || isnormalUSer && allowPermission" class="cardwidth"  style="width: 100%;top: 35px;">
+        <div class="cardCont">
+            <div class="p-col">
+                <div class="box padBox">
+                    <div class="dashboardTotalcountInfo">
+                       <!-- <p class="countLastText">Click on load project to load saved schema migration</p> -->
+                       <p class="countLastText">Click on load project button to load saved schema</p>
+                       <button pButton pRipple type="button" class="npBtn" label="Load project" class="p-button-rounded" (click)="loadProject()"></button>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </mat-card>
+</div>
+
+<p-dialog [(visible)]="userDilog" [style]="{width: '60vw'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="header">
+        <mat-card-title>
+            <h3>Load Schema Project</h3>
+            
+        </mat-card-title>
+        <p-divider></p-divider>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form class="example-form" [formGroup]="newprojectForm">
+            <div class="p-grid inptbox" style="margin-top: 15px; display: flex; flex-direction: column;">
+                <div style="width: 100%;  display: flex; align-items: center;">
+                    <div class="p-col schema_Pcol">
+                        <div class="box padBox">
+                            <strong><mat-label class="flable">Select Client Name<span>*</span></mat-label> </strong>
+                          
+                            <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                                <mat-label>Select Client for the Project</mat-label>
+                                <mat-select 
+                                    id = "clientNameLoadproject"
+                                    formControlName="clientName"
+                                    [(ngModel)]="selectedCLientForLoad"
+                                    (selectionChange)="onLoadClientChange()"
+                                    [class.is-invalid]="newprojectForm.controls.clientName.invalid && newprojectForm.controls.clientName.touched" 
+                                    >
+                                    <mat-option *ngFor="let doneproject of removedDuplicatedFromSelectedColn"
+                                    [value]="doneproject">{{doneproject}}</mat-option>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                            <small id="gettingData" *ngIf="isGettingData">
+                            Please wait getting clients...
+                        </small>
+                            <small 
+                                class="d-none"
+                                [class.dinone]="newprojectForm.controls.clientName.valid || newprojectForm.controls.clientName.untouched">
+                                Please select client name
+                            </small>
+                        </div>
+                    </div>
+
+
+
+                    <div class="p-col schema_Pcol">
+                        <div class="box padBox">
+                        <strong><mat-label class="flable">Select Project Name<span>*</span></mat-label> </strong>
+                      
+                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                            <mat-label>Select Project for the Client</mat-label>
+                            <mat-select 
+                                id = "projectName"
+                                formControlName="projectName"
+                                [(ngModel)]="selectedProjectName"
+                                [disabled]="!isAllowedtoselectProject"
+                                (selectionChange)="onLoadProjectChange()"
+                                [class.is-invalid]="newprojectForm.controls.projectName.invalid && newprojectForm.controls.projectName.touched" >
+                                <mat-option *ngFor="let projects of loadedProjectsForClient; let i=index"
+                                [value]="projects.projectName">{{projects?.projectName}}
+                                
+                            <small *ngIf="projects?.isProjectAutoomapped"  id="indexID_{{projects.projectName}}" style="margin-left: 12px;
+                            border-radius: 15px;
+                            color: #fff;
+                            background-color: #4f9f26;
+                            padding: 3px;
+                            font-size: 10px;
+                            text-align: center;">Auto Mapped</small>
+                            </mat-option>
+                               
+                            </mat-select>
+                        </mat-form-field>
+
+                        <small 
+                            class="d-none"
+                            [class.dinone]="newprojectForm.controls.projectName.valid || newprojectForm.controls.projectName.untouched">
+                              Please select project name
+                        </small>
+                    </div>
+                </div>
+
+                </div>
+
+                
+              <div style="width: 100%;">
+                <div class="p-col">
+                    <div class="box" style="max-width:100%; margin-top: 0px;">
+                        <label id="example-radio-group-label" class="flable"><strong>Select Project Type</strong><span>*</span></label><br>
+                        <mat-radio-group
+                          aria-labelledby="example-radio-group-label"
+                          class="example-radio-group"
+                         [disabled]="!isProjectSelcted"
+                          >
+                          <mat-radio-button class="example-radio-button" color="primary" *ngFor="let pt of projectTypes" [value]="pt" style="margin-right: 20px;
+                          margin-top: 15px;"
+                          (change)="projectSelection(pt)"
+                          >
+                            {{pt}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                    </div>   
+                </div> 
+              </div>
+               
+
+              <div *ngIf="isSourcebox" style="width: 100%;">
+                <div class="p-col">
+                    <div class="box" style="max-width:100%; margin-top: 0px;">
+                        <div class="file-upload-box">
+                            <mat-card-title >
+                                <h3 style="font-weight: 500;
+                                color: #191a1b;">Import Source Data <span style="color: tomato;">*</span></h3>
+                            </mat-card-title>
+                            <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+                            <div class="p-col">
+                             <app-fileup></app-fileup>
+                            </div>
+                        </div>
+                    </div>   
+                </div> 
+              </div>
+                
+                
+                   
+                
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="cacleLoadProject()"></button>
+        <button [disabled]="!sourceStatus&&!isEditProject" pButton pRipple label="Load" icon="pi pi-check" class="p-button-rounded p-button-success start" (click)="onLoadProject()" ></button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="newProjectDialog" [style]="{width: '60vw'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="header">
+        <mat-card-title>
+            <h3>New Schema Project</h3>
+        </mat-card-title>
+        <p-divider></p-divider>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form class="example-form" [formGroup]="newprojectForm">
+            <div class="p-grid inptbox" style="margin-top: 15px;">
+                <div class="p-col schema_Pcol slectedProjectName">
+                    <div class="box padBox">
+                        <strong><mat-label class="flable">Enter Project Name<span style="color: tomato;">*</span></mat-label> </strong>
+                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                            <mat-label>Enter project name for client</mat-label>
+                            <input 
+                            id = "projectName"
+                            formControlName="projectName"                                 
+                            [class.is-invalid]="newprojectForm.controls.projectName.invalid && newprojectForm.controls.projectName.touched" 
+                            matInput 
+                            [(ngModel)]="checkProjectName"
+                           (input)="OnchangeProjectName($event)"
+
+                           autocomplete="off" 
+                           placeholder="Project Name">
+                        </mat-form-field>
+                        <small 
+                            class="d-none"
+                            [class.dinone]="newprojectForm.controls.projectName.valid || newprojectForm.controls.projectName.untouched">
+                           Please enter project name
+                        </small>
+                        <small
+                        
+                        id="projectNameExists" 
+                        style="display: none;"
+                         > </small>
+                         <!-- {{checkProjectName}} -->
+                    </div>
+                </div>
+                <div class="p-col schema_Pcol">
+                    <div class="box padBox">
+                        <strong><mat-label class="flable">Select Client Name<span style="color: tomato;">*</span></mat-label> </strong>
+                        
+                        <mat-form-field class="example-full-width mat-form-field-fullwidth">
+                            <mat-label>Select Client for the Project</mat-label>
+                            <mat-select 
+                                id = "clientName"
+                                formControlName="clientName"
+                                [(ngModel)]="selectedClientName"
+                                [disabled]="isProjectNameExists"
+                                (selectionChange)="onClientChange()"
+                                [class.is-invalid]="newprojectForm.controls.clientName.invalid && newprojectForm.controls.clientName.touched" >
+                                <mat-option *ngFor="let client of clientsName" [value]="client.selectedClientName">
+                                    {{client.selectedClientName}}
+                                </mat-option>
+                              
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <small 
+                            class="d-none"
+                            [class.dinone]="newprojectForm.controls.clientName.valid || newprojectForm.controls.clientName.untouched">
+                          Please select client name
+                        </small> -->
+                        <small 
+                        class="d-none"
+                        [class.dinone]="notEmptyDestination">
+                        Please assign instrument destination for new created client
+                     
+                    </small>
+                    
+                       
+                    </div>
+                </div>
+            </div>
+            
+        <div class="p-grid" style="
+        margin-top: -25px;">
+            <div class="p-col">
+                <div class="box" style="max-width:100%; margin-top: 20px;">
+                    <h3 style="font-weight: 500;
+                    color: #191a1b;">Select Destination Legacy <span style="color: tomato;">*</span></h3>
+                    <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+                    <p-pickList [source]="sourceDestination" [target]="targetDestination" sourceHeader="Available" targetHeader="Selected"
+                    [responsive]="true" [sourceStyle]="{'height':'100px'}" [targetStyle]="{'height':'100px'}" filterBy="destinationName"
+                    sourceFilterPlaceholder="Search by destination name" targetFilterPlaceholder="Search by destination name" ngDefaultControl>
+                    <ng-template let-destinations pTemplate="item">
+                        <div class="product-item">
+                            <div class="product-list-detail">
+                                <h5 class="p-mb-2">{{destinations.destinationName}}</h5>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-pickList>
+                </div>
+            </div>
+        </div>
+        </form>
+
+
+
+        <div class="p-grid">
+            <div class="p-col">
+                <div class="box" style="max-width:100%; margin-top: 0px;">
+                    <div class="file-upload-box">
+                        <mat-card-title >
+                            <h3 style="font-weight: 500;
+                            color: #191a1b;">Import Source Data <span style="color: tomato;">*</span></h3>
+                        </mat-card-title>
+                        <p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
+                        <div class="p-col">
+                         <app-fileup></app-fileup>
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+        </div>   
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-info cm_button" (click)="hideDilog()"></button>
+        <button  pButton pRipple label="Start" icon="pi pi-check" class="p-button-rounded p-button-success start" (click)="onSubmit()" [disabled]="!sourceStatus || saveButtonAlready" ></button>
+        <!-- [routerLink]="['instrumentmapping','projectcontent']" -->
+    </ng-template>
+</p-dialog>
+
+<!--"  -->

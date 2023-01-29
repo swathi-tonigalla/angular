@@ -1,0 +1,11 @@
+<div class="container component_title upClass" >
+    <div class="prName">
+        <h3 *ngIf="project">{{project.projectName}}</h3>
+        <p  *ngIf="project">{{project.destinationName}}</p>
+    </div>
+  <div class="clientName">
+    <h3>Client</h3>
+    <p  *ngIf="project">{{project.clientName}}</p>
+  </div>
+    <hr>
+</div>

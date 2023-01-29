@@ -1,0 +1,62 @@
+.cardwidth{
+    width: 97%;
+    position: relative;
+    top: 15px;
+    left: 15px;
+    border-radius: 20px;
+    padding: 0 !important;
+}
+
+.cardheader{
+    height: 40px;
+    padding: 15px 25px;
+    border-radius: 20px 20px 0px 0px;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    position: relative;
+    top: -16px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.cardwidth_second{
+    width: 97%;
+    position:relative;
+    top:40px;
+    border-radius: 20px;
+    padding: 0 !important;
+
+}
+
+.component_title{padding:0px 15px}
+
+.example-form-field {
+    width: 200px;
+    left: 30px;
+  }
+
+  .permission-Filter-wrp{position: relative; padding: 10px 15px 10px 25px; margin-top:25px}
+  .mtr15{margin-right: 15px;}
+  .mat-raised-button{
+      width: 120px;
+      height: 40px;
+      background: #1F73AE 0% 0% no-repeat padding-box;
+      border-radius: 23px;
+      border-radius: 24px;
+      color:#fff;
+  }
+  .mat-raised-button-green{
+    width: 120px;
+    height: 40px;
+    background: #349738 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    border-radius: 24px;
+    color:#fff;
+}
+  .w600{width:625px}
+  .w280{width:280px}
+  h4{margin: 0px;}
+  
+  .input_titile{
+      position:absolute;
+      top:-30px;
+      margin: 10px;
+  }

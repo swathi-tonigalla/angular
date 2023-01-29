@@ -1,0 +1,394 @@
+<!-- *ngIf="instrument.instrumentID === isntrumentId ? isMasterSel:false" -->
+<!-- class="displaynoPanel"
+  [class.displayPanel]="instrument.instrumentID === isntrumentId && isMasterSel" -->
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" [rejectVisible]="false" acceptLabel="OK"></p-confirmDialog>
+<div id="progressSpinMidPan"
+  style="width: 100%; height: 60vh; display: flex; align-items: center; justify-content: center;">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+    fill="#EEEEEE"></p-progressSpinner>
+</div>
+<div *ngFor="let instrument of project.instruments;let i = index">
+  <p-panel id="panel_{{instrument.instrumentID}}" [toggleable]="true" class="Midpanel">
+    <ng-template pTemplate="header">
+      <div *ngIf="project.instruments" style="display:flex;width:100%;align-items: center;">
+        <div style="width: 100%; margin-right: 5px;">
+          <h3>{{instrument.instrumentName}}</h3>
+    
+        </div>
+        <div id="mapbtn_{{instrument.instrumentID}}" *ngIf="isload"  style="width: 40%;">
+         <div style="display: flex;align-items: center; justify-content: center; width: 100%;">
+          <p-progressSpinner *ngIf="isloadingAutomap" [style]="{width: '30px', height: '30px'}" styleClass="custom-spinner" strokeWidth="6"
+          fill="#EEEEEE"></p-progressSpinner>
+         </div> 
+          <button *ngIf="!isloadingAutomap" pButton pRipple
+          type="button" class="p-button-rounded p-button-text mappingReady" pTooltip="Click to automap"
+          [disabled]="!uidDatatus"
+          tooltipPosition="top" 
+          (click) = "automap(instrument.instrumentID)"
+           >
+           <!-- [class.mappingReady]="mappingList.MDisChecked" -->
+           <!--  -->
+           <!-- [disabled]="!mappingList.MDisChecked" -->
+          <!-- (click)=" mapping(instrument,mappingList.group,mappingList.colId,mappingList.name,instrument.instrumentID)" -->
+          <!-- [disabled]="!mappingList.MDisChecked && !isMappingReady" -->
+          <!-- [disabled]="!isMappingReady"  -->
+          <!--  [disabled]="!mappingList.MDisDesabled" -->
+          <mat-icon aria-hidden="false" aria-label="Example home icon">sync</mat-icon>
+          Auto Map
+        </button>
+        </div>
+      </div>
+    </ng-template>
+    <div class="mappingTable">
+      <p-scrollPanel [style]="{width: '100%', height: '380px'}" styleClass="custombar1">
+        <div class="mappingTableWrp">
+          <section class="example-section">
+            <div id="selectType_{{instrument.instrumentID}}" class="selectInst">
+              <div style="width: 90%;">
+                <small 
+                id="selecedtTypecol_{{instrument.instrumentID}}"
+                *ngIf="isload" class="instrumentTypCol"
+                >
+                {{instrument?.sourceName}}.{{instrument?.instTypeSourceColName}}
+                </small>
+                <small *ngIf="isload" style="margin:0px 5px; font-style: italic;">WHERE <span style="font-style: normal;"></span> = </small>
+                <small 
+                id="selecedtType_{{instrument.instrumentID}}"
+                *ngIf="isload" class="instrumentTyp"
+                >
+                {{instrument?.selectedInstrumentType}}
+                </small>
+                <small *ngIf="!isEdit && !isload && isntrumentId == instrument.instrumentID && selectedColForFilter.length==0 || isEdit && selectedColForFilter.length < 1 && !instrument.sourceName" style="font-weight: bold; display: flex;
+                      align-items: center;">
+                  <mat-icon aria-hidden="false" style="color: orange; font-size: 24px !important;">warning</mat-icon>
+                  <span style="margin-left: 10px;  font-size: 14px !important;"> Please select instrument type column
+                    from source data</span> <span style="color: tomato;font-size: 16px !important;
+                       margin-left: 1px;">*</span>
+                  </small>
+
+                
+               
+                <div id="edit_selectedType_{{instrument.instrumentID}}" *ngIf="isEdit && instrument.sourceName && instrument.instTypeSourceColName">
+                  <mat-chip [removable]="removable" (removed)="removesaved(instrument.instrumentID)">
+                    {{instrument?.sourceName}}.{{instrument?.instTypeSourceColName}}
+                    <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+                  </mat-chip>
+                 </div>
+             
+          
+               <small *ngIf="!isEdit && !isload && isntrumentId  == instrument.instrumentID && selectedColForFilter.length>0 || isEdit && selectedColForFilter.length>0 && !instrument.instTypeSourceColName && isntrumentId  == instrument.instrumentID" style="color: rgb(101 101 101);
+                        font-weight: bold; font-size: 12px;">
+
+                  <mat-chip [removable]="removable" (removed)="remove()">
+                    {{selectedColForFilter[0].LDgroup}}.{{selectedColForFilter[0].LDname}}
+                    <mat-icon matChipRemove *ngIf="removable" class="chipsConcat">cancel</mat-icon>
+                  </mat-chip>
+                </small>
+
+              </div>
+              <div *ngIf="!isEdit && !isload && selectedColForFilter.length>0 || isEdit && instrument.selectedInstrumentType || isEdit && selectedColForFilter.length>0" style="width: 40%; margin-right: 10px; ">
+                <p id="lblType_{{instrument.instrumentID}}" style="position: absolute; margin: 0px !important;
+                       top: 9px; color: #737373;">Instrument types</p>
+                <mat-form-field class="example-full-width mat-form-field-fullwidth"
+                [class.matWidth]="selectedType || isEdit && instrument.selectedInstrumentType"
+                >
+                <!-- isEdit && isDisabledrp -->
+                <!-- isEdit && instrument.isInstrumentSaved -->
+                <!-- [disabled]="isTypeSelDisabled" -->
+                  <mat-select id="instrumentTypeFor_{{instrument.instrumentName}}"
+                  [disabled]="instrument.isMappingStartedForInstrument"
+                    [(ngModel)]="instrument.selectedInstrumentType"
+                    (selectionChange)="onSelecttype(instrument.instrumentName,instrument.instrumentID,instrument.selectedInstrumentType)" 
+                    >
+
+
+                    <span *ngIf="isEdit">
+                      <mat-option *ngFor="let types of instrumenttp" [value]="types.instrumentTypename">
+             
+                        {{types?.instrumentTypename}}
+                      
+                    </mat-option>
+                    </span>
+    <span *ngIf="!isEdit"> 
+      <mat-option *ngFor="let types of project.
+      instrumentTypes" [value]="types.instrumentTypename">
+             
+        {{types?.instrumentTypename}}
+      
+    </mat-option>
+    </span>
+                   </mat-select>
+  </mat-form-field>
+  </div>
+              <!-- <div style="width:7%;border-right:1px solid #8d8d8d"
+                *ngIf="selectedColForFilter.length>0 && isTypeSelected">
+                <button [disabled]="selectedColForFilter.length==0" pButton pRipple icon="pi pi-pencil"
+                  class="p-button-rounded p-button-text p-button-success p-mr-2 selectInstTypeBtn"
+                  (click)="onEnabledrp()"></button>
+              </div> -->
+              
+              <div style="width: 50%; display: flex;
+              justify-content: center;" *ngIf="isload">
+                <button pButton pRipple [icon]="!isGoingForUID ? 'pi pi-plus':'pi pi-times' " [label]="!isGoingForUID ? 'UID':'Close UID'"
+                  class="p-button-rounded p-button-text p-button-info p-mr-2 uidBtn"
+                  style="border-radius: 50px !important;" 
+                  [ngClass]="isGoingForUID ? 'isGoingForUIDclass' : 'p-button-info'"
+                  (click)="onOpenUidDIlog(instrument.instrumentID,instrument)"></button>
+              </div>
+
+              <div style="width: 66%; display: flex;
+              justify-content: center;" *ngIf="!isEdit && !isload && selectedColForFilter.length>0 && isTypeSelected || isEdit && instrument.selectedInstrumentType">
+                <button pButton pRipple [icon]="!isGoingForUID ? 'pi pi-plus':'pi pi-times' " [label]="!isGoingForUID ? 'New UID':'Close UID'"
+                  class="p-button-rounded p-button-text p-button-info p-mr-2 uidBtn"
+                  style="border-radius: 50px !important;" 
+                  [ngClass]="isGoingForUID ? 'isGoingForUIDclass' : 'p-button-info'"
+                  (click)="onOpenUidDIlog(instrument.instrumentID,instrument)"></button>
+              </div>
+            </div>
+            <!-- *ngIf="isGoingForUID" -->
+           
+            <app-uid-genration class="uid_pan" id="uid_{{instrument.instrumentID}}"></app-uid-genration>
+            
+ 
+
+              <div *ngIf="SelecctionError" style="width: 100%; display: flex; align-items:center; justify-content: center; flex-direction: column; position: relative; z-index: 9999;">
+                <p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
+              </div>
+
+            <div *ngIf="!isFilterSelectionDone && !isload && !isEdit " style="width: 100%; display: flex; align-items:center; justify-content: center; flex-direction: column; color: rgb(183 183 183);
+                   min-height: 260px;">
+              <mat-icon aria-hidden="false" style="font-size: 28px !important;">warning</mat-icon>
+              <p style="margin: 2px;
+                    font-size: 13px;">Please select instrument type column from source data</p>
+              <p style="margin: 2px;
+                    font-size: 13px;">once you select column then you can select its type.</p>
+            </div>
+            <!-- *ngIf="isFilterSelectionDone" -->
+            <span  class="example-list-section" style="position: relative;
+                    top: 12px;">
+                    <div  
+                     
+                    id="ifNo_ul_{{instrument.instrumentID}}" 
+                    [class.hideAutomap]="isload || isEdit"
+                    style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh;">
+                      <p style="font-size: 14px;
+                      color: #666666;
+                      font-weight: 500;
+                      display: flex;
+                      position: relative;
+                      top: -35%;
+                      align-items: center;">
+                       <mat-icon aria-hidden="false" style="color: orange;
+                       font-size: 20px !important;
+                       margin-right: 5px;">warning</mat-icon>
+                      Please select instrument type!</p>
+                    </div>
+
+              <ul  class="colnListUl" id="mapping_ul_{{instrument.instrumentID}}" 
+              [ngStyle]="{'display':instrument?.isInstrumentSaved ? 'block' : 'none' }"
+           >
+                <div *ngFor="let mappingList of instrument?.instrumentsData;let i = index">
+                  <li id="mappingrow_{{mappingList.group}}_{{mappingList.colId}}">
+                    <!-- [class.togglebg]="subtask.checked2" -->
+                    <div class="listContent">
+                      <mat-checkbox name="mappingDestination_name" [(ngModel)]="mappingList.MDisChecked" [disabled]="ismappingGoingOn && !onerrMapping"
+                        (change)="isMappingRowSelected(mappingList,$event.checked)" color="primary">
+                      </mat-checkbox>
+                      <div class="brk"></div>
+                      <div class="listColn">{{mappingList?.name}}</div>
+                      <div class="brk" style="left:0px; margin-right: 2px;"></div>
+                      <!-- *ngFor="let mapResult of project.mappedData" -->
+                      <!-- <div class="mappedResult"><span id="mappedFile">Mapped File</span>.<span id="mappedCol">Mapped Col</span></div> -->
+                      <div class="mappedResult">
+                        <p id="result_{{mappingList.group}}_{{mappingList.colId}}">
+                          
+                          <span *ngIf="!isload && !isEdit">
+                            {{defaultText}}
+                          </span>
+                          
+                        <span *ngIf="isload && mappingList.MDisChecked && mappingList.mappedResultText || isEdit && mappingList.MDisChecked && mappingList.mappedResultText"  class="mappedP">
+                          {{mappingList?.mappedResultText}}
+                        </span>
+    
+                          <span *ngIf="isload && !mappingList.mappedResultText || isEdit && !mappingList.mappedResultText && !mappingList.MDisChecked">
+                            No mapping done.
+                          </span>
+                         
+                        </p>
+                      
+                      </div>
+                
+
+                      <div *ngIf="!isload" class="mappingbuttons">
+                        <div id="skeleton_{{mappingList.group}}_{{mappingList.colId}}" style="width:100%;display: none;">
+                          <p-skeleton></p-skeleton>
+                        </div>
+
+                        <!-- new one to one map button -->
+                        <!-- <div class="deletebtn">
+                          <button pButton pRipple type="button"  label="O" id="onetoonebutton"
+                              [disabled]="!mappingList.MDisChecked || mappingList.isMultiple || this.isOneToOne"
+                            [class.DesabledhardcoreBtn]="!mappingList.MDisChecked"
+                            class="hardcoreBtn toggleNotActive p-button-rounded p-button-text"
+                            (click)="setOneToOne()"
+                            >
+                          </button>
+                         </div> -->
+                        <!-- end of one to one map button -->
+
+                        <div id="disable_panel_{{mappingList.group}}_{{mappingList.colId}}" class="maapingBtn">
+                          <!-- *ngIf="!btnHighlight && mappingList.MDisChecked" -->
+                          <div id="disbaleBtn_{{mappingList.group}}_{{mappingList.colId}}"  class="btnDisabled"></div>
+                          <button id="mappingButton_{{mappingList.group}}_{{mappingList.colId}}" pButton pRipple
+                            type="button" class="p-button-rounded p-button-text" pTooltip="Click to map"
+                            tooltipPosition="top" [class.mappingReady]="btnHighlight && mappingList.MDisChecked || isEdit && mappingList.MDisChecked"
+                            (click)=" mapping(instrument,mappingList.group,mappingList.colId,mappingList.name,mappingList)"
+                            [disabled]="!mappingList.MDisChecked || onerrMapping ">
+                            <!-- [disabled]="!mappingList.MDisChecked && !isMappingReady" -->
+                            <!-- [disabled]="!isMappingReady"  -->
+                            <!--  [disabled]="!mappingList.MDisDesabled" -->
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">sync</mat-icon>
+                          </button>
+                        </div>
+                        <div><button pButton pRipple type="button" class="p-button-rounded p-button-text"
+                            [class.toggleNotActive]="!mappingList.isMultiple"
+                            [class.toggleActive]="mappingList.isMultiple"
+                            (click)="multipleMappingButton(mappingList,mappingList.group,mappingList.colId)"
+                            [disabled]="!mappingList.MDisChecked">
+                            <mat-icon *ngIf="mappingList.isMultiple" aria-hidden="false" class="toggleicon">toggle_on
+                            </mat-icon>
+                            <mat-icon *ngIf="!mappingList.isMultiple" aria-hidden="false" class="toggleicon">toggle_off
+                            </mat-icon>
+                          </button></div>
+                          <!-- (click)="mappingList.isMultiple = !mappingList.isMultiple" -->
+                        <!-- <div class="settings"><button pButton pRipple type="button"
+                          [disabled]="!mappingList.MDisChecked"
+                            class="toggleNotActive p-button-rounded p-button-text">
+                            <mat-icon aria-hidden="false">settings</mat-icon>
+                          </button></div> -->
+                        <div class="deletebtn">
+                          <button pButton pRipple type="button"  label="H" id="hardcodebutton"
+                            [disabled]="!mappingList.MDisChecked || mappingList.isMultiple"
+                            [class.DesabledhardcoreBtn]="!mappingList.MDisChecked"
+                            class="hardcoreBtn toggleNotActive p-button-rounded p-button-text"
+                            (click)="hardcoded(mappingList.group,mappingList.colId)"
+                            >
+                          </button>
+                         </div>
+                   
+                      </div>
+
+                    </div>
+                    <div style="display: none;" id="hardcoded_{{mappingList.group}}_{{mappingList.colId}}"
+                    class="whereMapingDone"  >
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: flex-end; position: relative;
+                    top: -55px;">
+                      <button pButton pRipple icon="pi pi-times"
+                      class="p-button-rounded p-button-text p-button-danger p-mr-2 resetButton" (click)="closebox(mappingList.group,mappingList.colId)"></button>
+
+                    </div>
+                    <div style="width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    flex-direction: column;">
+                      <h4>{{afterMappingDonemsg}}</h4>
+                      <!-- <p>for reset current mapping please click on reset button below</p> -->
+                      <!-- <button pButton pRipple icon="pi pi-times"
+                        class="p-button-rounded p-button-text p-button-success p-mr-2 resetButton" (click)="OnresetHardcode(mappingList.group,mappingList.colId)"></button>
+   -->
+                    </div>
+                   
+                  </div>
+                  <div style="width: 100%;display: flex;justify-content: end; align-items: center;">
+                    <button pButton pRipple icon="pi pi-times"
+                    id="hdcClosebtn_{{mappingList.group}}_{{mappingList.colId}}"
+                    style="display: none;background-color: #0a4c9500 !important;
+                    color: #f90a0a !important; position: absolute; z-index: 10; margin-top: 23px;" 
+                    class="p-button-rounded p-button-text p-button-danger p-mr-2 resetButton"  (click)="closeHardcode(mappingList,mappingList.group,mappingList.colId)"></button>
+                  </div>
+                  
+                    <app-hardcoded
+                    style="display: none;"
+                    id="hdcRow_{{mappingList.group}}_{{mappingList.colId}}"
+                    >
+                   
+                    </app-hardcoded>
+                    <div *ngIf="mappingList.isMultiple" 
+                    id="multiMappingPanel_{{mappingList.group}}_{{mappingList.colId}}"
+                    class="togglePanel" [class.panelactive]="mappingList.isMultiple"
+                      style=" transition: all 0.5s ease-in-out; display: none;">
+                      <div class="multiMap" style="width: 100%;">
+                        <div style="padding: 8px;">
+                          <mat-radio-group id="radiogroup_{{mappingList.group}}_{{mappingList.colId}}"
+                            aria-labelledby="example-radio-group-label" class="example-radio-group"
+                           >
+                            <mat-radio-button class="example-radio-button" *ngFor="let condi of conditions"
+                              [value]="condi" color="primary"
+                              (change)="onConditionCheck(condi,$event,mappingList.colId,mappingList.group)"
+                              style="margin-right: 15px;">
+                              {{condi}}
+                            </mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+
+                        <div class="multimapButtons">
+
+                        </div>
+
+                        <div style="display: none; " id="whereDone_{{mappingList.group}}_{{mappingList.colId}}"
+                          class="whereMapingDone">
+                          <h4 id="default_{{mappingList.group}}_{{mappingList.colId}}">{{afterMappingDonemsg}}</h4>
+                          <h4 style="display:none" id="concatH4_{{mappingList.group}}_{{mappingList.colId}}">{{afterMappingDonemsgConcat}}</h4>
+                          <h4  style="display:none" id="criteriaH4_{{mappingList.group}}_{{mappingList.colId}}">{{afterMappingDonemsgcriteria}}</h4>
+                          <p>To amend current mapping select reset button below</p>
+                          <button pButton pRipple icon="pi pi-times"
+                            class="p-button-rounded p-button-text p-button-success p-mr-2 resetButton"
+                            (click)="resetMapping(mappingList.group,mappingList.colId)"
+                            ></button>
+
+                        </div>
+
+                        <app-if-condition style="display: none;"
+                        id="ifCondition_{{mappingList.group}}_{{mappingList.colId}}">
+                        </app-if-condition>
+
+                        <app-multi-mapping style="display: none;"
+                          id="where_{{mappingList.group}}_{{mappingList.colId}}">
+                        </app-multi-mapping>
+                        <app-concatenate style="display: none;" 
+                        id="concat_{{mappingList.group}}_{{mappingList.colId}}">
+                        </app-concatenate>
+
+                        <app-criteria style="display: none;" 
+                        id="citeria_{{mappingList.group}}_{{mappingList.colId}}">
+                        </app-criteria>
+                     
+                      </div>
+                    </div>
+                  </li>
+                </div>
+
+
+              </ul>
+            </span>
+          </section>
+
+        </div>
+
+
+        <!-- <app-mapping-table></app-mapping-table> -->
+      </p-scrollPanel>
+
+    </div>
+
+
+  </p-panel>
+
+
+
+
+
+</div>

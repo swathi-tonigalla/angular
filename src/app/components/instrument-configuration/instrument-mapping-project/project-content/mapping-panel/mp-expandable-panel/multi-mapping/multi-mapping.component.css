@@ -1,0 +1,75 @@
+.multiMapRow{
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.multiMapinputBox{
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+ 
+    margin-right: 5px;
+}
+
+:host ::ng-deep .mat-form-field {
+    font-size: 14px !important;
+    position: relative !important;
+    top: -10px !important;
+}
+
+.selectedColnName{font-size: 13px; font-weight: bold; color: #0A4C95 ;}
+
+.nhr{
+    margin: 2px 0px;
+    border-color: #ffffff4d;
+}
+
+.chbxTxt{font-size: 12px;}
+
+.filterBox{
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+}
+
+.filterMappingSelected{
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.filterMappingSelected p{
+    line-height: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.filterMappingSelected .colName,.filterMappingSelected .whereselected{
+    padding: 5px;
+    /* background: #0a337b; */
+    border-radius: 5px;
+    color: #0a337b;;
+    margin: 0px 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.selectInstTypeBtn{
+    background-color: #689f38 !important;
+    color: #ffffff !important;
+  }
+
+  .editText{
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+  }

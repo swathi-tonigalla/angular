@@ -1,0 +1,10 @@
+
+.cardwidth_second{
+    width: 97%;
+    position:relative;
+    top:2px;
+    border-radius: 20px;
+    padding: 10px 5px 20px 10px;
+height: 100%;
+background-color: #ffffff !important;
+}

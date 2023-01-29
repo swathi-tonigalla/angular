@@ -1,0 +1,33 @@
+<div class="ifPanel">
+
+<div class="if_radio_button_panel">
+    <mat-radio-group id="radiogroup_if"
+    aria-labelledby="example-radio-group-label" class="example-radio-group"
+    [(ngModel)]="conditionCheked">
+    <mat-radio-button class="example-radio-button" *ngFor="let ifCondition of Ifconditions"
+      [value]="ifCondition" 
+      (change)="onIfConditionCheck(ifCondition,$event)"
+      style="margin-right: 15px;
+      font-size: 14px;
+      font-weight: 500;">
+      {{ifCondition}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div> 
+<div class="if_inputPanel">
+  <app-if-only
+  style="display: none;"
+  id="if_only"
+  ></app-if-only>
+
+  <app-if-concat
+  style="display: none;"
+  id="if_Concat"
+  ></app-if-concat>
+
+  <app-if-concat-criteria
+  style="display: none;"
+  id="if_Concat_criteria"
+  >  </app-if-concat-criteria>
+</div>   
+</div>

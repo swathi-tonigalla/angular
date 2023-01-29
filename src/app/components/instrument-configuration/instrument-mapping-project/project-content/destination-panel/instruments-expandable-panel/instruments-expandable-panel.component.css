@@ -1,0 +1,89 @@
+:host ::ng-deep .p-panel.p-panel-toggleable .p-panel-header {
+    padding: 0.3rem 1rem;
+    background: transparent linear-gradient(97deg, #0A5198 0%, #380670 100%) 0% 0% no-repeat padding-box;
+box-shadow: 0px 1px 1px #0C0C0C66;
+border-radius: 4px;
+color: #ffffff;
+font-size:13px
+}
+
+.dsbld{
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  background-color: rgb(112 112 112 / 9%);
+  position: absolute;
+  z-index: 1;
+  left: -30px;
+  top: 0px;
+}
+  
+  .colnListUl {
+    list-style-type: none;
+    margin-top: -10px;
+    padding: 0px;
+  }
+
+  .colnListUl div.rowDiv{background: #FFFFFF;}
+
+  .colnListUl .rowDiv li {padding: 6px 5px 5px 18px;
+    border: 1px solid #F6F6F6;  box-shadow: 0px 1px 2px #33333336; margin-bottom:2px; border-radius: 2px;
+   display: flex;
+   justify-content: flex-start;
+  }
+
+    .colnListUl li div{
+      display: inline-block;
+    }
+    .colnListUl div.rowDiv:nth-child(odd) {background: #F5F5F5;}
+
+.listColn{
+  font-size: 12px;
+  white-space: break-spaces;
+  padding: 0px 2px;
+  width: 115px;
+  position: relative;
+  top: 0px;
+  /* text-overflow: ellipsis !important; */
+  word-break: break-word;
+}
+:host ::ng-deep .p-panel .p-panel-content {
+    padding: 0.8rem 0.2rem;
+}
+  :host ::ng-deep .mat-checkbox-inner-container{ left: -7px;}
+
+
+  .colnListUl li div.isMandetory{
+    position: relative;
+    /* padding: 0px 10px; */
+    /* margin-left: 12px; */
+    left: 5px;
+  }
+
+  .dataType {
+    font-size: 10px;
+    font-weight: normal;
+    font-style: italic;
+    position: relative;
+    left: 1px;
+  }
+  :host ::ng-deep .isMandetory .p-badge {
+    background: #295597;
+    color: #ffffff;
+    font-size: 0.60rem;
+    font-weight: 700;
+    min-width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+}
+:host ::ng-deep .p-scrollpanel .p-scrollpanel-bar {
+  background: transparent linear-gradient(180deg, #0A5198 0%, #110670 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 2px #00000045;
+  border-radius: 6px;
+}
+  :host ::ng-deep .mat-checkbox-label{ position:relative;left:-5px; font-weight: 400;}
+
+  .noData h5{color: rgb(105, 105, 105); font-size: 14px;}
+.noData span {color: #fbc531;}
+
+.isDisabledLable{color: #dadada !important;}

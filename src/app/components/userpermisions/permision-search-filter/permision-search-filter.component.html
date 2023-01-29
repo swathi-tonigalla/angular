@@ -1,0 +1,53 @@
+<div class="permission-Filter-wrp">
+
+  <form class="example-form" [formGroup]="permissionSearch">
+    <div class="p-grid gridbox">
+      <div class="boxes">
+        <span class="input_titile"><strong>User Name<span style="color: tomato;">*</span></strong></span>
+        <mat-form-field class="mtr15 w600">
+          <mat-label>Select User Name</mat-label>
+          <mat-select [(ngModel)]="selectedUser" (selectionChange)="selected()" name="username" formControlName="userName" >
+            <mat-option *ngFor="let user of userslist" [value]="user.userName">
+              {{user.userName}}
+            </mat-option>
+          </mat-select>
+          <!-- {{selectedUser | json}} -->
+        </mat-form-field>
+      </div>
+      <strong class="smallLables">
+        <mat-label class="mtr15">Or</mat-label>
+      </strong>
+      <div class="boxes small20">
+    
+
+        <span class="input_titile"><strong>Start Date <span style="color: tomato;">*</span></strong></span>
+        <mat-form-field class="mtr15 w280">
+
+          <mat-label>Select Start Date</mat-label>
+          <input matInput formControlName="createdstartAt"  [matDatepicker]="userListDatePickerstdate" />
+          <mat-datepicker-toggle [for]="userListDatePickerstdate" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #userListDatePickerstdate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <strong class="smallLables">
+        <mat-label class="mtr15">To</mat-label>
+      </strong>
+      <div class="boxes small20">
+        
+        <span class="input_titile"><strong>End Date<span style="color: tomato;">*</span></strong></span>
+        <mat-form-field class="mtr15 w280">
+
+          <mat-label>Select End Date</mat-label>
+          <input matInput formControlName="createdendAt"  [matDatepicker]="userListDatePickerenddt" />
+          <mat-datepicker-toggle [for]="userListDatePickerenddt" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #userListDatePickerenddt></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="boxes small20">
+        <button class="mainbtn" mat-raised-button (click)="searchPermission()">Search</button>
+      </div>
+      <!-- <app-userpermisions [permisssionSearchData] ="permisssionSearch"></app-userpermisions> -->
+     </div>
+</form>
+</div>

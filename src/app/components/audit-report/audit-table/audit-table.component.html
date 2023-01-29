@@ -1,0 +1,128 @@
+ 
+    <div *ngIf="isLoading" id="progressSpinDesti"
+    style="width: 100%; min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="6"
+      fill="#EEEEEE"></p-progressSpinner>
+      <p style="font-size: 14px;text-align: center;">Please wait...<br>Collecting records for download</p>
+    </div>
+
+ <div *ngIf="!isLoading && noRecords" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; min-height: 380px;">
+  <p style="color: #333333;">No Projects Avaliable.</p>
+ </div>   
+
+<p-table *ngIf="!isLoading && !noRecords" #dt [value]="projects" [columns]="cols" [value]="projects" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+[globalFilterFields]="['projectName']" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Results" [rowsPerPageOptions]="[10,20,30]">
+    <ng-template pTemplate="caption">
+       
+        <div class="boxes">
+            <mat-form-field class="example-full-width mat-form-field-fullwidth inputSearch">
+                <input 
+                id="Searchbar"
+                matInput 
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Search Project Name">  
+            </mat-form-field>
+             
+        </div>
+ 
+        
+        </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th>
+                <p-checkbox name="groupname"></p-checkbox>
+            </th> -->
+            <!-- <th style="padding: 0px 40px;" id="id">Project Id</th> -->
+            <th id="prname">Project Name</th>
+            <th id="inst">Instrument</th>
+            <th id="usernmae">User Name</th>
+            <th id="clname">Client Name</th>
+      
+            <th style="padding-right: 33px;padding-left: 33px;" id="crat">Created On</th>
+            <th  id="dwnload">Download</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-projects>
+        <tr>
+            <!-- <td>
+                <p-checkbox name="groupname"></p-checkbox>
+            </td> -->
+            <!-- <td style="padding: 0px 40px;">{{projects?.id}}</td> -->
+            <td>{{projects?.projectName}}</td>
+            <td style="position: relative;">
+                <button pButton pRipple type="button" class="p-button-rounded"
+                    (click)="projects.instruments.toggleCheck = !projects.instruments.toggleCheck">
+                    {{projects?.mappedInstruments.length}}
+                    <mat-icon *ngIf="projects.instruments.toggleCheck" aria-hidden="false" class="iconUp">arrow_drop_up
+                    </mat-icon>
+                    <mat-icon *ngIf="!projects.instruments.toggleCheck" aria-hidden="false" class="iconDown">
+                        arrow_drop_down
+                    </mat-icon>
+                </button>
+                <ul *ngIf="projects.instruments.toggleCheck" class="instrumentList">
+                    <li *ngFor="let instruments of projects.mappedInstruments">
+                        {{instruments?.mappedInstrumentName}}</li>
+                </ul>
+            </td>
+            <td>{{projects?.userName}}</td>
+            <td>{{projects?.clientName}}</td>
+  
+            <td class="tdPad"
+            >{{projects?.createdAt | customDateFormat:'longDate'}}</td>
+            <td>
+                <button mat-button [matMenuTriggerFor]="menu" >
+                    <div class="usernameRole">
+                        <mat-icon style="margin-right: 3px;position: relative;
+                      
+                        top: 8px; color: #545b61;"> file_download</mat-icon>
+                  
+                        <mat-icon class="downicon" aria-hidden="false" aria-label="Example home icon" style="
+                       position: relative;
+                top: 7px; color: #545b61;">arrow_drop_down</mat-icon>
+                    </div>
+                </button>
+                <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item class="menuBtn" type="button" style="min-width: 155px;">
+
+                        <a style="display: block;
+                padding: 5px 7px;
+                padding: 5px 8px;
+                text-decoration: none;
+                color: #333333;
+                position: relative;
+               "
+               
+               (click)="exportCSVZIPALL(projects.id)">
+                            <mat-icon style="margin-right: 3px; "> insert_drive_file</mat-icon>
+
+                            CSV
+                        </a>
+
+                    </button>
+
+                    <button mat-menu-item class="menuBtn" type="button"
+                        style="min-width: 155px;border-top: 1px solid #ddd;">
+
+                        <a style="display: block;
+                padding: 5px 7px;
+                padding: 5px 8px;
+                text-decoration: none;
+                color: #333333;
+                position: relative;
+                "
+                (click)="exportAllExls(projects.id)"
+                
+                >
+                            <mat-icon style="margin-right: 3px; ">description</mat-icon>
+                            XLS
+                        </a>
+
+                    </button>
+
+                </mat-menu>
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
